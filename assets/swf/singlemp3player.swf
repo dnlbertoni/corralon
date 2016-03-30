@@ -1,0 +1,2240 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://ssl.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"assetHostPath": "https://ssl.gstatic.com/codesite/ph", "relativeBaseUrl": "", "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/13998957996356775390", "projectName": "fawziagulsha-sufimystic", "profileUrl": null, "domainName": null, "token": null, "loggedInUserEmail": null, "projectHomeUrl": "/r/fawziagulsha-sufimystic"};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>singlemp3player.swf - 
+ fawziagulsha-sufimystic -
+ 
+ 
+ Healing on the Fast Track - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/13998957996356775390/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/13998957996356775390/css/ph_detail.css" >
+ 
+ 
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/13998957996356775390/css/d_sb.css" >
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="https://ssl.gstatic.com/codesite/ph/13998957996356775390/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(https://ssl.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ 
+  tr.inline_comment {
+ background: #fff;
+ vertical-align: top;
+ }
+ div.draft, div.published {
+ padding: .3em;
+ border: 1px solid #999; 
+ margin-bottom: .1em;
+ font-family: arial, sans-serif;
+ max-width: 60em;
+ }
+ div.draft {
+ background: #ffa;
+ } 
+ div.published {
+ background: #e5ecf9;
+ }
+ div.published .body, div.draft .body {
+ padding: .5em .1em .1em .1em;
+ max-width: 60em;
+ white-space: pre-wrap;
+ white-space: -moz-pre-wrap;
+ white-space: -pre-wrap;
+ white-space: -o-pre-wrap;
+ word-wrap: break-word;
+ font-size: 1em;
+ }
+ div.draft .actions {
+ margin-left: 1em;
+ font-size: 90%;
+ }
+ div.draft form {
+ padding: .5em .5em .5em 0;
+ }
+ div.draft textarea, div.published textarea {
+ width: 95%;
+ height: 10em;
+ font-family: arial, sans-serif;
+ margin-bottom: .5em;
+ }
+
+ 
+ .nocursor, .nocursor td, .cursor_hidden, .cursor_hidden td {
+ background-color: white;
+ height: 2px;
+ }
+ .cursor, .cursor td {
+ background-color: darkblue;
+ height: 2px;
+ display: '';
+ }
+ 
+ 
+.list {
+ border: 1px solid white;
+ border-bottom: 0;
+}
+
+ 
+ </style>
+</head>
+<body class="t4">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fr%2Ffawziagulsha-sufimystic%2Fsource%2Fbrowse%2Fmagic-fields%2Fjs%2Fsinglemp3player.swf&amp;followup=https%3A%2F%2Fcode.google.com%2Fr%2Ffawziagulsha-sufimystic%2Fsource%2Fbrowse%2Fmagic-fields%2Fjs%2Fsinglemp3player.swf" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/r/fawziagulsha-sufimystic/"><span itemprop="name">fawziagulsha-sufimystic</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/r/fawziagulsha-sufimystic/"><span itemprop="description">Healing on the Fast Track</span></a>
+ 
+ - 
+ <a href="/p/living-stories/source/clones?repo=wordpress">wordpress.living-stories clone</a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div class=gtb> 
+ <a href="/r/fawziagulsha-sufimystic/" class="tab">
+ Repository&nbsp;Home
+ </a>
+ 
+ <a href="/r/fawziagulsha-sufimystic/source/checkout" class="tab active">
+ Source
+ </a>
+ 
+ <div class=gtbc></div> 
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ <td class="subt">
+ <div class="st2">
+ <div class="isf">
+ 
+ 
+
+
+ <span class="inst1"><a href="/r/fawziagulsha-sufimystic/source/checkout">Checkout</a></span> &nbsp;
+ <span class="inst2"><a href="/r/fawziagulsha-sufimystic/source/browse/">Browse</a></span> &nbsp;
+ <span class="inst3"><a href="/r/fawziagulsha-sufimystic/source/list">Changes</a></span> &nbsp;
+ 
+ 
+ 
+ </form>
+ <script type="text/javascript">
+ 
+ function codesearchQuery(form) {
+ var query = document.getElementById('q').value;
+ if (query) { form.action += '%20' + query; }
+ }
+ </script>
+ </div>
+</div>
+
+ </td>
+ 
+ 
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+<div class="expand">
+<div id="colcontrol">
+<style type="text/css">
+ #file_flipper { white-space: nowrap; padding-right: 2em; }
+ #file_flipper.hidden { display: none; }
+ #file_flipper .pagelink { color: #0000CC; text-decoration: underline; }
+ #file_flipper #visiblefiles { padding-left: 0.5em; padding-right: 0.5em; }
+</style>
+<table id="nav_and_rev" class="list"
+ cellpadding="0" cellspacing="0" width="100%">
+ <tr>
+ 
+ <td nowrap="nowrap" class="src_crumbs src_nav" width="33%">
+ <strong class="src_nav">Source path:&nbsp;</strong>
+ <span id="crumb_root">
+ 
+ <a href="/r/fawziagulsha-sufimystic/source/browse/">hg</a>/&nbsp;</span>
+ <span id="crumb_links" class="ifClosed"><a href="/r/fawziagulsha-sufimystic/source/browse/magic-fields/">magic-fields</a><span class="sp">/&nbsp;</span><a href="/r/fawziagulsha-sufimystic/source/browse/magic-fields/js/">js</a><span class="sp">/&nbsp;</span>singlemp3player.swf</span>
+ 
+ 
+
+ <span class="sourcelabel">Download
+ <a href="//fawziagulsha-sufimystic.googlecode.com/archive/13f440fd3e0d81d17942a4c6bedf9f33747ac0d6.zip" rel="nofollow">zip</a> | <a href="//fawziagulsha-sufimystic.googlecode.com/archive/13f440fd3e0d81d17942a4c6bedf9f33747ac0d6.tar.gz" rel="nofollow">tar.gz</a>
+ </span>
+
+
+ </td>
+ 
+ 
+ <td nowrap="nowrap" width="33%" align="right">
+ <table cellpadding="0" cellspacing="0" style="font-size: 100%"><tr>
+ 
+ 
+ <td class="flipper"><b>13f440fd3e0d</b></td>
+ 
+ </tr></table>
+ </td> 
+ </tr>
+</table>
+
+<div class="fc">
+ 
+ 
+ <p><em>
+ 
+ This file is not plain text (only UTF-8 and Latin-1
+ text encodings are currently supported).
+ 
+ </em></p>
+ 
+ 
+ <div id="log">
+ <div style="text-align:right">
+ <a class="ifCollapse" href="#" onclick="_toggleMeta(this); return false">Show details</a>
+ <a class="ifExpand" href="#" onclick="_toggleMeta(this); return false">Hide details</a>
+ </div>
+ <div class="ifExpand">
+ 
+ 
+ <div class="pmeta_bubble_bg" style="border:1px solid white">
+ <div class="round4"></div>
+ <div class="round2"></div>
+ <div class="round1"></div>
+ <div class="box-inner">
+ <div id="changelog">
+ <p>Change log</p>
+ <div>
+ <a href="/r/fawziagulsha-sufimystic/source/detail?spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6&amp;r=a868456b6c7b48382a9dbb75cc48f139f59381a2">a868456b6c7b</a>
+ by ericzhang
+ on Apr 28, 2010
+ &nbsp; <a href="/r/fawziagulsha-sufimystic/source/diff?spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6&r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;format=side&amp;path=/magic-fields/js/singlemp3player.swf&amp;old_path=/magic-fields/js/singlemp3player.swf&amp;old=">Diff</a>
+ </div>
+ <pre>initial checkin of all wordpress
+plugin/theme files</pre>
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ <script type="text/javascript">
+ var detail_url = '/r/fawziagulsha-sufimystic/source/detail?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6';
+ var publish_url = '/r/fawziagulsha-sufimystic/source/detail?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6#publish';
+ // describe the paths of this revision in javascript.
+ var changed_paths = [];
+ var changed_urls = [];
+ 
+ changed_paths.push('/living-story-plugin.zip');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/living-story-plugin.zip?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/living-story-theme.zip');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/living-story-theme.zip?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields.zip');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields.zip?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/Main.php');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/Main.php?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/PanelFields.php');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/PanelFields.php?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/RCCWP_Application.php');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_Application.php?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/RCCWP_Application.php~');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_Application.php~?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/RCCWP_Constant.php');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_Constant.php?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/RCCWP_CreateCustomFieldPage.php');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_CreateCustomFieldPage.php?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/RCCWP_CreateCustomGroupPage.php');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_CreateCustomGroupPage.php?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/RCCWP_CreateCustomWritePanelPage.php');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_CreateCustomWritePanelPage.php?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/RCCWP_CustomField.php');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_CustomField.php?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/RCCWP_CustomField.php~');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_CustomField.php~?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/RCCWP_CustomFieldPage.php');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_CustomFieldPage.php?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/RCCWP_CustomGroup.php');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_CustomGroup.php?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/RCCWP_CustomGroupPage.php');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_CustomGroupPage.php?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/RCCWP_CustomWritePanel.php');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_CustomWritePanel.php?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/RCCWP_CustomWritePanel.php~');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_CustomWritePanel.php~?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/RCCWP_CustomWritePanelPage.php');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_CustomWritePanelPage.php?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/RCCWP_CustomWritePanelPage.php~');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_CustomWritePanelPage.php~?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/RCCWP_EditnPlace.php');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_EditnPlace.php?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/RCCWP_EditnPlaceResponse.php');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_EditnPlaceResponse.php?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/RCCWP_GetDuplicate.php');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_GetDuplicate.php?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/RCCWP_GetFile.php');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_GetFile.php?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/RCCWP_ManagementPage.php');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_ManagementPage.php?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/RCCWP_Menu.php');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_Menu.php?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/RCCWP_Options.php');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_Options.php?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/RCCWP_OptionsPage.php');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_OptionsPage.php?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/RCCWP_Post.php');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_Post.php?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/RCCWP_Processor.php');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_Processor.php?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/RCCWP_Query.php');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_Query.php?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/RCCWP_SWFUpload.php');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_SWFUpload.php?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/RCCWP_WritePostPage.php');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_WritePostPage.php?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/RCCWP_removeFiles.php');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_removeFiles.php?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/RCCWP_upload.php');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_upload.php?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/RC_Format.php');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/RC_Format.php?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/README.markdown');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/README.markdown?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/css/admin.css');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/css/admin.css?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/css/base.css');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/css/base.css?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/css/datepicker/images/ui-bg_flat_0_aaaaaa_40x100.png');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/css/datepicker/images/ui-bg_flat_0_aaaaaa_40x100.png?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/css/datepicker/images/ui-bg_flat_75_ffffff_40x100.png');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/css/datepicker/images/ui-bg_flat_75_ffffff_40x100.png?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/css/datepicker/images/ui-bg_glass_55_fbf9ee_1x400.png');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/css/datepicker/images/ui-bg_glass_55_fbf9ee_1x400.png?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/css/datepicker/images/ui-bg_glass_65_ffffff_1x400.png');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/css/datepicker/images/ui-bg_glass_65_ffffff_1x400.png?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/css/datepicker/images/ui-bg_glass_75_dadada_1x400.png');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/css/datepicker/images/ui-bg_glass_75_dadada_1x400.png?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/css/datepicker/images/ui-bg_glass_75_e6e6e6_1x400.png');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/css/datepicker/images/ui-bg_glass_75_e6e6e6_1x400.png?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/css/datepicker/images/ui-bg_glass_95_fef1ec_1x400.png');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/css/datepicker/images/ui-bg_glass_95_fef1ec_1x400.png?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/css/datepicker/images/ui-bg_highlight-soft_75_cccccc_1x100.png');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/css/datepicker/images/ui-bg_highlight-soft_75_cccccc_1x100.png?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/css/datepicker/images/ui-icons_222222_256x240.png');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/css/datepicker/images/ui-icons_222222_256x240.png?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/css/datepicker/images/ui-icons_2e83ff_256x240.png');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/css/datepicker/images/ui-icons_2e83ff_256x240.png?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/css/datepicker/images/ui-icons_454545_256x240.png');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/css/datepicker/images/ui-icons_454545_256x240.png?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/css/datepicker/images/ui-icons_888888_256x240.png');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/css/datepicker/images/ui-icons_888888_256x240.png?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/css/datepicker/images/ui-icons_cd0a0a_256x240.png');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/css/datepicker/images/ui-icons_cd0a0a_256x240.png?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/css/datepicker/ui.datepicker.css');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/css/datepicker/ui.datepicker.css?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/css/datepicker/ui.datepickercosa.css');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/css/datepicker/ui.datepickercosa.css?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/get-custom.php');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/get-custom.php?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/images/arrow.gif');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/images/arrow.gif?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/images/arrow_right.gif');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/images/arrow_right.gif?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/images/bar.jpg');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/images/bar.jpg?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/images/blank.gif');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/images/blank.gif?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/images/delete.png');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/images/delete.png?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/images/duplicate.png');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/images/duplicate.png?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/images/move.png');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/images/move.png?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/images/noimage.jpg');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/images/noimage.jpg?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/images/spinner.gif');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/images/spinner.gif?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/js/custom_fields/colorpicker.js');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/js/custom_fields/colorpicker.js?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/js/custom_fields/datepicker.js');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/js/custom_fields/datepicker.js?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/js/custom_fields/editor_validate.js');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/js/custom_fields/editor_validate.js?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/js/custom_fields/image.js');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/js/custom_fields/image.js?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/js/custom_fields/validate.js');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/js/custom_fields/validate.js?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/js/editnplace.js');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/js/editnplace.js?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/js/groups.js');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/js/groups.js?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/js/jquery.metadata.js');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/js/jquery.metadata.js?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/js/jquery.validate.pack.js');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/js/jquery.validate.pack.js?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/js/nicEdit.js');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/js/nicEdit.js?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/js/nicEditorIcons.gif');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/js/nicEditorIcons.gif?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/js/options.js');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/js/options.js?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/js/sevencolorpicker.js');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/js/sevencolorpicker.js?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/js/singlemp3player.swf');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/js/singlemp3player.swf?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ var selected_path = '/magic-fields/js/singlemp3player.swf';
+ 
+ 
+ changed_paths.push('/magic-fields/js/ui.datepicker.js');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/js/ui.datepicker.js?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/js/ui.slider.js');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/js/ui.slider.js?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/js/upload.js');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/js/upload.js?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/readme.txt');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/readme.txt?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/releasenotes.txt');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/releasenotes.txt?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/screenshot-1.jpg');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/screenshot-1.jpg?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/screenshot-2.jpg');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/screenshot-2.jpg?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/thirdparty/phpthumb/index.php');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/thirdparty/phpthumb/index.php?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/thirdparty/phpthumb/phpThumb.config.php');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/thirdparty/phpthumb/phpThumb.config.php?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/thirdparty/phpthumb/phpThumb.php');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/thirdparty/phpthumb/phpThumb.php?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/thirdparty/phpthumb/phpthumb.bmp.php');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/thirdparty/phpthumb/phpthumb.bmp.php?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/thirdparty/phpthumb/phpthumb.class.php');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/thirdparty/phpthumb/phpthumb.class.php?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/thirdparty/phpthumb/phpthumb.filters.php');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/thirdparty/phpthumb/phpthumb.filters.php?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/thirdparty/phpthumb/phpthumb.functions.php');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/thirdparty/phpthumb/phpthumb.functions.php?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/thirdparty/phpthumb/phpthumb.gif.php');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/thirdparty/phpthumb/phpthumb.gif.php?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/thirdparty/phpthumb/phpthumb.ico.php');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/thirdparty/phpthumb/phpthumb.ico.php?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/thirdparty/phpthumb/phpthumb.unsharp.php');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/thirdparty/phpthumb/phpthumb.unsharp.php?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/tools/debug.php');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/tools/debug.php?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/uninstall.php');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/uninstall.php?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/magic-fields/wpmu/MagicFields.php');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/magic-fields/wpmu/MagicFields.php?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/plugin-gwt/.classpath');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/plugin-gwt/.classpath?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/plugin-gwt/.project');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/plugin-gwt/.project?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/plugin-gwt/.settings/com.google.gwt.eclipse.core.prefs');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/plugin-gwt/.settings/com.google.gwt.eclipse.core.prefs?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/plugin-gwt/src/com/google/livingstories/plugins/wordpress/livingstorypropertymanager/Plugin.gwt.xml');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/plugin-gwt/src/com/google/livingstories/plugins/wordpress/livingstorypropertymanager/Plugin.gwt.xml?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/plugin-gwt/src/com/google/livingstories/plugins/wordpress/livingstorypropertymanager/client/EnumDropdown.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/plugin-gwt/src/com/google/livingstories/plugins/wordpress/livingstorypropertymanager/client/EnumDropdown.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/plugin-gwt/src/com/google/livingstories/plugins/wordpress/livingstorypropertymanager/client/Importance.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/plugin-gwt/src/com/google/livingstories/plugins/wordpress/livingstorypropertymanager/client/Importance.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/plugin-gwt/src/com/google/livingstories/plugins/wordpress/livingstorypropertymanager/client/LivingStoryPropertyManager.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/plugin-gwt/src/com/google/livingstories/plugins/wordpress/livingstorypropertymanager/client/LivingStoryPropertyManager.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/plugin-gwt/src/com/google/livingstories/plugins/wordpress/livingstorypropertymanager/client/LivingStoryPropertyManager.ui.xml');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/plugin-gwt/src/com/google/livingstories/plugins/wordpress/livingstorypropertymanager/client/LivingStoryPropertyManager.ui.xml?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/plugin-gwt/src/com/google/livingstories/plugins/wordpress/livingstorypropertymanager/client/Location.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/plugin-gwt/src/com/google/livingstories/plugins/wordpress/livingstorypropertymanager/client/Location.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/plugin-gwt/src/com/google/livingstories/plugins/wordpress/livingstorypropertymanager/client/Plugin.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/plugin-gwt/src/com/google/livingstories/plugins/wordpress/livingstorypropertymanager/client/Plugin.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/plugin-gwt/src/com/google/livingstories/plugins/wordpress/livingstorypropertymanager/client/i18n/ClientConstants.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/plugin-gwt/src/com/google/livingstories/plugins/wordpress/livingstorypropertymanager/client/i18n/ClientConstants.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/plugin-gwt/src/com/google/livingstories/plugins/wordpress/livingstorypropertymanager/client/i18n/ClientConstants.properties');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/plugin-gwt/src/com/google/livingstories/plugins/wordpress/livingstorypropertymanager/client/i18n/ClientConstants.properties?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/plugin-gwt/src/com/google/livingstories/plugins/wordpress/livingstorypropertymanager/client/i18n/ClientMessageHolder.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/plugin-gwt/src/com/google/livingstories/plugins/wordpress/livingstorypropertymanager/client/i18n/ClientMessageHolder.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/plugin-gwt/src/com/google/livingstories/plugins/wordpress/livingstorypropertymanager/client/i18n/ClientMessages.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/plugin-gwt/src/com/google/livingstories/plugins/wordpress/livingstorypropertymanager/client/i18n/ClientMessages.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/plugin-gwt/src/com/google/livingstories/plugins/wordpress/livingstorypropertymanager/client/i18n/EnumTranslator.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/plugin-gwt/src/com/google/livingstories/plugins/wordpress/livingstorypropertymanager/client/i18n/EnumTranslator.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/plugin-gwt/src/com/google/livingstories/plugins/wordpress/livingstorypropertymanager/client/ui/LocationInput.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/plugin-gwt/src/com/google/livingstories/plugins/wordpress/livingstorypropertymanager/client/ui/LocationInput.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/plugin-gwt/src/com/google/livingstories/plugins/wordpress/livingstorypropertymanager/client/util/ContentItemData.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/plugin-gwt/src/com/google/livingstories/plugins/wordpress/livingstorypropertymanager/client/util/ContentItemData.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/plugin-gwt/src/com/google/livingstories/plugins/wordpress/livingstorypropertymanager/client/util/LivingStoryPropertyManagerPlugin.css');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/plugin-gwt/src/com/google/livingstories/plugins/wordpress/livingstorypropertymanager/client/util/LivingStoryPropertyManagerPlugin.css?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/plugin-gwt/src/com/google/livingstories/plugins/wordpress/livingstorypropertymanager/client/util/Resources.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/plugin-gwt/src/com/google/livingstories/plugins/wordpress/livingstorypropertymanager/client/util/Resources.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/plugin-gwt/war/LivingStoryPropertyManagerPlugin.html');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/plugin-gwt/war/LivingStoryPropertyManagerPlugin.html?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/plugin-gwt/war/WEB-INF/lib/gwt-maps.jar');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/plugin-gwt/war/WEB-INF/lib/gwt-maps.jar?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/plugin-gwt/war/WEB-INF/lib/gwt-servlet.jar');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/plugin-gwt/war/WEB-INF/lib/gwt-servlet.jar?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/plugin-gwt/war/WEB-INF/web.xml');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/plugin-gwt/war/WEB-INF/web.xml?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/plugin/living_stories.php');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/plugin/living_stories.php?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/plugin/panels/Audio.pnl');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/plugin/panels/Audio.pnl?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/plugin/panels/Background.pnl');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/plugin/panels/Background.pnl?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/plugin/panels/Documents.pnl');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/plugin/panels/Documents.pnl?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/plugin/panels/Events.pnl');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/plugin/panels/Events.pnl?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/plugin/panels/Facts.pnl');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/plugin/panels/Facts.pnl?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/plugin/panels/Graphics.pnl');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/plugin/panels/Graphics.pnl?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/plugin/panels/Images.pnl');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/plugin/panels/Images.pnl?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/plugin/panels/Narratives.pnl');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/plugin/panels/Narratives.pnl?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/plugin/panels/Players.pnl');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/plugin/panels/Players.pnl?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/plugin/panels/Quotes.pnl');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/plugin/panels/Quotes.pnl?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/plugin/panels/Reactions.pnl');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/plugin/panels/Reactions.pnl?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/plugin/panels/Resources.pnl');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/plugin/panels/Resources.pnl?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/plugin/panels/Videos.pnl');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/plugin/panels/Videos.pnl?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/.classpath');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/.classpath?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/.externalToolBuilders/i18nRefresh.launch');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/.externalToolBuilders/i18nRefresh.launch?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/.project');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/.project?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/.settings/com.google.appengine.eclipse.core.prefs');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/.settings/com.google.appengine.eclipse.core.prefs?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/.settings/com.google.gwt.eclipse.core.prefs');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/.settings/com.google.gwt.eclipse.core.prefs?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/All-i18n.sh');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/All-i18n.sh?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/ClientConstants-i18n');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/ClientConstants-i18n?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/LspConstants-i18n');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/LspConstants-i18n?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/LspMessages-i18n');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/LspMessages-i18n?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/sanify-autogenerated-files.sh');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/sanify-autogenerated-files.sh?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/src/META-INF/jdoconfig.xml');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/META-INF/jdoconfig.xml?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/src/com/google/livingstories/LivingStoryPage.gwt.xml');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/LivingStoryPage.gwt.xml?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/src/com/google/livingstories/client/AssetContentItem.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/AssetContentItem.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/src/com/google/livingstories/client/AssetType.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/AssetType.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/src/com/google/livingstories/client/BackgroundContentItem.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/BackgroundContentItem.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/src/com/google/livingstories/client/BaseContentItem.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/BaseContentItem.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/src/com/google/livingstories/client/ClientConstants.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/ClientConstants.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/src/com/google/livingstories/client/ClientConstants.properties');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/ClientConstants.properties?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/src/com/google/livingstories/client/ClientConstants_en.properties');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/ClientConstants_en.properties?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/src/com/google/livingstories/client/ClientMessageHolder.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/ClientMessageHolder.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/src/com/google/livingstories/client/ClientMessages.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/ClientMessages.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/src/com/google/livingstories/client/ClientMessages_en.properties');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/ClientMessages_en.properties?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/src/com/google/livingstories/client/ContentItemType.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/ContentItemType.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/src/com/google/livingstories/client/ContentItemTypesBundle.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/ContentItemTypesBundle.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/src/com/google/livingstories/client/DataContentItem.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/DataContentItem.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/src/com/google/livingstories/client/DimensionEvent.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/DimensionEvent.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/src/com/google/livingstories/client/DimensionHandler.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/DimensionHandler.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/src/com/google/livingstories/client/EnumTranslator.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/EnumTranslator.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/src/com/google/livingstories/client/EventContentItem.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/EventContentItem.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/src/com/google/livingstories/client/Importance.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/Importance.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/src/com/google/livingstories/client/LivingStory.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/LivingStory.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/src/com/google/livingstories/client/LivingStoryRpcService.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/LivingStoryRpcService.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/src/com/google/livingstories/client/Location.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/Location.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/src/com/google/livingstories/client/NarrativeContentItem.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/NarrativeContentItem.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/src/com/google/livingstories/client/NarrativeType.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/NarrativeType.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/src/com/google/livingstories/client/PlayerContentItem.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/PlayerContentItem.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/src/com/google/livingstories/client/PlayerType.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/PlayerType.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/src/com/google/livingstories/client/PublishState.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/PublishState.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/src/com/google/livingstories/client/QuoteContentItem.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/QuoteContentItem.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/src/com/google/livingstories/client/ReactionContentItem.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/ReactionContentItem.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/src/com/google/livingstories/client/StoryPlayerContentItem.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/StoryPlayerContentItem.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/src/com/google/livingstories/client/Theme.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/Theme.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/src/com/google/livingstories/client/contentitemlist/ClickableContentItemListElement.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/contentitemlist/ClickableContentItemListElement.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/src/com/google/livingstories/client/contentitemlist/ContentItemClickHandler.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/contentitemlist/ContentItemClickHandler.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/src/com/google/livingstories/client/contentitemlist/ContentItemList.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/contentitemlist/ContentItemList.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/src/com/google/livingstories/client/contentitemlist/ContentItemListElement.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/contentitemlist/ContentItemListElement.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/src/com/google/livingstories/client/contentitemlist/SummarySnippetWidget.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/contentitemlist/SummarySnippetWidget.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/src/com/google/livingstories/client/lsp/BylineWidget.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/lsp/BylineWidget.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/src/com/google/livingstories/client/lsp/ContentItemBundle.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/lsp/ContentItemBundle.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/src/com/google/livingstories/client/lsp/ContentItemPopupWidget.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/lsp/ContentItemPopupWidget.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/src/com/google/livingstories/client/lsp/ContentRenderer.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/lsp/ContentRenderer.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/src/com/google/livingstories/client/lsp/EventTimelineCreator.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/lsp/EventTimelineCreator.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/src/com/google/livingstories/client/lsp/Externs.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/lsp/Externs.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/src/com/google/livingstories/client/lsp/FilterWidget.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/lsp/FilterWidget.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/src/com/google/livingstories/client/lsp/LivingStory.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/lsp/LivingStory.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/src/com/google/livingstories/client/lsp/LspConstants.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/lsp/LspConstants.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/src/com/google/livingstories/client/lsp/LspConstants.properties');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/lsp/LspConstants.properties?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/src/com/google/livingstories/client/lsp/LspContentItemListWidget.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/lsp/LspContentItemListWidget.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/src/com/google/livingstories/client/lsp/LspMessageHolder.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/lsp/LspMessageHolder.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/src/com/google/livingstories/client/lsp/LspMessages.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/lsp/LspMessages.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/src/com/google/livingstories/client/lsp/LspMessages.properties');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/lsp/LspMessages.properties?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/src/com/google/livingstories/client/lsp/SourceLink.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/lsp/SourceLink.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/src/com/google/livingstories/client/lsp/SourcePopupWidget.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/lsp/SourcePopupWidget.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/src/com/google/livingstories/client/lsp/ThemeListWidget.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/lsp/ThemeListWidget.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ changed_paths.push('/theme-gwt/src/com/google/livingstories/client/lsp/event/BlockToggledEvent.java');
+ changed_urls.push('/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/lsp/event/BlockToggledEvent.java?r\x3da868456b6c7b48382a9dbb75cc48f139f59381a2\x26spec\x3dsvn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6');
+ 
+ 
+ function getCurrentPageIndex() {
+ for (var i = 0; i < changed_paths.length; i++) {
+ if (selected_path == changed_paths[i]) {
+ return i;
+ }
+ }
+ }
+ function getNextPage() {
+ var i = getCurrentPageIndex();
+ if (i < changed_paths.length - 1) {
+ return changed_urls[i + 1];
+ }
+ return null;
+ }
+ function getPreviousPage() {
+ var i = getCurrentPageIndex();
+ if (i > 0) {
+ return changed_urls[i - 1];
+ }
+ return null;
+ }
+ function gotoNextPage() {
+ var page = getNextPage();
+ if (!page) {
+ page = detail_url;
+ }
+ window.location = page;
+ }
+ function gotoPreviousPage() {
+ var page = getPreviousPage();
+ if (!page) {
+ page = detail_url;
+ }
+ window.location = page;
+ }
+ function gotoDetailPage() {
+ window.location = detail_url;
+ }
+ function gotoPublishPage() {
+ window.location = publish_url;
+ }
+</script>
+
+ 
+ <style type="text/css">
+ #review_nav {
+ border-top: 3px solid white;
+ padding-top: 6px;
+ margin-top: 1em;
+ }
+ #review_nav td {
+ vertical-align: middle;
+ }
+ #review_nav select {
+ margin: .5em 0;
+ }
+ </style>
+ <div id="review_nav">
+ <table><tr><td>Go to:&nbsp;</td><td>
+ <select name="files_in_rev" onchange="window.location=this.value">
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/living-story-plugin.zip?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/living-story-plugin.zip</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/living-story-theme.zip?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/living-story-theme.zip</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields.zip?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/magic-fields.zip</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/Main.php?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/magic-fields/Main.php</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/PanelFields.php?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/magic-fields/PanelFields.php</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_Application.php?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/magic-fields/RCCWP_Application.php</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_Application.php~?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...ic-fields/RCCWP_Application.php~</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_Constant.php?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/magic-fields/RCCWP_Constant.php</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_CreateCustomFieldPage.php?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >.../RCCWP_CreateCustomFieldPage.php</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_CreateCustomGroupPage.php?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >.../RCCWP_CreateCustomGroupPage.php</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_CreateCustomWritePanelPage.php?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...P_CreateCustomWritePanelPage.php</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_CustomField.php?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/magic-fields/RCCWP_CustomField.php</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_CustomField.php~?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...ic-fields/RCCWP_CustomField.php~</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_CustomFieldPage.php?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...fields/RCCWP_CustomFieldPage.php</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_CustomGroup.php?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/magic-fields/RCCWP_CustomGroup.php</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_CustomGroupPage.php?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...fields/RCCWP_CustomGroupPage.php</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_CustomWritePanel.php?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...ields/RCCWP_CustomWritePanel.php</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_CustomWritePanel.php~?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...elds/RCCWP_CustomWritePanel.php~</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_CustomWritePanelPage.php?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...s/RCCWP_CustomWritePanelPage.php</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_CustomWritePanelPage.php~?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >.../RCCWP_CustomWritePanelPage.php~</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_EditnPlace.php?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/magic-fields/RCCWP_EditnPlace.php</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_EditnPlaceResponse.php?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...lds/RCCWP_EditnPlaceResponse.php</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_GetDuplicate.php?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...ic-fields/RCCWP_GetDuplicate.php</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_GetFile.php?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/magic-fields/RCCWP_GetFile.php</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_ManagementPage.php?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...-fields/RCCWP_ManagementPage.php</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_Menu.php?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/magic-fields/RCCWP_Menu.php</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_Options.php?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/magic-fields/RCCWP_Options.php</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_OptionsPage.php?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/magic-fields/RCCWP_OptionsPage.php</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_Post.php?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/magic-fields/RCCWP_Post.php</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_Processor.php?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/magic-fields/RCCWP_Processor.php</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_Query.php?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/magic-fields/RCCWP_Query.php</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_SWFUpload.php?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/magic-fields/RCCWP_SWFUpload.php</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_WritePostPage.php?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...c-fields/RCCWP_WritePostPage.php</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_removeFiles.php?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/magic-fields/RCCWP_removeFiles.php</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/RCCWP_upload.php?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/magic-fields/RCCWP_upload.php</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/RC_Format.php?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/magic-fields/RC_Format.php</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/README.markdown?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/magic-fields/README.markdown</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/css/admin.css?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/magic-fields/css/admin.css</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/css/base.css?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/magic-fields/css/base.css</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/css/datepicker/images/ui-bg_flat_0_aaaaaa_40x100.png?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...s/ui-bg_flat_0_aaaaaa_40x100.png</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/css/datepicker/images/ui-bg_flat_75_ffffff_40x100.png?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >.../ui-bg_flat_75_ffffff_40x100.png</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/css/datepicker/images/ui-bg_glass_55_fbf9ee_1x400.png?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >.../ui-bg_glass_55_fbf9ee_1x400.png</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/css/datepicker/images/ui-bg_glass_65_ffffff_1x400.png?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >.../ui-bg_glass_65_ffffff_1x400.png</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/css/datepicker/images/ui-bg_glass_75_dadada_1x400.png?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >.../ui-bg_glass_75_dadada_1x400.png</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/css/datepicker/images/ui-bg_glass_75_e6e6e6_1x400.png?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >.../ui-bg_glass_75_e6e6e6_1x400.png</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/css/datepicker/images/ui-bg_glass_95_fef1ec_1x400.png?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >.../ui-bg_glass_95_fef1ec_1x400.png</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/css/datepicker/images/ui-bg_highlight-soft_75_cccccc_1x100.png?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...ghlight-soft_75_cccccc_1x100.png</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/css/datepicker/images/ui-icons_222222_256x240.png?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...ages/ui-icons_222222_256x240.png</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/css/datepicker/images/ui-icons_2e83ff_256x240.png?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...ages/ui-icons_2e83ff_256x240.png</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/css/datepicker/images/ui-icons_454545_256x240.png?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...ages/ui-icons_454545_256x240.png</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/css/datepicker/images/ui-icons_888888_256x240.png?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...ages/ui-icons_888888_256x240.png</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/css/datepicker/images/ui-icons_cd0a0a_256x240.png?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...ages/ui-icons_cd0a0a_256x240.png</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/css/datepicker/ui.datepicker.css?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...css/datepicker/ui.datepicker.css</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/css/datepicker/ui.datepickercosa.css?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...datepicker/ui.datepickercosa.css</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/get-custom.php?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/magic-fields/get-custom.php</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/images/arrow.gif?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/magic-fields/images/arrow.gif</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/images/arrow_right.gif?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...ic-fields/images/arrow_right.gif</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/images/bar.jpg?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/magic-fields/images/bar.jpg</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/images/blank.gif?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/magic-fields/images/blank.gif</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/images/delete.png?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/magic-fields/images/delete.png</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/images/duplicate.png?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/magic-fields/images/duplicate.png</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/images/move.png?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/magic-fields/images/move.png</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/images/noimage.jpg?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/magic-fields/images/noimage.jpg</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/images/spinner.gif?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/magic-fields/images/spinner.gif</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/js/custom_fields/colorpicker.js?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >.../js/custom_fields/colorpicker.js</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/js/custom_fields/datepicker.js?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...s/js/custom_fields/datepicker.js</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/js/custom_fields/editor_validate.js?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...custom_fields/editor_validate.js</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/js/custom_fields/image.js?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...fields/js/custom_fields/image.js</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/js/custom_fields/validate.js?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...lds/js/custom_fields/validate.js</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/js/editnplace.js?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/magic-fields/js/editnplace.js</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/js/groups.js?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/magic-fields/js/groups.js</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/js/jquery.metadata.js?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/magic-fields/js/jquery.metadata.js</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/js/jquery.validate.pack.js?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...ields/js/jquery.validate.pack.js</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/js/nicEdit.js?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/magic-fields/js/nicEdit.js</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/js/nicEditorIcons.gif?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/magic-fields/js/nicEditorIcons.gif</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/js/options.js?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/magic-fields/js/options.js</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/js/sevencolorpicker.js?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...ic-fields/js/sevencolorpicker.js</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/js/singlemp3player.swf?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ selected="selected"
+ >...ic-fields/js/singlemp3player.swf</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/js/ui.datepicker.js?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/magic-fields/js/ui.datepicker.js</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/js/ui.slider.js?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/magic-fields/js/ui.slider.js</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/js/upload.js?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/magic-fields/js/upload.js</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/readme.txt?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/magic-fields/readme.txt</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/releasenotes.txt?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/magic-fields/releasenotes.txt</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/screenshot-1.jpg?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/magic-fields/screenshot-1.jpg</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/screenshot-2.jpg?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/magic-fields/screenshot-2.jpg</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/thirdparty/phpthumb/index.php?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...ds/thirdparty/phpthumb/index.php</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/thirdparty/phpthumb/phpThumb.config.php?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...rty/phpthumb/phpThumb.config.php</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/thirdparty/phpthumb/phpThumb.php?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...thirdparty/phpthumb/phpThumb.php</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/thirdparty/phpthumb/phpthumb.bmp.php?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...dparty/phpthumb/phpthumb.bmp.php</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/thirdparty/phpthumb/phpthumb.class.php?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...arty/phpthumb/phpthumb.class.php</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/thirdparty/phpthumb/phpthumb.filters.php?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...ty/phpthumb/phpthumb.filters.php</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/thirdparty/phpthumb/phpthumb.functions.php?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >.../phpthumb/phpthumb.functions.php</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/thirdparty/phpthumb/phpthumb.gif.php?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...dparty/phpthumb/phpthumb.gif.php</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/thirdparty/phpthumb/phpthumb.ico.php?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...dparty/phpthumb/phpthumb.ico.php</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/thirdparty/phpthumb/phpthumb.unsharp.php?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...ty/phpthumb/phpthumb.unsharp.php</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/tools/debug.php?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/magic-fields/tools/debug.php</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/uninstall.php?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/magic-fields/uninstall.php</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/magic-fields/wpmu/MagicFields.php?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/magic-fields/wpmu/MagicFields.php</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/plugin-gwt/.classpath?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/plugin-gwt/.classpath</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/plugin-gwt/.project?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/plugin-gwt/.project</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/plugin-gwt/.settings/com.google.gwt.eclipse.core.prefs?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...om.google.gwt.eclipse.core.prefs</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/plugin-gwt/src/com/google/livingstories/plugins/wordpress/livingstorypropertymanager/Plugin.gwt.xml?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...rypropertymanager/Plugin.gwt.xml</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/plugin-gwt/src/com/google/livingstories/plugins/wordpress/livingstorypropertymanager/client/EnumDropdown.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...manager/client/EnumDropdown.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/plugin-gwt/src/com/google/livingstories/plugins/wordpress/livingstorypropertymanager/client/Importance.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...tymanager/client/Importance.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/plugin-gwt/src/com/google/livingstories/plugins/wordpress/livingstorypropertymanager/client/LivingStoryPropertyManager.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >.../LivingStoryPropertyManager.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/plugin-gwt/src/com/google/livingstories/plugins/wordpress/livingstorypropertymanager/client/LivingStoryPropertyManager.ui.xml?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...ivingStoryPropertyManager.ui.xml</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/plugin-gwt/src/com/google/livingstories/plugins/wordpress/livingstorypropertymanager/client/Location.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...ertymanager/client/Location.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/plugin-gwt/src/com/google/livingstories/plugins/wordpress/livingstorypropertymanager/client/Plugin.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...opertymanager/client/Plugin.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/plugin-gwt/src/com/google/livingstories/plugins/wordpress/livingstorypropertymanager/client/i18n/ClientConstants.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...client/i18n/ClientConstants.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/plugin-gwt/src/com/google/livingstories/plugins/wordpress/livingstorypropertymanager/client/i18n/ClientConstants.properties?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >.../i18n/ClientConstants.properties</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/plugin-gwt/src/com/google/livingstories/plugins/wordpress/livingstorypropertymanager/client/i18n/ClientMessageHolder.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...nt/i18n/ClientMessageHolder.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/plugin-gwt/src/com/google/livingstories/plugins/wordpress/livingstorypropertymanager/client/i18n/ClientMessages.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >.../client/i18n/ClientMessages.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/plugin-gwt/src/com/google/livingstories/plugins/wordpress/livingstorypropertymanager/client/i18n/EnumTranslator.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >.../client/i18n/EnumTranslator.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/plugin-gwt/src/com/google/livingstories/plugins/wordpress/livingstorypropertymanager/client/ui/LocationInput.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...ger/client/ui/LocationInput.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/plugin-gwt/src/com/google/livingstories/plugins/wordpress/livingstorypropertymanager/client/util/ContentItemData.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...client/util/ContentItemData.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/plugin-gwt/src/com/google/livingstories/plugins/wordpress/livingstorypropertymanager/client/util/LivingStoryPropertyManagerPlugin.css?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...ngStoryPropertyManagerPlugin.css</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/plugin-gwt/src/com/google/livingstories/plugins/wordpress/livingstorypropertymanager/client/util/Resources.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...nager/client/util/Resources.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/plugin-gwt/war/LivingStoryPropertyManagerPlugin.html?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...gStoryPropertyManagerPlugin.html</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/plugin-gwt/war/WEB-INF/lib/gwt-maps.jar?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...gwt/war/WEB-INF/lib/gwt-maps.jar</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/plugin-gwt/war/WEB-INF/lib/gwt-servlet.jar?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >.../war/WEB-INF/lib/gwt-servlet.jar</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/plugin-gwt/war/WEB-INF/web.xml?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/plugin-gwt/war/WEB-INF/web.xml</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/plugin/living_stories.php?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/plugin/living_stories.php</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/plugin/panels/Audio.pnl?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/plugin/panels/Audio.pnl</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/plugin/panels/Background.pnl?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/plugin/panels/Background.pnl</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/plugin/panels/Documents.pnl?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/plugin/panels/Documents.pnl</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/plugin/panels/Events.pnl?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/plugin/panels/Events.pnl</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/plugin/panels/Facts.pnl?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/plugin/panels/Facts.pnl</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/plugin/panels/Graphics.pnl?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/plugin/panels/Graphics.pnl</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/plugin/panels/Images.pnl?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/plugin/panels/Images.pnl</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/plugin/panels/Narratives.pnl?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/plugin/panels/Narratives.pnl</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/plugin/panels/Players.pnl?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/plugin/panels/Players.pnl</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/plugin/panels/Quotes.pnl?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/plugin/panels/Quotes.pnl</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/plugin/panels/Reactions.pnl?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/plugin/panels/Reactions.pnl</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/plugin/panels/Resources.pnl?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/plugin/panels/Resources.pnl</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/plugin/panels/Videos.pnl?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/plugin/panels/Videos.pnl</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/.classpath?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/theme-gwt/.classpath</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/.externalToolBuilders/i18nRefresh.launch?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...lToolBuilders/i18nRefresh.launch</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/.project?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/theme-gwt/.project</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/.settings/com.google.appengine.eclipse.core.prefs?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...gle.appengine.eclipse.core.prefs</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/.settings/com.google.gwt.eclipse.core.prefs?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...om.google.gwt.eclipse.core.prefs</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/All-i18n.sh?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/theme-gwt/All-i18n.sh</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/ClientConstants-i18n?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/theme-gwt/ClientConstants-i18n</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/LspConstants-i18n?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/theme-gwt/LspConstants-i18n</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/LspMessages-i18n?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >/theme-gwt/LspMessages-i18n</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/sanify-autogenerated-files.sh?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...wt/sanify-autogenerated-files.sh</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/META-INF/jdoconfig.xml?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...e-gwt/src/META-INF/jdoconfig.xml</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/LivingStoryPage.gwt.xml?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...gstories/LivingStoryPage.gwt.xml</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/AssetContentItem.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...ies/client/AssetContentItem.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/AssetType.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...ingstories/client/AssetType.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/BackgroundContentItem.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...lient/BackgroundContentItem.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/BaseContentItem.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...ries/client/BaseContentItem.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/ClientConstants.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...ries/client/ClientConstants.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/ClientConstants.properties?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...lient/ClientConstants.properties</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/ClientConstants_en.properties?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...nt/ClientConstants_en.properties</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/ClientMessageHolder.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >.../client/ClientMessageHolder.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/ClientMessages.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...ories/client/ClientMessages.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/ClientMessages_en.properties?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...ent/ClientMessages_en.properties</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/ContentItemType.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...ries/client/ContentItemType.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/ContentItemTypesBundle.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...ient/ContentItemTypesBundle.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/DataContentItem.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...ries/client/DataContentItem.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/DimensionEvent.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...ories/client/DimensionEvent.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/DimensionHandler.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...ies/client/DimensionHandler.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/EnumTranslator.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...ories/client/EnumTranslator.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/EventContentItem.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...ies/client/EventContentItem.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/Importance.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...ngstories/client/Importance.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/LivingStory.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...gstories/client/LivingStory.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/LivingStoryRpcService.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...lient/LivingStoryRpcService.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/Location.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...vingstories/client/Location.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/NarrativeContentItem.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...client/NarrativeContentItem.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/NarrativeType.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...tories/client/NarrativeType.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/PlayerContentItem.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...es/client/PlayerContentItem.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/PlayerType.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...ngstories/client/PlayerType.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/PublishState.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...stories/client/PublishState.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/QuoteContentItem.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...ies/client/QuoteContentItem.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/ReactionContentItem.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >.../client/ReactionContentItem.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/StoryPlayerContentItem.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...ient/StoryPlayerContentItem.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/Theme.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >.../livingstories/client/Theme.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/contentitemlist/ClickableContentItemListElement.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...kableContentItemListElement.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/contentitemlist/ContentItemClickHandler.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...ist/ContentItemClickHandler.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/contentitemlist/ContentItemList.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...entitemlist/ContentItemList.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/contentitemlist/ContentItemListElement.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...list/ContentItemListElement.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/contentitemlist/SummarySnippetWidget.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...emlist/SummarySnippetWidget.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/lsp/BylineWidget.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...ies/client/lsp/BylineWidget.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/lsp/ContentItemBundle.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...lient/lsp/ContentItemBundle.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/lsp/ContentItemPopupWidget.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >.../lsp/ContentItemPopupWidget.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/lsp/ContentRenderer.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >.../client/lsp/ContentRenderer.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/lsp/EventTimelineCreator.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...nt/lsp/EventTimelineCreator.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/lsp/Externs.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...gstories/client/lsp/Externs.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/lsp/FilterWidget.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...ies/client/lsp/FilterWidget.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/lsp/LivingStory.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...ries/client/lsp/LivingStory.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/lsp/LspConstants.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...ies/client/lsp/LspConstants.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/lsp/LspConstants.properties?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...ient/lsp/LspConstants.properties</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/lsp/LspContentItemListWidget.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...sp/LspContentItemListWidget.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/lsp/LspMessageHolder.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...client/lsp/LspMessageHolder.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/lsp/LspMessages.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...ries/client/lsp/LspMessages.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/lsp/LspMessages.properties?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...lient/lsp/LspMessages.properties</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/lsp/SourceLink.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...ories/client/lsp/SourceLink.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/lsp/SourcePopupWidget.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...lient/lsp/SourcePopupWidget.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/lsp/ThemeListWidget.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >.../client/lsp/ThemeListWidget.java</option>
+ 
+ <option value="/r/fawziagulsha-sufimystic/source/browse/theme-gwt/src/com/google/livingstories/client/lsp/event/BlockToggledEvent.java?r=a868456b6c7b48382a9dbb75cc48f139f59381a2&amp;spec=svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6"
+ 
+ >...lsp/event/BlockToggledEvent.java</option>
+ 
+ </select>
+ </td></tr></table>
+ 
+ 
+ 
+
+
+
+ <div style="white-space:nowrap">
+ Project members,
+ <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fr%2Ffawziagulsha-sufimystic%2Fsource%2Fbrowse%2Fmagic-fields%2Fjs%2Fsinglemp3player.swf&amp;followup=https%3A%2F%2Fcode.google.com%2Fr%2Ffawziagulsha-sufimystic%2Fsource%2Fbrowse%2Fmagic-fields%2Fjs%2Fsinglemp3player.swf"
+ >sign in</a> to write a code review</div>
+
+
+ 
+ </div>
+ 
+ 
+ </div>
+ <div class="round1"></div>
+ <div class="round2"></div>
+ <div class="round4"></div>
+ </div>
+ <div class="pmeta_bubble_bg" style="border:1px solid white">
+ <div class="round4"></div>
+ <div class="round2"></div>
+ <div class="round1"></div>
+ <div class="box-inner">
+ <div id="older_bubble">
+ <p>Older revisions</p>
+ 
+ <a href="/r/fawziagulsha-sufimystic/source/list?path=/magic-fields/js/singlemp3player.swf&r=a868456b6c7b48382a9dbb75cc48f139f59381a2">All revisions of this file</a>
+ </div>
+ </div>
+ <div class="round1"></div>
+ <div class="round2"></div>
+ <div class="round4"></div>
+ </div>
+ 
+ <div class="pmeta_bubble_bg" style="border:1px solid white">
+ <div class="round4"></div>
+ <div class="round2"></div>
+ <div class="round1"></div>
+ <div class="box-inner">
+ <div id="fileinfo_bubble">
+ <p>File info</p>
+ 
+ <div>Size: 2599 bytes</div>
+ 
+ <div><a href="//fawziagulsha-sufimystic.googlecode.com/hg/magic-fields/js/singlemp3player.swf">View raw file</a></div>
+ </div>
+ 
+ </div>
+ <div class="round1"></div>
+ <div class="round2"></div>
+ <div class="round4"></div>
+ </div>
+ </div>
+ </div>
+
+
+</div>
+
+</div>
+</div>
+
+
+<script src="https://ssl.gstatic.com/codesite/ph/13998957996356775390/js/source_file_scripts.js"></script>
+
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/13998957996356775390/js/kibbles.js"></script>
+ <script type="text/javascript">
+ var lastStop = null;
+ var initialized = false;
+ 
+ function updateCursor(next, prev) {
+ if (prev && prev.element) {
+ prev.element.className = 'cursor_stop cursor_hidden';
+ }
+ if (next && next.element) {
+ next.element.className = 'cursor_stop cursor';
+ lastStop = next.index;
+ }
+ }
+ 
+ function pubRevealed(data) {
+ updateCursorForCell(data.cellId, 'cursor_stop cursor_hidden');
+ if (initialized) {
+ reloadCursors();
+ }
+ }
+ 
+ function draftRevealed(data) {
+ updateCursorForCell(data.cellId, 'cursor_stop cursor_hidden');
+ if (initialized) {
+ reloadCursors();
+ }
+ }
+ 
+ function draftDestroyed(data) {
+ updateCursorForCell(data.cellId, 'nocursor');
+ if (initialized) {
+ reloadCursors();
+ }
+ }
+ function reloadCursors() {
+ kibbles.skipper.reset();
+ loadCursors();
+ if (lastStop != null) {
+ kibbles.skipper.setCurrentStop(lastStop);
+ }
+ }
+ // possibly the simplest way to insert any newly added comments
+ // is to update the class of the corresponding cursor row,
+ // then refresh the entire list of rows.
+ function updateCursorForCell(cellId, className) {
+ var cell = document.getElementById(cellId);
+ // we have to go two rows back to find the cursor location
+ var row = getPreviousElement(cell.parentNode);
+ row.className = className;
+ }
+ // returns the previous element, ignores text nodes.
+ function getPreviousElement(e) {
+ var element = e.previousSibling;
+ if (element.nodeType == 3) {
+ element = element.previousSibling;
+ }
+ if (element && element.tagName) {
+ return element;
+ }
+ }
+ function loadCursors() {
+ // register our elements with skipper
+ var elements = CR_getElements('*', 'cursor_stop');
+ var len = elements.length;
+ for (var i = 0; i < len; i++) {
+ var element = elements[i]; 
+ element.className = 'cursor_stop cursor_hidden';
+ kibbles.skipper.append(element);
+ }
+ }
+ function toggleComments() {
+ CR_toggleCommentDisplay();
+ reloadCursors();
+ }
+ function keysOnLoadHandler() {
+ // setup skipper
+ kibbles.skipper.addStopListener(
+ kibbles.skipper.LISTENER_TYPE.PRE, updateCursor);
+ // Set the 'offset' option to return the middle of the client area
+ // an option can be a static value, or a callback
+ kibbles.skipper.setOption('padding_top', 50);
+ // Set the 'offset' option to return the middle of the client area
+ // an option can be a static value, or a callback
+ kibbles.skipper.setOption('padding_bottom', 100);
+ // Register our keys
+ kibbles.skipper.addFwdKey("n");
+ kibbles.skipper.addRevKey("p");
+ kibbles.keys.addKeyPressListener(
+ 'u', function() { window.location = detail_url; });
+ kibbles.keys.addKeyPressListener(
+ 'r', function() { window.location = detail_url + '#publish'; });
+ 
+ kibbles.keys.addKeyPressListener('j', gotoNextPage);
+ kibbles.keys.addKeyPressListener('k', gotoPreviousPage);
+ 
+ 
+ }
+ </script>
+<script src="https://ssl.gstatic.com/codesite/ph/13998957996356775390/js/code_review_scripts.js"></script>
+<script type="text/javascript">
+ function showPublishInstructions() {
+ var element = document.getElementById('review_instr');
+ if (element) {
+ element.className = 'opened';
+ }
+ }
+ var codereviews;
+ function revsOnLoadHandler() {
+ // register our source container with the commenting code
+ var paths = {'svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6': '/magic-fields/js/singlemp3player.swf'}
+ codereviews = CR_controller.setup(
+ {"assetHostPath": "https://ssl.gstatic.com/codesite/ph", "relativeBaseUrl": "", "assetVersionPath": "https://ssl.gstatic.com/codesite/ph/13998957996356775390", "projectName": "fawziagulsha-sufimystic", "profileUrl": null, "domainName": null, "token": null, "loggedInUserEmail": null, "projectHomeUrl": "/r/fawziagulsha-sufimystic"}, '', 'svn13f440fd3e0d81d17942a4c6bedf9f33747ac0d6', paths,
+ CR_BrowseIntegrationFactory);
+ 
+ codereviews.registerActivityListener(CR_ActivityType.REVEAL_DRAFT_PLATE, showPublishInstructions);
+ 
+ codereviews.registerActivityListener(CR_ActivityType.REVEAL_PUB_PLATE, pubRevealed);
+ codereviews.registerActivityListener(CR_ActivityType.REVEAL_DRAFT_PLATE, draftRevealed);
+ codereviews.registerActivityListener(CR_ActivityType.DISCARD_DRAFT_COMMENT, draftDestroyed);
+ 
+ 
+ var initialized = true;
+ reloadCursors();
+ }
+ window.onload = function() {keysOnLoadHandler(); revsOnLoadHandler();};
+
+</script>
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/13998957996356775390/js/dit_scripts.js"></script>
+
+ 
+ 
+ 
+ <script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/13998957996356775390/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ </body>
+</html>
+
