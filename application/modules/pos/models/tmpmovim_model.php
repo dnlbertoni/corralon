@@ -3,7 +3,7 @@
 class Tmpmovim_model extends MY_Model
 {
     var $tabla = "tmp_movim";
-    var $tablaArticulos = "tbl_articulos";
+    var $tablaArticulos = "stk_articulos";
 
     function __construct()
     {

@@ -36,10 +36,10 @@ class Submarcas_model extends MY_Model
         $this->db->select('ALIAS_SUBMARCA');
         $this->db->select('COUNT(id_articulo) AS articulos', FALSE);
         $this->db->select('SUM(IF(wizard=1,1,0)) AS Warticulos', FALSE);
-        $this->db->from('tbl_articulos');
-        $this->db->join("stk_submarcas", "tbl_articulos.id_marca = stk_submarcas.id_submarca ", "left");
+        $this->db->from('stk_articulos');
+        $this->db->join("stk_submarcas", "stk_articulos.id_marca = stk_submarcas.id_submarca ", "left");
         $this->db->join("stk_marcas", "stk_submarcas.id_marca = stk_marcas.id_marca", "left");
-        $this->db->group_by('tbl_articulos.id_marca');
+        $this->db->group_by('stk_articulos.id_marca');
         $this->db->order_by('detalle_marca');
         $this->db->order_by('alias_submarca');
         return $this->db->get()->result();
@@ -111,14 +111,14 @@ class Submarcas_model extends MY_Model
         $this->db->select('DESCRIPCION_articulo AS nombre');
         $this->db->select('CONCAT(descripcion_subrubro, " ( ", descripcion_rubro, " ) ") AS rubro', FALSE);
         $this->db->select('wizard AS w');
-        $this->db->from('tbl_articulos');
-        $this->db->join("tbl_subrubros", "tbl_subrubros.id_subrubro = tbl_articulos.id_subrubro", "inner");
-        $this->db->join("stk_submarcas", "tbl_articulos.id_marca = stk_submarcas.id_submarca", "right");
-        $this->db->join("tbl_rubros", "tbl_subrubros.id_rubro    = tbl_rubros.id_rubro", "inner");
+        $this->db->from('stk_articulos');
+        $this->db->join("tbl_subrubros", "tbl_subrubros.id_subrubro = stk_articulos.id_subrubro", "inner");
+        $this->db->join("stk_submarcas", "stk_articulos.id_marca = stk_submarcas.id_submarca", "right");
+        $this->db->join("stk_rubros", "tbl_subrubros.id_rubro    = stk_rubros.id_rubro", "inner");
         if ($id) {
-            $this->db->where('tbl_articulos.id_marca', $id);
+            $this->db->where('stk_articulos.id_marca', $id);
         } else {
-            $this->db->where('tbl_articulos.id_marca IS NULL', '', FALSE);
+            $this->db->where('stk_articulos.id_marca IS NULL', '', FALSE);
         }
         $this->db->order_by('nombre');
         return $this->db->get()->result();

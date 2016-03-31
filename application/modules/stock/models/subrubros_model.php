@@ -35,7 +35,7 @@ class Subrubros_model extends MY_Model
         $this->db->select('DESCRIPCION_RUBRO AS rubro');
         $this->db->select('ALIAS_SUBRUBRO');
         $this->db->from($this->getTable());
-        $this->db->join("tbl_rubros", "tbl_subrubros.id_rubro = tbl_rubros.id_rubro", "inner");
+        $this->db->join("stk_rubros", "tbl_subrubros.id_rubro = stk_rubros.id_rubro", "inner");
         $this->db->order_by('tbl_subrubros.ID_RUBRO');
         $this->db->order_by('ALIAS_SUBRUBRO');
         return $this->db->get()->result();
@@ -49,10 +49,10 @@ class Subrubros_model extends MY_Model
         $this->db->select('ALIAS_SUBRUBRO');
         $this->db->select('COUNT(id_articulo) AS articulos', FALSE);
         $this->db->select('SUM(IF(wizard=1,1,0)) AS Warticulos', FALSE);
-        $this->db->from('tbl_articulos');
-        $this->db->join("tbl_subrubros", "tbl_subrubros.id_subrubro = tbl_articulos.id_subrubro", "right");
-        $this->db->join("tbl_rubros", "tbl_subrubros.id_rubro = tbl_rubros.id_rubro", "right");
-        $this->db->group_by('tbl_articulos.id_subrubro');
+        $this->db->from('stk_articulos');
+        $this->db->join("tbl_subrubros", "tbl_subrubros.id_subrubro = stk_articulos.id_subrubro", "right");
+        $this->db->join("stk_rubros", "tbl_subrubros.id_rubro = stk_rubros.id_rubro", "right");
+        $this->db->group_by('stk_articulos.id_subrubro');
         $this->db->order_by('descripcion_rubro');
         $this->db->order_by('alias_subrubro');
         return $this->db->get()->result();
@@ -80,7 +80,7 @@ class Subrubros_model extends MY_Model
         $this->db->select('descripcion_subrubro as nombre');
         $this->db->select('descripcion_rubro as rubro');
         $this->db->from($this->getTable());
-        $this->db->join('tbl_rubros', 'tbl_rubros.id_rubro = tbl_subrubros.id_rubro', 'inner');
+        $this->db->join('stk_rubros', 'stk_rubros.id_rubro = tbl_subrubros.id_rubro', 'inner');
         $this->db->like('descripcion_subrubro', $valor);
         $q = $this->db->get();
         if ($q->num_rows() > 0) {
@@ -97,11 +97,11 @@ class Subrubros_model extends MY_Model
         $this->db->select('DESCRIPCION_articulo AS nombre');
         $this->db->select('CONCAT(detalle_submarca, " ( ", detalle_marca, " ) ") AS marca', FALSE);
         $this->db->select('wizard AS w');
-        $this->db->from('tbl_articulos');
-        $this->db->join("tbl_subrubros", "tbl_subrubros.id_subrubro = tbl_articulos.id_subrubro", "inner");
-        $this->db->join("stk_submarcas", "stk_submarcas.id_submarca = tbl_articulos.id_marca", "inner");
+        $this->db->from('stk_articulos');
+        $this->db->join("tbl_subrubros", "tbl_subrubros.id_subrubro = stk_articulos.id_subrubro", "inner");
+        $this->db->join("stk_submarcas", "stk_submarcas.id_submarca = stk_articulos.id_marca", "inner");
         $this->db->join("stk_marcas", "stk_submarcas.id_marca    = stk_marcas.id_marca", "inner");
-        $this->db->where('tbl_articulos.id_subrubro', $id);
+        $this->db->where('stk_articulos.id_subrubro', $id);
         $this->db->order_by('nombre');
         return $this->db->get()->result();
     }
