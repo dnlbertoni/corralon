@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="DnL">
 
-    <title>Sistema de Gestion de Autoservicio Santa Lucia</title>
+    <title>Sistema de Gestion de Corralon Del Sur</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/themes/citrus/screen.css" rel="stylesheet">
@@ -22,7 +22,7 @@
     <script src="/themes/citrus/js/bootstrapCitrus.js"></script>
     <script src="/themes/citrus/js/citrus.js"></script>
 
-    <?php echo Assets::js() ?>
+    <?php //echo Assets::js() ?>
     <?php //echo Assets::css() ?>
 </head>
 
@@ -38,18 +38,11 @@
     <footer>
         <div class="row">
             <div class="col-lg-12">
-                <p>Copyright &copy; Autoservicio Santa lucia 2010-2015</p>
+                <p>Copyright &copy; 2016</p>
             </div>
         </div>
     </footer>
 
 </div><!-- /.container -->
-<script>
-    $(document).ready(function () {
-        $("#BACK").click(function () {
-            history.back();
-        })
-    });
-</script>
 </body>
 </html>

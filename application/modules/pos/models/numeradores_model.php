@@ -7,14 +7,14 @@
 
 class Numeradores_model extends MY_Model
 {
-    var $tabla = "numerador";
+    var $tabla = "cfg_numerador";
     var $principal = "numero";
     var $primaryKey = "id";
 
     function __construct()
     {
         parent::__construct();
-        $this->setTable('numerador');
+        $this->setTable('cfg_numerador');
     }
 
     function getById($id)

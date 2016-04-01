@@ -87,7 +87,7 @@ class Ctacte_movim_model extends MY_Model
         $this->db->select('preciovta_movim as Precio');
         $this->db->select('cantidad_movim * preciovta_movim as Importe');
         $this->db->from('facmovim');
-        $this->db->join('tbl_articulos', 'tbl_articulos.id_articulo=facmovim.id_articulo', 'inner');
+        $this->db->join('stk_articulos', 'stk_articulos.id_articulo=facmovim.id_articulo', 'inner');
         $this->db->where('facmovim.idencab', $idencab);
         return $this->db->get()->result();
     }

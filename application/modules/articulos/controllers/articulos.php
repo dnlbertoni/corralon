@@ -363,7 +363,7 @@ class Articulos extends MY_Controller
     {
         $estados = $this->Articulos_model->getRubrosMarcasAgrupadas();
         $activos = $this->Articulos_model->getActivos();
-        $generica = $this->Articulos_model->getConsulta("SELECT COUNT(id_articulo) AS cantidad FROM tbl_articulos WHERE id_marca = 0");
+        $generica = $this->Articulos_model->getConsulta("SELECT COUNT(id_articulo) AS cantidad FROM stk_articulos WHERE id_marca = 0");
         $data['faltanGenericas'] = $generica->cantidad;
         $data['estados'] = $estados;
         $total = 0;

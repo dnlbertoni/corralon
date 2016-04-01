@@ -14,18 +14,11 @@
                     <div class="pull-right">
                         <div class="btn-group">
                             <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-                                Actions
+                                Acciones
                                 <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu pull-right" role="menu">
-                                <li><a href="#">Action</a>
-                                </li>
-                                <li><a href="#">Another action</a>
-                                </li>
-                                <li><a href="#">Something else here</a>
-                                </li>
-                                <li class="divider"></li>
-                                <li><a href="#">Separated link</a>
+                                <li><?php echo anchor('setting/addParametro', 'Nuevo Parametro', 'data-toggle="modal" data-target="#remoteModal"'); ?></li>
                                 </li>
                             </ul>
                         </div>
@@ -33,7 +26,26 @@
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
-                    defino que es parametrizable
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Valor</th>
+                                    <th>&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php foreach ($menuParametros as $parametro):?>
+                                <tr>
+                                    <td><?php echo $parametro->nombre;?></td>
+                                    <td><?php echo $parametro->valor;?></td>
+                                    <td>botones</td>
+                                </tr>
+                            </tbody>
+                            <?php endforeach;?>
+                        </table>
+                        </div>
                 </div>
                 <!-- /.panel-body -->
             </div>
@@ -48,8 +60,8 @@
                                 <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu pull-right" role="menu">
-                                <li><?php echo anchor('setting/addModulo', 'Nuevo Modulo', 'data-toggle="modal" data-target="#remoteModal"'); ?></a></li>
-                                <li>Asignar Roles</li>
+                                <li><?php echo anchor('setting/addModulo', 'Nuevo Modulo', 'data-toggle="modal" data-target="#remoteModal"'); ?></li>
+                                <li><?php echo anchor('setting/addModulo', 'Asignar Rol', 'data-toggle="modal" data-target="#remoteModal"'); ?></li>
                                 <li class="divider"></li>
                                 <li><a href="#">Relacionar con Menues</a></li>
                             </ul>

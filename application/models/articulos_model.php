@@ -2,12 +2,12 @@
 
 class Articulos_model extends MY_Model
 {
-    private $tabla = "tbl_articulos";
+    private $tabla = "stk_articulos";
 
     function __construct()
     {
         parent::__construct();
-        $this->setTable('tbl_articulos');
+        $this->setTable('stk_articulos');
     }
 
     function getDatosBasicos($id)

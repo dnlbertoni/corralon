@@ -5,7 +5,7 @@ class Rubros_model extends MY_Model
     function __construct()
     {
         parent::__construct();
-        $this->setTable("tbl_rubros");
+        $this->setTable("stk_rubros");
     }
 
     function ListaSelect($campoId = "id_rubro", $campoNombre = "descripcion_rubro")

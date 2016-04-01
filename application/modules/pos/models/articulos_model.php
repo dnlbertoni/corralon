@@ -2,12 +2,12 @@
 
 class Articulos_model extends MY_Model
 {
-    var $tabla = "tbl_articulos";
+    var $tabla = "stk_articulos";
 
     function __construct()
     {
         parent::__construct();
-        $this->setTable('tbl_articulos');
+        $this->setTable('stk_articulos');
     }
 
     function getDatosPresupuesto($codigobarra)

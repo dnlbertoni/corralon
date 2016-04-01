@@ -23,7 +23,7 @@ class Preciosmovim_model extends MY_Model
         $this->db->select('preciovta_articulo AS precio');
         $this->db->select('fechamodif_articulo AS fecha');
         $this->db->select('fechaprint as impreso');
-        $this->db->from('tbl_articulos');
+        $this->db->from('stk_articulos');
         $articulos = $this->db->get()->result();
         foreach ($articulos as $articulo) {
             $datos = array('id_articulo' => $articulo->id,

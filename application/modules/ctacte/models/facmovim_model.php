@@ -20,7 +20,7 @@ class Facmovim_model extends MY_Model
         $this->db->select('descripcion_articulo');
         $this->db->select('preciovta_movim');
         $this->db->from($this->getTable());
-        $this->db->join('tbl_articulos', 'tbl_articulos.id_articulo=facmovim.id_articulo', 'inner');
+        $this->db->join('stk_articulos', 'stk_articulos.id_articulo=facmovim.id_articulo', 'inner');
         $this->db->where('facmovim.idencab', $idencab);
         return $this->db->get()->result();
     }
