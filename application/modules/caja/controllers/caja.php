@@ -5,18 +5,20 @@
  *
  * @author dnl
  */
-class Caja extends MY_Controller
-{
-    function __construct()
-    {
+class Caja extends Admin_Controller {
+
+    function __construct () {
         parent::__construct();
-        Template::set_theme('moderno/');
 
     }
 
-    function index()
-    {
+    function index () {
         Template::render();
     }
 
+    function open () {
+        $data['puesto'] = $this->getPuesto ();
+        Template::set ( $data );
+        Template::render ();
+    }
 }
