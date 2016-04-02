@@ -10,15 +10,12 @@
  * @property Cuenta_model $Cuenta_model
  * @property Cajamovim_model $Cajamovim_model
  */
-class Billing extends Admin_Controller
-{
-    var $puesto;
+class Billing extends Admin_Controller{
     var $PrinterDestino;
 
     function __construct()
     {
         parent::__construct();
-        $this->puesto = PUESTO;
         $this->PrinterDestino = 2; // 1 controlador 2 laser
         $this->load->model('Articulos_model', '', true);
         $this->load->model('Tmpmovim_model', '', true);
@@ -34,17 +31,17 @@ class Billing extends Admin_Controller
     function presupuesto()
     {
         //busco datos del previo
-        $presuEncab = $this->Tmpfacencab_model->getDatosUltimo($this->puesto);
+        $presuEncab = $this->Tmpfacencab_model->getDatosUltimo($this->getPuesto());
         $fecha = new DateTime();
         $data['fechoy'] = $fecha->format('d/m/Y');
         if (!$presuEncab) { //sino existe creo uno en blanco
-            $data['puesto'] = $this->puesto;
+            $data['puesto'] = $this->getPuesto();
             $data['numero'] = $this->Facencab_model->getMaxId() + 1;
             $data['idCuenta'] = 1;
             $data['tipcom_id'] = 1;
             $data['nombreCuenta'] = $this->Cuenta_model->getNombre(1);
             //creo el presupuesto
-            $numeroTemporal = $this->Tmpfacencab_model->inicializo($this->puesto, $data['numero'], $data['tipcom_id'], $data['idCuenta']);
+            $numeroTemporal = $this->Tmpfacencab_model->inicializo($this->getPuesto(), $data['numero'], $data['tipcom_id'], $data['idCuenta']);
             //creo la forma de pago en efectivo con 0
             $this->Tmpfpagos_model->inicializo($numeroTemporal);
         } else { //levanto los datos del presupuesto vigente para el puesto
@@ -186,8 +183,7 @@ class Billing extends Admin_Controller
         //Template::redirect('pos/billing/presupuesto');
     }
 
-    function cambioCondicion()
-    {
+    function cambioCondicion(){
         $puesto = $this->input->post('puesto');
         $id_tmpencab = $this->input->post('id_tmpencab');
         $cuenta = $this->input->post('condVtaId');
@@ -196,8 +192,7 @@ class Billing extends Admin_Controller
         //Template::render();
     }
 
-    function emitoComprobante()
-    {
+    function emitoComprobante(){
         $this->output->enable_profiler(false);
         $this->load->library('hasar');
         $tmpfacenab_id = $this->input->post('tmpfacencab');
@@ -224,9 +219,9 @@ class Billing extends Admin_Controller
         //imprimo comprobante
         switch ($comprobante->tipcom_id) {
             case 1:
-                $archivo = $this->_imprimeTicket($this->puesto, $comprobante->id, $renglones, $total, false);
+                $archivo = $this->_imprimeTicket($this->getPuesto(), $comprobante->id, $renglones, $total, false);
 
-                $this->hasar->setPuesto($this->puesto);
+                $this->hasar->setPuesto($this->getPuesto());
                 $this->hasar->nombres($archivo);
                 $respuesta = $this->hasar->RespuestaFull();
                 //$respEstado = $this->hasar->Estado();
@@ -237,9 +232,9 @@ class Billing extends Admin_Controller
 
                 break;
             case 2:
-                $archivo = $this->_imprimeFactura($this->puesto, $comprobante->id, $renglones, $total, $cliente);
+                $archivo = $this->_imprimeFactura($this->getPuesto(), $comprobante->id, $renglones, $total, $cliente);
 
-                $this->hasar->setPuesto($this->puesto);
+                $this->hasar->setPuesto($this->getPuesto());
                 $this->hasar->nombres($archivo);
                 $respuesta = $this->hasar->RespuestaFull();
                 //$respEstado = $this->hasar->Estado();
@@ -255,9 +250,9 @@ class Billing extends Admin_Controller
                 $numrem = $this->Numeradores_model->getNextRemito($ptorem);
                 $ivatot = 0;
                 if ($this->PrinterDestino == 1) {
-                    $archivo = $this->_imprimeDNF($ptorem, $numrem, $this->puesto, $comprobante->id, $cliente, $renglones, 1, false);
+                    $archivo = $this->_imprimeDNF($ptorem, $numrem, $this->getPuesto(), $comprobante->id, $cliente, $renglones, 1, false);
 
-                    $this->hasar->setPuesto($this->puesto);
+                    $this->hasar->setPuesto($this->getPuesto());
                     $this->hasar->nombres($archivo);
                     $respuesta = $this->hasar->RespuestaFull();
                     //$respEstado = $this->hasar->Estado();
@@ -388,7 +383,7 @@ class Billing extends Admin_Controller
     {
         $this->load->library('hasar');
         $this->load->library('cnf');
-        $this->cnf->setPuesto($this->puesto);
+        $this->cnf->setPuesto($this->getPuesto());
         $comprobante = "v";
         $factura = ($detalle == 1) ? $ptorem . "-" . $numrem : $puesto . "-" . $idencab;
         $nom_archiv = $comprobante . $idencab;
@@ -404,7 +399,7 @@ class Billing extends Admin_Controller
     {
         $this->load->library('hasar');
         $this->load->library('cnf');
-        $this->cnf->setPuesto($this->puesto);
+        $this->cnf->setPuesto($this->getPuesto());
         $comprobante = "x";
         $factura = $puesto . "-" . $numero;
         $nom_archiv = $comprobante . $numero;
@@ -572,7 +567,7 @@ class Billing extends Admin_Controller
             $this->fpdf->SetXY(0, $linea + 22);
             $this->fpdf->Cell(0, 5, "Firma del Cliente", 0, 1, 'C');
         };
-        $nombre = ABSOLUT_PATH . '/' . PUESTO . "/pdf/ticket.pdf";
+        $nombre = ABSOLUT_PATH . '/' . $this->getPuesto() . "/pdf/ticket.pdf";
         $this->fpdf->Output($nombre, 'F');
         $cmd = sprintf("lp -o media=Custom.100x148mm %s -d %s", $nombre, PRREMITO);
         shell_exec($cmd);
