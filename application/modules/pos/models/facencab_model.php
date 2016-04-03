@@ -1,21 +1,20 @@
 <?php
 
-class Facencab_model extends MY_Model
-{
-    var $tabla = "facencab";
-    var $tablaMovim = "facmovim";
+class Facencab_model extends MY_Model {
+
+    var $tablaMovim = "fac_facmovim";
     var $tablaTmp = "tmp_movimientos";
 
     function __construct()
     {
         parent::__construct();
-        $this->setTable("facencab");
+        $this->setTable ( "fac_facencab" );
     }
 
     function getMaxId()
     {
         $this->db->select_max('id');
-        $this->db->from($this->tabla);
+        $this->db->from ( $this->getTable () );
         return $this->db->get()->row()->id;
     }
 
@@ -25,7 +24,7 @@ class Facencab_model extends MY_Model
         //grabo facencab
         $this->db->set('fecha', 'NOW()', FALSE);
         $this->db->set('periva', 'DATE_FORMAT(NOW(),"%Y%m")', FALSE);
-        $this->db->insert($this->tabla, $datosEncab);
+        $this->db->insert ( $this->getTable (), $datosEncab );
         $idencab = $this->db->insert_id();
         //grabo facmovim
         foreach ($datosMovim as $movimiento) {
@@ -57,18 +56,16 @@ class Facencab_model extends MY_Model
         return $q;
     }
 
-    function getRegistro($id)
-    {
+    function getRegistro ( $id ) {
         $this->db->_reset_select();
-        $this->db->from($this->tabla);
+        $this->db->from ( $this->getTable () );
         $this->db->where('id', $id);
         return $this->db->get()->row();
     }
 
-    function getCierreZ($numero)
-    {
+    function getCierreZ ( $numero ) {
         $this->db->_reset_select();
-        $this->db->from($this->tabla);
+        $this->db->from ( $this->getTable () );
         $this->db->where('numero', $numero);
         $this->db->where('tipcom_id', 4);
         $this->db->where('puesto', 3);
@@ -76,8 +73,7 @@ class Facencab_model extends MY_Model
         return $this->db->get()->row();
     }
 
-    function getNumeroFromIdencab($id)
-    {
+    function getNumeroFromIdencab ( $id ) {
         $this->db->select('numero');
         $this->db->from($this->getTable());
         $this->db->where('id', $id);

@@ -25,12 +25,16 @@
                         <ul class="dropdown-menu">
                             <?php foreach ($menu as $me): ?>
                                 <?php if ($mo->id == $me->modulo): ?>
-                                    <?php if ($me->clase) {
-                                        $nombre = " <span class='$me->clase fa-fw pull-right'></span> " . $me->nombre;
-                                    } else {
-                                        $nombre = $me->nombre;
-                                    }; ?>
-                                    <li><?php echo anchor($me->link, $nombre) ?></li>
+                                    <?php if ( $me->clase == "Separador" ): ?>
+                                        <li class="divider"></li>
+                                    <?php else: ?>
+                                        <?php if ( $me->clase ) {
+                                            $nombre = " <span class='$me->clase fa-fw pull-right'></span> " . $me->nombre;
+                                        } else {
+                                            $nombre = $me->nombre;
+                                        }; ?>
+                                        <li><?php echo anchor ( $me->link, $nombre ) ?></li>
+                                    <?php endif; ?>
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         </ul>

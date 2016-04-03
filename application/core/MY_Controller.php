@@ -112,6 +112,30 @@ class Admin_Controller extends MY_Controller {
     function getPuesto () {
         return $this->Cfgpuestos_model->getPuesto ( $this->input->ip_address () );
     }
+
+    function getFecha ( $tipo = "humano" ) {
+        $fecha = new DateTime();
+        switch ( $tipo ) {
+            case "db":
+                return $fecha->format ( "Y-m-d" );
+                break;
+            default:
+                return $fecha->format ( "d/m/Y" );
+                break;
+        }
+    }
+
+    function getFechaHora ( $tipo = "humano" ) {
+        $fecha = new DateTime();
+        switch ( $tipo ) {
+            case "db":
+                return $fecha->format ( "Y-m-d h:i:s" );
+                break;
+            default:
+                return $fecha->format ( "d/m/Y h:i:s" );
+                break;
+        }
+    }
 }
 
 class POS_Controller extends MY_Controller

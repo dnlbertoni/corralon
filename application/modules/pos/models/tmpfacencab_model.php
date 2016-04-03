@@ -32,11 +32,14 @@ class Tmpfacencab_model extends MY_Model
         return true;
     }
 
-    function getDatosUltimo($puesto)
-    {
+    function getDatosUltimo ( $puesto, $tipcom = false ) {
         $this->db->select_max('id');
         $this->db->from($this->getTable());
         $this->db->where('puesto', $puesto);
+        if ( $tipcom )
+            $this->db->where ( 'tipcom_id', $tipcom );
+        else
+            $this->db->where ( 'tipcom_id <>', 18 );
         $q = $this->db->get();
         if ($q->num_rows() > 0) {
             $idencab = $q->row()->id;
@@ -48,7 +51,7 @@ class Tmpfacencab_model extends MY_Model
             return $this->db->get()->row();
         } else {
             return false;
-        };
+        }
     }
 
     function getComprobante($id)

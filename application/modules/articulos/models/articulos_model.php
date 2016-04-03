@@ -1,7 +1,6 @@
 <?php
 
-class Articulos_model extends MY_Model
-{
+class Articulos_model extends MY_Model {
     var $tabla = array("name" => "stk_articulos",
         "id" => "id_articulo",
         "nombre" => "descripcion_articulo",
@@ -10,9 +9,8 @@ class Articulos_model extends MY_Model
     );
     var $primaryKey = "ID_ARTICULO";
 
-    function __construct()
-    {
-        parent::Model();
+    function __construct () {
+        parent::__construct ();
         $this->tabla = (object)$this->tabla;
         $this->setTable($this->tabla->name);
     }
@@ -314,13 +312,13 @@ class Articulos_model extends MY_Model
         $this->db->select("stk_articulos.id_marca");
         $this->db->select("detalle_submarca AS submarca");
         if ($importe) {
-            $this->db->select("sum(facmovim.preciovta_movim * facmovim.cantidad_movim) as cantidad", false);
+            $this->db->select ( "sum(fac_facmovim.preciovta_movim * fac_facmovim.cantidad_movim) as cantidad", false );
         } else {
-            $this->db->select("sum(facmovim.cantidad_movim) as cantidad", false);
+            $this->db->select ( "sum(fac_facmovim.cantidad_movim) as cantidad", false );
         }
         $this->db->select("CONCAT(stk_articulos.id_subrubro, stk_articulos.id_marca) as indice", false);
-        $this->db->from("facmovim");
-        $this->db->join("stk_articulos", "facmovim.id_articulo = stk_articulos.id_articulo", "inner");
+        $this->db->from ( "fac_facmovim" );
+        $this->db->join ( "stk_articulos", "fac_facmovim.id_articulo = stk_articulos.id_articulo", "inner" );
         $this->db->join("tbl_subrubros", "stk_articulos.id_subrubro = tbl_subrubros.id_subrubro", "left");
         $this->db->join("stk_submarcas", "stk_articulos.id_marca = stk_submarcas.id_submarca", "left");
         $this->db->group_by("indice");
@@ -477,6 +475,7 @@ class Articulos_model extends MY_Model
         $this->db->where('especificacion IS NOT NULL', '', FALSE);
         $this->db->where('TRIM(especificacion) <>""', '', FALSE);
         $q = $this->db->get()->result();
+        $palabras = array ();
         if (count($q) > 0) {
             foreach ($q as $palabra) {
                 $aux = explode(' ', $palabra->especificacion);
@@ -506,6 +505,7 @@ class Articulos_model extends MY_Model
         $this->db->where('medida IS NOT NULL', '', FALSE);
         $this->db->where('TRIM(medida) <>""', '', FALSE);
         $q = $this->db->get()->result();
+        $palabras = array ();
         if (count($q) > 0) {
             foreach ($q as $palabra) {
                 $aux = explode(' ', $palabra->medida);
@@ -533,6 +533,7 @@ class Articulos_model extends MY_Model
         $this->db->where('preciocosto_articulo > 0', '', FALSE);
         $this->db->where('markup_articulo > 0', '', FALSE);
         $q = $this->db->get()->result();
+        $palabras = array ();
         if (count($q) > 0) {
             foreach ($q as $palabra) {
                 $aux = explode(' ', $palabra->markup);

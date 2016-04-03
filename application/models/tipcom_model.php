@@ -5,7 +5,7 @@ class Tipcom_model extends MY_Model
     function __construct()
     {
         parent::__construct();
-        $this->setTable('tipcom');
+        $this->setTable ( 'cfg_tipcom' );
     }
 
     function getNombre($id = 0)
@@ -13,7 +13,7 @@ class Tipcom_model extends MY_Model
         //$this->db->_reset_select();
         if ($id != 0) {
             $this->db->select('descripcion AS nombre');
-            $this->db->from('tipcom');
+            $this->db->from ( $this->getTable () );
             $this->db->where('id', $id);
             $this->db->limit(1);
             $q = $this->db->get();
@@ -29,7 +29,7 @@ class Tipcom_model extends MY_Model
     {
         if ($id != 0) {
             $this->db->select('concepto_id AS concepto');
-            $this->db->from('tipcom');
+            $this->db->from ( $this->getTable () );
             $this->db->where('id', $id);
             $this->db->limit(1);
             $query = $this->db->get()->row()->concepto;

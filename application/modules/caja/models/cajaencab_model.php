@@ -20,7 +20,7 @@ class Cajaencab_model extends MY_Model {
                 $this->db->where ( 'estado', $estado );
             }
             $resultado = $this->db->get ();
-            switch ( $resultado->numrows () ) {
+            switch ( $resultado->num_rows () ) {
                 case 0:
                     return false;
                     break;

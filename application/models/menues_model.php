@@ -17,6 +17,7 @@ class Menues_model extends MY_Model
     {
         $this->db->select('cfg_menu.id as id');
         $this->db->select('cfg_menu.id_modulo as modulo');
+        $this->db->select ( 'cfg_menu.orden as orden' );
         $this->db->select('cfg_menu.nombre as nombre');
         $this->db->select('IF(ISNULL(cfg_menu.clase),"",cfg_menu.clase) as clase', FALSE);
         $this->db->select('cfg_menu.link as link');
@@ -28,6 +29,7 @@ class Menues_model extends MY_Model
             $this->db->where('cfg_menu.estado', $estado);
         }
         $this->db->order_by('modulo');
+        $this->db->order_by ( 'orden' );
         return $this->db->get()->result();
     }
 }

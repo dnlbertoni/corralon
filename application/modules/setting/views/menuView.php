@@ -26,6 +26,10 @@
                 <?php echo form_input('target', $menu->target, 'class="form-control input-sm" placeholder="_self"') ?>
             </div>
             <div class="form-group">
+                <?php echo form_label ( 'Orden:' ); ?>
+                <?php echo form_input ( 'orden', $menu->orden, 'class="form-control input-sm" placeholder="Orden en el menu"' ) ?>
+            </div>
+            <div class="form-group">
                 <?php echo form_label('Modulo:'); ?>
                 <?php echo form_dropdown('id_modulo', $modulosSel, $menu->id_modulo, "class='form-control'"); ?>
             </div>

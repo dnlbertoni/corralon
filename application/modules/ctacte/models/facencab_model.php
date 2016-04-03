@@ -10,7 +10,7 @@ class Facencab_model extends MY_Model
     function __construct()
     {
         parent::__construct();
-        $this->setTable('facencab');
+        $this->setTable ( 'fac_facencab' );
     }
 
     function getAnosCTACTE()
@@ -36,11 +36,11 @@ class Facencab_model extends MY_Model
         $this->db->select('cuenta_id');
         $this->db->select('cuenta.nombre as cliente');
         $this->db->select('SUM(importe) as total');
-        $this->db->select('count(facencab.id) as compras');
+        $this->db->select ( 'count(fac_facencab.id) as compras' );
         $this->db->from($this->getTable());
-        $this->db->join('cuenta', 'cuenta.id=facencab.cuenta_id', 'right');
+        $this->db->join ( 'cuenta', 'cuenta.id=fac_facencab.cuenta_id', 'right' );
         $this->db->where('DATE_FORMAT(fecha, "%Y%m") = ' . $periodo, '', false);
-        $this->db->where('facencab.estado', 9);
+        $this->db->where ( 'fac_facencab.estado', 9 );
         $this->db->group_by('cuenta_id');
         $this->db->order_by('cliente');
         return $this->db->get()->result();

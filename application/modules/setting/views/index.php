@@ -164,6 +164,7 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Nombre Modulo</th>
+                                        <th>Orden Modulo</th>
                                         <th>Nombre</th>
                                         <th>Icono</th>
                                         <th>Link</th>
@@ -176,6 +177,7 @@
                                         <tr>
                                             <td><?php echo $men->id ?></td>
                                             <td><?php echo $men->nombreModulo ?></td>
+                                            <td><?php echo $men->orden ?></td>
                                             <td><?php echo $men->nombre ?></td>
                                             <td><span class="<?php echo $men->clase ?>"></span></td>
                                             <td><?php echo $men->link ?></td>

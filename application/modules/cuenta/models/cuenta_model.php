@@ -71,11 +71,10 @@ class Cuenta_model extends MY_Model
         return $this->db->insert_id();
     }
 
-    function StaticsSimples($id)
-    {
+    function StaticsSimples ( $id ) {
         $this->db->select('count(tipcom_id) as cantidad ', false);
         $this->db->select('sum(importe) as importe', false);
-        $this->db->from('facencab');
+        $this->db->from ( 'fac_facencab' );
         $this->db->where('cuenta_id', $id);
         return $this->db->get()->row();
     }

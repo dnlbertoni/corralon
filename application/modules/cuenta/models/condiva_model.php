@@ -5,7 +5,7 @@ class Condiva_model extends MY_Model
     function __construct()
     {
         parent::__construct();
-        $this->setTable('condiva');
+        $this->setTable ( 'cfg_condiva' );
     }
 
     function toDropDown()
@@ -13,9 +13,10 @@ class Condiva_model extends MY_Model
         $this->db->select('id, nombre ');
         $this->db->from($this->getTable());
         $q = $this->db->get()->result();
+        $lista = array ();
         foreach ($q as $item) {
             $lista[$item->id] = $item->nombre;
         };
-        return (object)$lista;
+        return (object) $lista;
     }
 }

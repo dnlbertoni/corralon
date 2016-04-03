@@ -5,7 +5,7 @@ class Tipcom_model extends MY_Model
     function __construct()
     {
         parent::__construct();
-        $this->setTable('tipcom');
+        $this->setTable ( 'cfg_tipcom' );
     }
 
     function getNombre($id)

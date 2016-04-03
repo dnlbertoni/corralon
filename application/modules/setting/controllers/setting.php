@@ -6,7 +6,8 @@
  * @author dnl
  * @version 1
  *
- * @property $Cfgparametros_model $Cfgparametros_model
+ * @property $Cfgparametros_model   $Cfgparametros_model
+ * @property $Menues_model          $Menues_model
  *
  */
 class Setting extends Admin_Controller

@@ -5,7 +5,7 @@ class Facencab_model extends MY_Model
     function __construct()
     {
         parent::__construct();
-        $this->setTable('facencab');
+        $this->setTable ( 'fac_facencab' );
     }
 
     function ListadoSumaPeriodos($libro)
@@ -15,9 +15,9 @@ class Facencab_model extends MY_Model
         $this->db->select('sum(importe) AS total');
         $this->db->select('sum(ivamin + ivamax) AS totiva');
         $this->db->from($this->getTable());
-        $this->db->join('tipcom', 'tipcom.id=facencab.tipcom_id', 'inner');
-        $this->db->where('facencab.periva IS NOT NULL', null, false);
-        $this->db->where('tipcom.libroiva', $libro);
+        $this->db->join ( 'cfg_tipcom', 'cfg_tipcom.id=fac_facencab.tipcom_id', 'inner' );
+        $this->db->where ( 'fac_facencab.periva IS NOT NULL', null, false );
+        $this->db->where ( 'cfg_tipcom.libroiva', $libro );
         $this->db->group_by('periva');
         $this->db->order_by('periva', 'DESC');
         $q = $this->db->get();
@@ -34,22 +34,22 @@ class Facencab_model extends MY_Model
         }
         $mes -= 3;
         $perdes = ($ano * 100) + $mes;
-        $this->db->select('facencab.id, tipcom.abreviatura as tipcomp, facencab.letra, puesto, numero, cuenta.nombre as razonSocial, importe, ivapass, periva ');
+        $this->db->select ( 'fac_facencab.id, cfg_tipcom.abreviatura as tipcomp, fac_facencab.letra, puesto, numero, cuenta.nombre as razonSocial, importe, ivapass, periva ' );
         $this->db->select('date_format(fecha, "%d-%m-%Y") as fecha', false);
         $this->db->select('(ivamin+ivamax+percep) as ivatot', false);
-        $this->db->select('if( facencab.tipcom_id=2 AND puesto=3, 0, 1) AS suma', false);
+        $this->db->select ( 'if( fac_facencab.tipcom_id=2 AND puesto=3, 0, 1) AS suma', false );
         $this->db->from($this->getTable());
-        $this->db->join('tipcom', 'tipcom.id=facencab.tipcom_id', 'inner');
+        $this->db->join ( 'cfg_tipcom', 'cfg_tipcom.id=fac_facencab.tipcom_id', 'inner' );
         $this->db->join('cuenta', 'cuenta_id = cuenta.id', 'inner');
         if (isset($periodo)) {
-            $condicion = "( facencab.periva = " . $periodo . " OR facencab.periva = 0) ";
+            $condicion = "( fac_facencab.periva = " . $periodo . " OR fac_facencab.periva = 0) ";
             $this->db->where($condicion, null, false);
         };
-        $this->db->where('tipcom.libroiva', $libro);
+        $this->db->where ( 'cfg_tipcom.libroiva', $libro );
         $this->db->where('date_format(fecha, "%Y%m") <= ', $periodo, false);
         $this->db->where('date_format(fecha, "%Y%m") >= ', $perdes, false);
-        $this->db->where('facencab.estado <>', 2);
-        $this->db->order_by('facencab.fecha');
+        $this->db->where ( 'fac_facencab.estado <>', 2 );
+        $this->db->order_by ( 'fac_facencab.fecha' );
         $this->db->order_by('tipcom_id');
         $q = $this->db->get();
         //echo $this->db->last_query();
@@ -58,15 +58,15 @@ class Facencab_model extends MY_Model
 
     function ListadoFacturasPeriodo($libro, $periodo)
     {
-        $this->db->select('facencab.id, tipcom.abreviatura as tipcomp, facencab.letra, puesto, numero, cuenta.nombre as razonSocial, importe, ivapass, periva ');
+        $this->db->select ( 'fac_facencab.id, cfg_tipcom.abreviatura as tipcomp, fac_facencab.letra, puesto, numero, cuenta.nombre as razonSocial, importe, ivapass, periva ' );
         $this->db->select('date_format(fecha, "%d-%m-%Y") as fecha', false);
         $this->db->select('(ivamin+ivamax+percep) as ivatot', false);
-        $this->db->select('if( facencab.tipcom_id=2 AND puesto=3, 0, 1) AS suma', false);
+        $this->db->select ( 'if( fac_facencab.tipcom_id=2 AND puesto=3, 0, 1) AS suma', false );
         $this->db->from($this->getTable());
-        $this->db->join('tipcom', 'tipcom.id=facencab.tipcom_id', 'inner');
+        $this->db->join ( 'cfg_tipcom', 'cfg_tipcom.id=fac_facencab.tipcom_id', 'inner' );
         $this->db->join('cuenta', 'cuenta_id = cuenta.id', 'inner');
-        $this->db->where('facencab.periva ', $periodo);
-        $this->db->where('tipcom.libroiva', $libro);
+        $this->db->where ( 'fac_facencab.periva ', $periodo );
+        $this->db->where ( 'cfg_tipcom.libroiva', $libro );
         $this->db->order_by('fecha');
         $this->db->order_by('tipcom_id');
         //echo $this->db->_compile_select();
@@ -77,16 +77,16 @@ class Facencab_model extends MY_Model
     function LibroIVA($libro, $periodo)
     {
         $this->db->select('date_format(fecha, "%d-%m-%Y") as fecha', false);
-        $this->db->select('CONCAT( tipcom.abreviatura, " ", facencab.letra, " ",  puesto,"-", numero) as comprobante', false);
+        $this->db->select ( 'CONCAT( cfg_tipcom.abreviatura, " ", fac_facencab.letra, " ",  puesto,"-", numero) as comprobante', false );
         $this->db->select(' cuenta.nombre as razonSocial, cuenta.cuit as Cuit', false);
         $this->db->select('importe, neto, ivamin, ivamax, ingbru, impint, percep');
-        $this->db->select('if( facencab.tipcom_id=2 AND puesto=3, 0, 1) AS suma', false);
+        $this->db->select ( 'if( fac_facencab.tipcom_id=2 AND puesto=3, 0, 1) AS suma', false );
         $this->db->from($this->getTable());
-        $this->db->join('tipcom', 'tipcom.id=facencab.tipcom_id', 'inner');
+        $this->db->join ( 'cfg_tipcom', 'cfg_tipcom.id=fac_facencab.tipcom_id', 'inner' );
         $this->db->join('cuenta', 'cuenta_id = cuenta.id', 'inner');
-        $this->db->where('facencab.periva ', $periodo);
-        $this->db->where('tipcom.libroiva', $libro);
-        $this->db->order_by('facencab.fecha');
+        $this->db->where ( 'fac_facencab.periva ', $periodo );
+        $this->db->where ( 'cfg_tipcom.libroiva', $libro );
+        $this->db->order_by ( 'fac_facencab.fecha' );
         $this->db->order_by('tipcom_id');
         $this->db->order_by('puesto');
         $this->db->order_by('numero');
@@ -107,10 +107,10 @@ class Facencab_model extends MY_Model
         $this->db->select_sum('impint', 'impint');
         $this->db->select_sum('percep', 'percep');
         $this->db->from($this->getTable());
-        $this->db->join('tipcom', 'tipcom.id=facencab.tipcom_id', 'inner');
+        $this->db->join ( 'cfg_tipcom', 'cfg_tipcom.id=fac_facencab.tipcom_id', 'inner' );
         $this->db->join('cuenta', 'cuenta_id = cuenta.id', 'inner');
-        $this->db->where('facencab.periva ', $periodo);
-        $this->db->where('tipcom.libroiva', 2);
+        $this->db->where ( 'fac_facencab.periva ', $periodo );
+        $this->db->where ( 'cfg_tipcom.libroiva', 2 );
         $this->db->group_by('cuit');
         $this->db->order_by('razonSocial');
         //echo $this->db->_compile_select();

@@ -37,12 +37,12 @@
 | in the URL cannot be matched to a valid route.
 |
 */
-if ($_SERVER['REMOTE_ADDR'] === "192.168.1.50") {
+if ( $_SERVER['REMOTE_ADDR'] === "192.168.10.101" ) {
     $route['default_controller'] = "pos/factura/presupuesto";
-    $route['ticket'] = 'pos/factura/presupuesto';
+    $route['ticket'] = 'pos/presupuestos';
 } else {
     $route['default_controller'] = "dashboard";
-    $route['ticket'] = 'pos/billing/presupuesto';
+    $route['ticket'] = 'pos/presupuestoss';
 }
 $route['404_override'] = '';
 $route['wizard'] = 'articulos/wizard/index';

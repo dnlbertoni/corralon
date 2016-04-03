@@ -14,9 +14,9 @@ class Ctacte_movim_model extends MY_Model
         $this->db->select('DATE_FORMAT(ctacte_movim.fecha, "%d/%m/%Y") as fecha', FALSE);
         $this->db->select('CONCAT(ctacte_movim.puesto,"-",ctacte_movim.numero) AS firmado', FALSE);
         $this->db->select('ctacte_movim.importe');
-        $this->db->select("CONCAT(facencab.puesto,'-',facencab.numero) AS comprobante", FALSE);
+        $this->db->select ( "CONCAT(fac_facencab.puesto,'-',fac_facencab.numero) AS comprobante", FALSE );
         $this->db->from($this->getTable());
-        $this->db->join('facencab', 'ctacte_movim.idencab=facencab.id', 'inner');
+        $this->db->join ( 'fac_facencab', 'ctacte_movim.idencab=fac_facencab.id', 'inner' );
         $this->db->where('id_cuenta', $cuenta);
         $this->db->where('ctacte_movim.estado', $estado);
         $this->db->order_by('fecha', 'ASC');
@@ -38,8 +38,7 @@ class Ctacte_movim_model extends MY_Model
         return $this->db->get()->result();
     }
 
-    private function _buscoComprobante($id, $liq = FALSE)
-    {
+    private function _buscoComprobante ( $id, $liq = FALSE ) {
         // buso el comprobante original
         $this->db->select('idencab as factura');
         $this->db->from($this->getTable());
@@ -64,16 +63,16 @@ class Ctacte_movim_model extends MY_Model
     {
         $idencab = $this->_buscoComprobante($id, $liq);
         $this->db->select('DATE_FORMAT(fecha, "%d/%m/%Y") as fecha');
-        $this->db->select('facencab.cuenta_id');
+        $this->db->select ( 'fac_facencab.cuenta_id' );
         $this->db->select('cuenta.nombre as cuenta_nombre');
-        $this->db->select('CONCAT(tipcom.abreviatura," - ", facencab.letra ) as tipocom', false);
+        $this->db->select ( 'CONCAT(cfg_tipcom.abreviatura," - ", fac_facencab.letra ) as tipocom', false );
         $this->db->select('CONCAT(puesto,"-",numero) as comprobante', false);
-        $this->db->select('IF(facencab.estado=1,"Contado", "CtaCte") as condvta');
+        $this->db->select ( 'IF(fac_facencab.estado=1,"Contado", "CtaCte") as condvta' );
         $this->db->select('importe as total');
-        $this->db->from('facencab');
-        $this->db->join('cuenta', 'cuenta.id=facencab.cuenta_id', 'inner');
-        $this->db->join('tipcom', 'tipcom.id=facencab.tipcom_id', 'inner');
-        $this->db->where('facencab.id', $idencab);
+        $this->db->from ( 'fac_facencab' );
+        $this->db->join ( 'cuenta', 'cuenta.id=fac_facencab.cuenta_id', 'inner' );
+        $this->db->join ( 'cfg_tipcom', 'cfg_tipcom.id=fac_facencab.tipcom_id', 'inner' );
+        $this->db->where ( 'fac_facencab.id', $idencab );
         return $this->db->get()->row();
     }
 
@@ -82,13 +81,13 @@ class Ctacte_movim_model extends MY_Model
         $idencab = $this->_buscoComprobante($id, $liq);
         $this->db->select('codigobarra_articulo as Codigobarra');
         $this->db->select('cantidad_movim as Cantidad');
-        $this->db->select('facmovim.id_articulo');
+        $this->db->select ( 'fac_facmovim.id_articulo' );
         $this->db->select('descripcion_articulo as Nombre');
         $this->db->select('preciovta_movim as Precio');
         $this->db->select('cantidad_movim * preciovta_movim as Importe');
-        $this->db->from('facmovim');
-        $this->db->join('stk_articulos', 'stk_articulos.id_articulo=facmovim.id_articulo', 'inner');
-        $this->db->where('facmovim.idencab', $idencab);
+        $this->db->from ( 'fac_facmovim' );
+        $this->db->join ( 'stk_articulos', 'stk_articulos.id_articulo=fac_facmovim.id_articulo', 'inner' );
+        $this->db->where ( 'fac_facmovim.idencab', $idencab );
         return $this->db->get()->result();
     }
 
@@ -104,7 +103,7 @@ class Ctacte_movim_model extends MY_Model
         // cambio de estado el comprobante en la lista de movimientos de facturas
         $this->db->set('estado', 1);
         $this->db->where('id', $idencab);
-        $this->db->update('facencab');
+        $this->db->update ( 'fac_facencab' );
         //$this->db->free_result();
         //borro de los movimientos de la cuenta corriente
         $this->db->where('id', $id);
@@ -147,9 +146,9 @@ class Ctacte_movim_model extends MY_Model
 
         $this->db->select('CONCAT(ctacte_movim.puesto,"-",ctacte_movim.numero) AS firmado', FALSE);
         $this->db->select('ctacte_movim.importe');
-        $this->db->select("CONCAT(facencab.puesto,'-',facencab.numero) AS comprobante", FALSE);
+        $this->db->select ( "CONCAT(fac_facencab.puesto,'-',fac_facencab.numero) AS comprobante", FALSE );
         $this->db->from($this->getTable());
-        $this->db->join('facencab', 'ctacte_movim.idencab=facencab.id', 'inner');
+        $this->db->join ( 'fac_facencab', 'ctacte_movim.idencab=fac_facencab.id', 'inner' );
         $this->db->where('id_liq', $idLiq);
         $this->db->order_by('fecha', 'ASC');
         return $this->db->get()->result();

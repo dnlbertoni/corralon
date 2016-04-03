@@ -1,13 +1,11 @@
 <?php
 
-class Facencab_model extends MY_Model
-{
-    private $tabla = "facencab";
+class Facencab_model extends MY_Model {
 
     function __construct()
     {
         parent::__construct();
-        $this->setTable('facencab');
+        $this->setTable ( 'fac_facencab' );
     }
 
     function ActualizoPeriva($periodo, $fac_id)
@@ -20,7 +18,7 @@ class Facencab_model extends MY_Model
             $this->db->set('ivapass', $valor);
             $this->db->set('periva', ($valor == 0) ? 0 : $periodo);
             $this->db->where('id', $key);
-            $this->db->update($this->tabla);
+            $this->db->update ( $this->getTable () );
             //echo $this->db->last_query();
         }
         if ($this->db->trans_status()) {
@@ -36,7 +34,7 @@ class Facencab_model extends MY_Model
     function verificoCierreZ($numero)
     {
         $this->db->_reset_select();
-        $this->db->from($this->tabla);
+        $this->db->from ( $this->getTable () );
         $this->db->where('numero', $numero);
         $this->db->where('tipcom_id', 4);
         $this->db->where('puesto', 3);
@@ -54,20 +52,21 @@ class Facencab_model extends MY_Model
         $this->db->_reset_select();
         $this->db->distinct();
         $this->db->select('periva');
-        $this->db->from($this->tabla);
+        $this->db->from ( $this->getTable () );
         $this->db->where('periva IS NOT NULL', null, false);
         $this->db->where('periva !=', 0);
         $this->db->order_by('periva', 'desc');
         $q = $this->db->get()->result();
+        $linea = array ();
         foreach ($q as $item) {
             $linea [$item->periva] = $item->periva;
         };
-        return (object)$linea;
+        return (object) $linea;
     }
 
     function save($datos)
     {
-        $this->db->insert($this->tabla, $datos);
+        $this->db->insert ( $this->getTable (), $datos );
         $q = $this->db->insert_id();
         return $q;
     }
@@ -75,7 +74,7 @@ class Facencab_model extends MY_Model
     function getRegistro($id)
     {
         $this->db->_reset_select();
-        $this->db->from($this->tabla);
+        $this->db->from ( $this->getTable () );
         $this->db->where('id', $id);
         return $this->db->get()->row();
     }
@@ -83,7 +82,7 @@ class Facencab_model extends MY_Model
     function getCierreZ($numero)
     {
         $this->db->_reset_select();
-        $this->db->from($this->tabla);
+        $this->db->from ( $this->getTable () );
         $this->db->where('numero', $numero);
         $this->db->where('tipcom_id', 4);
         $this->db->where('puesto', 3);
@@ -93,15 +92,15 @@ class Facencab_model extends MY_Model
 
     function getCuentasFechas($cuenta_id = false, $desde = false, $hasta = false, $limite = false)
     {
-        $this->db->select('facencab.id as id');
+        $this->db->select ( 'fac_facencab.id as id' );
         $this->db->select('nombre ');
         $this->db->select('DATE_FORMAT(fecha, "%d-%m-%Y") as fecha');
-        $this->db->select('CONCAT( tipcom.abreviatura, " ", facencab.letra, " ",  puesto,"-", numero) as comprobante', FALSE);
+        $this->db->select ( 'CONCAT( cfg_tipcom.abreviatura, " ", fac_facencab.letra, " ",  puesto,"-", numero) as comprobante', FALSE );
         $this->db->select('importe');
         $this->db->select('periva');
         $this->db->from($this->getTable());
         $this->db->join('cuenta', 'cuenta_id=cuenta.id', 'left');
-        $this->db->join('tipcom', 'tipcom.id=facencab.tipcom_id', 'inner');
+        $this->db->join ( 'cfg_tipcom', 'cfg_tipcom.id=fac_facencab.tipcom_id', 'inner' );
         if ($cuenta_id != '') {
             $this->db->where('cuenta_id', $cuenta_id);
         }
@@ -114,7 +113,7 @@ class Facencab_model extends MY_Model
         if ($desde != "" && $hasta != "") {
             $this->db->where('DATE_FORMAT(fecha, "%Y-%m-%d") BETWEEN "' . $desde . '" AND "' . $hasta . '"', '', FALSE);
         }
-        $this->db->order_by('facencab.fecha', 'DESC');
+        $this->db->order_by ( 'fac_facencab.fecha', 'DESC' );
         $this->db->order_by('comprobante', 'ASC');
         if ($limite) {
             $this->db->limit($limite);
