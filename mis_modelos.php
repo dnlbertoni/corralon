@@ -15,9 +15,13 @@
  * ---------------------- Models to Load ----------------------
  * <examples>
  *
- * @property tmpfacencab_model $tmpfacencab_model
- * @property facencab_model $facencab_model
- * @property facmovim_model $facmovim_model
- *
- * *
+ * @property Articulos_model $Articulos_model
+ * @property Tmpfacencab_model $Tmpfacencab_model
+ * @property Tmpmovim_model $Tmpmovim_model
+ * @property Tmpfpagos_model $Tmpfpagos_model
+ * @property Numeradores_model $Numeradores_model
+ * @property Cuenta_model $Cuenta_model
+ * @property Facencab_model $Facencab_model
+ * @property Fpagos_model $Fpagos_model
+ * @property Ctactemovim_model $Ctactemovim_model
  */

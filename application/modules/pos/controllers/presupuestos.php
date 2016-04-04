@@ -5,7 +5,16 @@
  * User: dyf
  * Date: 02/04/2016
  * Time: 04:44 PM
- * @property $Tmpfacencab_model $Tmpfacencab_model
+ * @property Articulos_model $Articulos_model
+ * @property Tmpfacencab_model $Tmpfacencab_model
+ * @property Tmpmovim_model $Tmpmovim_model
+ * @property Tmpfpagos_model $Tmpfpagos_model
+ * @property Numeradores_model $Numeradores_model
+ * @property Cuenta_model $Cuenta_model
+ * @property Facencab_model $Facencab_model
+ * @property Fpagos_model $Fpagos_model
+ * @property Ctactemovim_model $Ctactemovim_model
+ * @property Presuencab_model $Presuencab_model
  */
 class Presupuestos extends Admin_Controller {
     var $tipcom;
@@ -27,7 +36,6 @@ class Presupuestos extends Admin_Controller {
         $this->load->model ( 'Fpagos_model' );
         $this->load->model ( 'Ctactemovim_model' );
     }
-
     function index () {
         //busco datos del previo
         $presuEncab = $this->Tmpfacencab_model->getDatosUltimo ( $this->getPuesto (), 18 );
@@ -67,7 +75,6 @@ class Presupuestos extends Admin_Controller {
         Template::set ( $data );
         Template::render ();
     }
-
     function muestroFpagos ( $tmpfacencab_id ) {
         $this->output->enable_profiler ( false );
         $fpagos = $this->Tmpfpagos_model->getPagosComprobante ( $tmpfacencab_id );
@@ -75,7 +82,6 @@ class Presupuestos extends Admin_Controller {
         header ( 'Content-Type: application/json' );
         echo $jsonString;
     }
-
     function addArticulo () {
         $this->output->enable_profiler ( false );
         $codigobarra = $this->input->post ( 'codigobarra' );
@@ -123,7 +129,6 @@ class Presupuestos extends Admin_Controller {
         header ( 'Content-Type: application/json' );
         echo $jsonString;
     }
-
     function delArticulo ( $id ) {
         $tmpfacencab_id = $this->Tmpmovim_model->delArticulo ( $id );
         $totales = $this->Tmpmovim_model->getTotales ( $tmpfacencab_id );//busco totales
@@ -133,14 +138,12 @@ class Presupuestos extends Admin_Controller {
         //$resultado = $this->Tmpfacencab_model->updateTotales($tmpfacencab_id,$totales->Total);// actualizo totales
         Template::redirect ( 'pos/presupuestos' );
     }
-
     function cancelo () {
         $id = $this->input->post ( 'tmpfacencab_id' );
         $this->Tmpfpagos_model->vacio ( $id );
         $this->Tmpmovim_model->vacio ( $id );
         $this->Tmpfacencab_model->vacio ( $id );
     }
-
     function cambioCuenta ( $tmpfacencab_id, $cuenta_id ) {
         $cliente = $this->Cuenta_model->getByIdComprobante ( $cuenta_id );
         $this->Tmpfacencab_model->cambioCuenta ( $tmpfacencab_id, $cuenta_id );
@@ -152,7 +155,6 @@ class Presupuestos extends Admin_Controller {
         }
         Template::redirect ( 'pos/presupuestos' );
     }
-
     function cambioCondicion () {
         $puesto = $this->input->post ( 'puesto' );
         $id_tmpencab = $this->input->post ( 'id_tmpencab' );
@@ -161,7 +163,6 @@ class Presupuestos extends Admin_Controller {
         $this->Tmpmovim_model->cambioCuenta ( $puesto, $id_tmpencab, $cuenta, $cliente->ctacte );
         //Template::render();
     }
-
     function cierroComprobante () {
         $this->output->enable_profiler ( false );
         $tmpfacenab_id = $this->input->post ( 'tmpfacencab' );
@@ -233,12 +234,9 @@ class Presupuestos extends Admin_Controller {
             'neto' => $comprobante->importe - $ivatot,
             'ivamin' => $ivamin,
             'ivamax' => $ivamax,
-            'impint' => 0,
-            'ingbru' => 0,
-            'percep' => 0,
-            'estado' => 2 // significa que no esta facturado - 3 es para facturado
+            'estado' => 'P' //
         );
-        $idFacencab = $this->Facencab_model->graboComprobante ( $datosEncab, $datosMovim );
+        $idPresuencab = $this->Presuencab_model->graboComprobante ( $datosEncab, $datosMovim );
         $actualizoNumerador = $this->Numeradores_model->updatePresupuesto ( $comprobante->puesto, $comprobante->numero );
         /*
          * limpio los temporales

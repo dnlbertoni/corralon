@@ -1,11 +1,8 @@
 <?php
 
-class Cuenta_model extends MY_Model
-{
-    private $tabla = 'cuenta';
+class Cuenta_model extends MY_Model{
 
-    function __construct()
-    {
+    function __construct(){
         parent::__construct();
         $this->setTable('cuenta');
     }
@@ -17,7 +14,7 @@ class Cuenta_model extends MY_Model
         if ($limite > 0) {
             $this->db->limit($limite);
         }
-        $q = $this->db->get($this->tabla);
+        $q = $this->db->get($this->getTable());
         return $q->result();
     }
 
@@ -25,7 +22,7 @@ class Cuenta_model extends MY_Model
     {
         $this->db->select('id, nombre, cuit');
         $this->db->where('cuit', $cuit);
-        $q = $this->db->get($this->tabla);
+        $q = $this->db->get($this->getTable());
         return $q->result();
     }
 
@@ -34,7 +31,7 @@ class Cuenta_model extends MY_Model
         //$this->db->_reset_select();
         $this->db->select('id, nombre, cuit, letra');
         $search = '%' . $valor . '%';
-        $this->db->from($this->tabla);
+        $this->db->from($this->getTable());
         $this->db->like('nombre', $valor);
         $q = $this->db->get();
         return $q->result();
@@ -43,7 +40,7 @@ class Cuenta_model extends MY_Model
 
     function save($datos)
     {
-        $this->db->insert($this->tabla, $datos);
+        $this->db->insert($this->getTable(), $datos);
         return $this->db->insert_id();
     }
 

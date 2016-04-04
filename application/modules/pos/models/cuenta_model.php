@@ -29,7 +29,7 @@ class Cuenta_model extends MY_Model
 
     function getNombre ( $id ) {
         if ($id != 0) {
-            $this->db->from($this->tabla);
+            $this->db->from($this->getTable());
             $this->db->where('id', $id);
             return $this->db->get()->row()->nombre;
         } else {
