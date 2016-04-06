@@ -1,7 +1,6 @@
 <?php
 
-class Tmpfacencab_model extends MY_Model
-{
+class Tmpfacencab_model extends MY_Model {
     function __construct()
     {
         parent::__construct();
@@ -25,8 +24,7 @@ class Tmpfacencab_model extends MY_Model
         return $q;
     }
 
-    function vacio($id)
-    {
+    function vacio ( $id ) {
         $this->db->where('id', $id);
         $this->db->delete($this->getTable());
         return true;

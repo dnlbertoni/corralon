@@ -19,6 +19,7 @@
 class Presupuestos extends Admin_Controller {
     var $tipcom;
     var $Imprime;
+    var $Puesto;
 
     function __construct () {
         parent::__construct ();
@@ -26,6 +27,7 @@ class Presupuestos extends Admin_Controller {
         $this->Imprime = false;
 
         $this->PrinterDestino = 2; // 1 controlador 2 laser
+        $this->Puesto = $this->getPuesto ();
         $this->load->model ( 'Articulos_model', '', true );
         $this->load->model ( 'Tmpmovim_model', '', true );
         $this->load->model ( 'Tmpfacencab_model' );
@@ -35,14 +37,16 @@ class Presupuestos extends Admin_Controller {
         $this->load->model ( 'Facencab_model' );
         $this->load->model ( 'Fpagos_model' );
         $this->load->model ( 'Ctactemovim_model' );
+        $this->load->model ( 'Presuencab_model' );
+
     }
     function index () {
         //busco datos del previo
-        $presuEncab = $this->Tmpfacencab_model->getDatosUltimo ( $this->getPuesto (), 18 );
+        $presuEncab = $this->Tmpfacencab_model->getDatosUltimo ( $this->Puesto, 18 );
         $data['fechoy'] = $this->getFecha ();
         if ( !$presuEncab ) { //sino existe creo uno en blanco
             $data['puesto'] = $this->getPuesto ();
-            $data['numero'] = $this->Facencab_model->getMaxId () + 1;
+            $data['numero'] = $this->Numeradores_model->getNextPresupuesto ( $this->Puesto ) + 1;
             $data['idCuenta'] = 1;
             $data['tipcom_id'] = $this->tipcom;
             $data['nombreCuenta'] = $this->Cuenta_model->getNombre ( 1 );
@@ -188,7 +192,7 @@ class Presupuestos extends Admin_Controller {
        * 18 Prespuesto mostrador
        */
         //imprimo comprobante
-        switch ( $comprobante->tipcom_id ) {
+        switch ( intval ( $comprobante->tipcom_id ) ) {
             case 18:
                 $numpre = $this->Numeradores_model->getNextPresupuesto ( $this->getPuesto () );
                 $ivatot = 0;
@@ -199,45 +203,50 @@ class Presupuestos extends Admin_Controller {
                 break;
             default:
                 die( "error de comprobante" );
+                break;
         }
         /*
          * grabo comprobante
          */
         $ivamax = 0;
         $ivamin = 0;
-        foreach ( $renglones as $item ) {
-            $datosMovim[] = array (
-                'tipcomid_movim' => $comprobante->tipcom_id,
-                'puesto_movim' => $comprobante->puesto,
-                'numero_movim' => $comprobante->numero,
-                'letra_movim' => $letra,
-                'id_articulo' => $item->id_articulo,
-                'codigobarra_movim' => $item->codigobarra,
-                'cantidad_movim' => $item->cantidad,
-                'preciovta_movim' => $item->precio,
-                'tasaiva_movim' => $item->iva
-            );
-            if ( $item->iva > 20 ) {
-                $ivamax += ( $item->precio / ( 1 + ( $item->iva / 100 ) ) ) * $item->iva / 100;
-            } else {
-                $ivamin += ( $item->precio / ( 1 + ( $item->iva / 100 ) ) ) * $item->iva / 100;
+        if ( count ( $renglones ) > 0 ) {
+            foreach ( $renglones as $item ) {
+                $datosMovim[] = array (
+                    'tipcomid_movim' => $comprobante->tipcom_id,
+                    'puesto_movim' => $comprobante->puesto,
+                    'numero_movim' => $comprobante->numero,
+                    'letra_movim' => $letra,
+                    'id_articulo' => $item->id_articulo,
+                    'codigobarra_movim' => $item->codigobarra,
+                    'cantidad_movim' => $item->cantidad,
+                    'preciovta_movim' => $item->precio,
+                    'tasaiva_movim' => $item->iva
+                );
+                if ( $item->iva > 20 ) {
+                    $ivamax += ( $item->precio / ( 1 + ( $item->iva / 100 ) ) ) * $item->iva / 100;
+                } else {
+                    $ivamin += ( $item->precio / ( 1 + ( $item->iva / 100 ) ) ) * $item->iva / 100;
+                }
             }
+        } else {
+            $datosMovim = array ();
         }
 
         $datosEncab = array (
-            'tipcom_id' => $comprobante->tipcom_id,
             'puesto' => $comprobante->puesto,
             'numero' => $comprobante->numero,
-            'letra' => $letra,
             'cuenta_id' => $comprobante->cuenta_id,
             'importe' => $comprobante->importe,
             'neto' => $comprobante->importe - $ivatot,
             'ivamin' => $ivamin,
             'ivamax' => $ivamax,
-            'estado' => 'P' //
+            'estado' => 'P',
+            'facencab_id' => 'NULL'
         );
         $idPresuencab = $this->Presuencab_model->graboComprobante ( $datosEncab, $datosMovim );
         $actualizoNumerador = $this->Numeradores_model->updatePresupuesto ( $comprobante->puesto, $comprobante->numero );
+
         /*
          * limpio los temporales
          */

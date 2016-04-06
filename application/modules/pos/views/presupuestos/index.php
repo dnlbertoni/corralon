@@ -524,7 +524,7 @@
             dataType: "json",
             async: true,
             success: function (datos) {
-                location.reload();
+                // location.reload();
             }
         });
     }

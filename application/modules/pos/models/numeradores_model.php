@@ -63,7 +63,7 @@ class Numeradores_model extends MY_Model
 
     function getNextPresupuesto ( $puesto ) {
         $this->db->select ( $this->principal . " AS numero ", false );
-        $this->db->from ( $this->tabla );
+        $this->db->from ( $this->getTable () );
         $this->db->where ( 'puesto', $puesto );
         $this->db->where ( 'tipcom_id', 18 );
         return $this->db->get ()->row ()->numero;
@@ -73,7 +73,8 @@ class Numeradores_model extends MY_Model
         $this->db->set ( 'numero', $numero );
         $this->db->where ( 'tipcom_id', 18 );
         $this->db->where ( 'puesto', $puesto );
-        $this->db->update ( $this->tabla );
+        $this->db->update ( $this->getTable () );
+        //die();
         return true;
     }
 }

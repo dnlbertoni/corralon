@@ -8,12 +8,13 @@
  */
 class Presuencab_model extends MY_Model {
     var $tablaMovim = 'fac_presumovim';
+    var $tablaTmp = "tmp_movimientos";
     function __construct () {
         parent::__construct ();
         $this->setTable ( 'fac_presuencab' );
     }
-    function graboComprobante($datosEncab, $datosMovim)
-    {
+
+    function graboComprobante ( $datosEncab, $datosMovim ) {
         $this->db->trans_begin();
         //grabo facencab
         $this->db->set('fecha', 'NOW()', FALSE);
@@ -26,11 +27,7 @@ class Presuencab_model extends MY_Model {
             $this->db->insert($this->tablaMovim, $movimiento);
         }
         //borro el temporal
-        if ($datosEncab['tipcom_id'] == 6 || $datosEncab['tipcom_id'] == 9) {
-            $puesto = $datosEncab['puesto'] - 90;
-        } else {
-            $puesto = $datosEncab['puesto'];
-        }
+        $puesto = $datosEncab['puesto'];
         $this->db->where('puesto_tmpmov', $puesto);
         $this->db->delete($this->tablaTmp);
         if ($this->db->trans_status() === FALSE) {
