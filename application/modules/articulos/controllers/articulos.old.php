@@ -451,8 +451,8 @@ class Articulos extends MY_Controller
     function graboDesdeCSV()
     {
         $precio = $this->input->post('costo') * 1.7;
-        $this->Articulos_model->updateArticulo($this->input->post('codigobarra'), 'preciocosto_articulo', $this->input->post('costo'));
-        $this->Articulos_model->updateArticulo($this->input->post('codigobarra'), 'preciovta_articulo', $precio);
+        $this->Articulos_model->updateArticulo ( $this->input->post ( 'codigobarra' ), 'costo_articulo', $this->input->post ( 'costo' ) );
+        $this->Articulos_model->updateArticulo ( $this->input->post ( 'codigobarra' ), 'precio_articulo', $precio );
         echo "Grabacion Ok";
     }
 
@@ -525,16 +525,16 @@ class Articulos extends MY_Controller
 
     function graboDesdeLSCSV()
     {
-        $this->Articulos_model->updateArticulo($this->input->post('codigobarra'), 'preciocosto_articulo', $this->input->post('costo'));
-        $this->Articulos_model->updateArticulo($this->input->post('codigobarra'), 'preciovta_articulo', $this->input->post('precio'));
+        $this->Articulos_model->updateArticulo ( $this->input->post ( 'codigobarra' ), 'costo_articulo', $this->input->post ( 'costo' ) );
+        $this->Articulos_model->updateArticulo ( $this->input->post ( 'codigobarra' ), 'precio_articulo', $this->input->post ( 'precio' ) );
         $this->Articulos_model->updateArticulo($this->input->post('codigobarra'), 'markup_articulo', $this->input->post('markup'));
         echo "Grabacion Ok";
     }
 
     function insertoDesdeLSCSV()
     {
-        $this->Articulos_model->updateArticulo($this->input->post('codigobarra'), 'preciocosto_articulo', $this->input->post('costo'));
-        $this->Articulos_model->updateArticulo($this->input->post('codigobarra'), 'preciovta_articulo', $this->input->post('precio'));
+        $this->Articulos_model->updateArticulo ( $this->input->post ( 'codigobarra' ), 'costo_articulo', $this->input->post ( 'costo' ) );
+        $this->Articulos_model->updateArticulo ( $this->input->post ( 'codigobarra' ), 'precio_articulo', $this->input->post ( 'precio' ) );
         $this->Articulos_model->updateArticulo($this->input->post('codigobarra'), 'markup_articulo', $this->input->post('markup'));
         echo "Grabacion Ok";
     }

@@ -271,7 +271,7 @@ class Wizard extends MY_Controller
         $this->_getArticulo($this->CB);
         $data['ocultos'] = array('CB' => $this->CB,
             'id' => $this->Articulo->ID_ARTICULO,
-            'tipo' => 'preciovta_articulo',
+            'tipo' => 'precio_articulo',
             'valor' => '',
             'masivo' => $this->Masivo
         );
@@ -289,9 +289,9 @@ class Wizard extends MY_Controller
         $this->CB = $this->input->post('CB');
         $this->Masivo = $this->input->post('masivo');
         $this->idEmpresa = substr($this->CB, 0, 7);
-        $datos = array('preciovta_articulo' => $this->input->post('preciovta_articulo'),
+        $datos = array ( 'precio_articulo' => $this->input->post ( 'precio_articulo' ),
             'tasaiva_articulo' => $this->input->post('TASAIVA_ARTICULO'),
-            'preciocosto_articulo' => $this->input->post('preciocosto_articulo'),
+            'costo_articulo' => $this->input->post ( 'costo_articulo' ),
             'markup_articulo' => $this->input->post('markup_articulo')
         );
         $this->Articulos_model->updateMod($this->input->post('id'), $datos);

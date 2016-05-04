@@ -38,9 +38,9 @@ class Presupuestos extends Admin_Controller {
         $this->load->model ( 'Fpagos_model' );
         $this->load->model ( 'Ctactemovim_model' );
         $this->load->model ( 'Presuencab_model' );
-
     }
     function index () {
+        $this->load->model ( "Vendedores_model" );
         //busco datos del previo
         $presuEncab = $this->Tmpfacencab_model->getDatosUltimo ( $this->Puesto, 18 );
         $data['fechoy'] = $this->getFecha ();
@@ -76,6 +76,7 @@ class Presupuestos extends Admin_Controller {
             'DEBITO' => array ( 'label' => 'primary', 'icon' => 'fa-credit-card' ),
             'TARJETA' => array ( 'label' => 'warning', 'icon' => 'fa-credit-card' ),
             'CHEQUE' => array ( 'label' => 'danger', 'icon' => 'fa-suitcase' ) );
+        $data['vendedores'] = $this->Vendedores_model->getAll ();
         Template::set ( $data );
         Template::render ();
     }

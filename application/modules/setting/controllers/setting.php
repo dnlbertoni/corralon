@@ -10,8 +10,7 @@
  * @property $Menues_model          $Menues_model
  *
  */
-class Setting extends Admin_Controller
-{
+class Setting extends Admin_Controller {
     function __construct()
     {
         parent::__construct();
@@ -111,7 +110,10 @@ class Setting extends Admin_Controller
         $this->Menues_model->update($datos, $this->input->post('id'));
         Template::redirect('setting');
     }
-    /** CRUD parametros */
+
+    /**
+     * CRUD parametros
+     */
 
     public function addParametro()    {
         $this->output->enable_profiler(FALSE);

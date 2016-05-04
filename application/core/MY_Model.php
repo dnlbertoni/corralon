@@ -274,8 +274,8 @@ class MY_Model extends CI_Model
         return $datos;
     }
 
-    public function getAll($estado = 'ALL', $orden = FALSE, $limite = FALSE)
-    {
+    public function getAll ( $estado = false, $orden = FALSE, $limite = false ) {
+        $estado = ( $estado ) ? $estado : "ALL";
         $this->db->from($this->getTable());
         if ($estado != 'ALL') {
             $this->db->where('estado', $estado);
@@ -316,6 +316,10 @@ class MY_Model extends CI_Model
         $this->db->where('id', $id);
         $this->db->update($this->getTable());
         return true;
+    }
+
+    public function getNumeroFilas () {
+        return $this->db->get ( $this->getTable () )->num_rows ();
     }
 }
 /* End of file MY_Model.php*/

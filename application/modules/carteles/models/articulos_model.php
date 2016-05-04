@@ -19,7 +19,7 @@ class Articulos_model extends MY_Model
     {
         $id = intval($id);
         $this->db->_reset_select();
-        $this->db->select("id_articulo AS id, descripcion_articulo AS descripcion, preciovta_articulo AS precio");
+        $this->db->select ( "id_articulo AS id, descripcion_articulo AS descripcion, precio_articulo AS precio" );
         $this->db->select('codigobarra_articulo as codigobarra');
         $this->db->from($this->tabla);
         $this->db->where('id_articulo', $id);
@@ -30,7 +30,7 @@ class Articulos_model extends MY_Model
     {
         $this->db->select('id_articulo as id');
         $this->db->select('descripcion_articulo as nombre');
-        $this->db->select('preciovta_articulo as precio');
+        $this->db->select ( 'precio_articulo as precio' );
         $this->db->select('codigobarra_articulo as codigobarra');
         $this->db->from($this->tabla);
         $this->db->where('codigobarra_articulo', $codigoBarra);
@@ -48,10 +48,10 @@ class Articulos_model extends MY_Model
         $this->db->select('id_articulo AS id,
                       codigobarra_articulo AS Codigobarra,
                       descripcion_articulo AS Descripcion,
-                      preciovta_articulo AS Precio,
+                      precio_articulo AS Precio,
                       descripcion_subrubro AS Subrubro', false);
         $this->db->from($this->tabla);
-        $this->db->join('tbl_subrubros', 'stk_articulos.id_subrubro = tbl_subrubros.id_subrubro', 'inner');
+        $this->db->join ( 'stk_subrubros', 'stk_articulos.id_subrubro = stk_subrubros.id_subrubro', 'inner' );
         $condicion = "date_format(fechamodif_articulo, '%Y-%m-%d') >";
         $this->db->where($condicion, $fecha);
         $this->db->order_by('Subrubro');
@@ -65,12 +65,12 @@ class Articulos_model extends MY_Model
         $this->db->select('tbl_preciosmovim.id_articulo      AS id');
         $this->db->select('codigobarra_articulo AS Codigobarra');
         $this->db->select('descripcion_articulo AS Descripcion');
-        $this->db->select('preciovta_articulo   AS Precio');
+        $this->db->select ( 'precio_articulo   AS Precio' );
         $this->db->select('descripcion_subrubro AS Subrubro');
         $this->db->select('detalle_submarca     AS Submarca');
         $this->db->from('tbl_preciosmovim');
         $this->db->join('stk_articulos', 'tbl_preciosmovim.id_articulo = stk_articulos.id_articulo', 'inner');
-        $this->db->join('tbl_subrubros', 'stk_articulos.id_subrubro = tbl_subrubros.id_subrubro', 'inner');
+        $this->db->join ( 'stk_subrubros', 'stk_articulos.id_subrubro = stk_subrubros.id_subrubro', 'inner' );
         $this->db->join('stk_submarcas', 'stk_articulos.id_marca = stk_submarcas.id_submarca', 'inner');
         $this->db->where('impreso', 0);
         if ($limite) {
@@ -97,10 +97,10 @@ class Articulos_model extends MY_Model
         $this->db->select('id_articulo AS id,
                 codigobarra_articulo AS Codigobarra,
                 descripcion_articulo AS Descripcion,
-                preciovta_articulo AS Precio,
+                precio_articulo AS Precio,
                 descripcion_subrubro AS Subrubro', false);
         $this->db->from($this->tabla);
-        $this->db->join('tbl_subrubros', 'stk_articulos.id_subrubro = tbl_subrubros.id_subrubro', 'inner');
+        $this->db->join ( 'stk_subrubros', 'stk_articulos.id_subrubro = stk_subrubros.id_subrubro', 'inner' );
         $condicion = "date_format(fechamodif_articulo, '%Y-%m-%d') >";
         $this->db->where($condicion, $fecha);
         $this->db->order_by('Subrubro');
@@ -135,7 +135,7 @@ class Articulos_model extends MY_Model
         $this->db->select('codigobarra_articulo as CB');
         $this->db->select('descripcion_articulo as nombre');
         $this->db->from($this->getTable());
-        $this->db->join('tbl_subrubros', 'tbl_subrubros.id_subrubro=stk_articulos.id_subrubro', 'inner');
+        $this->db->join ( 'stk_subrubros', 'stk_subrubros.id_subrubro=stk_articulos.id_subrubro', 'inner' );
         $this->db->where('id_rubro', $id_rubro);
         $this->db->order_by('nombre');
         return $this->db->get()->result();
@@ -145,8 +145,8 @@ class Articulos_model extends MY_Model
     {
         $this->db->select('descripcion_rubro as nombre');
         $this->db->from($this->getTable());
-        $this->db->join('tbl_subrubros', 'stk_articulos.id_subrubro=tbl_subrubros.id_subrubro', 'inner');
-        $this->db->join('stk_rubros', 'stk_rubros.id_rubro=tbl_subrubros.id_rubro', 'inner');
+        $this->db->join ( 'stk_subrubros', 'stk_articulos.id_subrubro=stk_subrubros.id_subrubro', 'inner' );
+        $this->db->join ( 'stk_rubros', 'stk_rubros.id_rubro=stk_subrubros.id_rubro', 'inner' );
         $this->db->where('id_articulo', $id);
         $q = $this->db->get()->row();
         return $q->nombre;
@@ -157,13 +157,13 @@ class Articulos_model extends MY_Model
         $this->db->_reset_select();
         $this->db->select("id_articulo AS id");
         $this->db->select("descripcion_articulo AS descripcion");
-        $this->db->select("preciovta_articulo AS precio");
+        $this->db->select ( "precio_articulo AS precio" );
         $this->db->select("stk_rubros.descripcion_rubro AS rubro");
-        $this->db->select("tbl_subrubros.descripcion_subrubro AS subrubro");
+        $this->db->select ( "stk_subrubros.descripcion_subrubro AS subrubro" );
         $this->db->select('codigobarra_articulo as codigobarra');
         $this->db->from($this->tabla);
-        $this->db->join('tbl_subrubros', 'tbl_subrubros.id_subrubro=stk_articulos.id_subrubro', 'left');
-        $this->db->join('stk_rubros', 'stk_rubros.id_rubro=tbl_subrubros.id_rubro', 'left');
+        $this->db->join ( 'stk_subrubros', 'stk_subrubros.id_subrubro=stk_articulos.id_subrubro', 'left' );
+        $this->db->join ( 'stk_rubros', 'stk_rubros.id_rubro=stk_subrubros.id_rubro', 'left' );
         if ($activos)
             $this->db->where('stk_articulos.estado_articulo', 1);
         $this->db->order_by('rubro');

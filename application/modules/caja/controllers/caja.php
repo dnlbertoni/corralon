@@ -4,8 +4,9 @@
  * Description of caja
  *
  * @author dnl
- * @property $Cajaencab_model $Cajaencab_model
- * @property $Facencab_model  $Facencab_model
+ * @property Cajaencab_model $Cajaencab_model
+ * @property Facencab_model $Facencab_model
+ * @property Presuencab_model $Presuencab_model
  */
 class Caja extends Admin_Controller {
 
@@ -29,9 +30,13 @@ class Caja extends Admin_Controller {
     function openDo () { }
 
     function facturar () {
-        $this->load->model ( "Facencab_model" );
-        $data['presupuestos'] = $this->Facencab_model->getPresupuestosPendientes ( $this->getFecha ( "db" ) );
+        $this->load->model ( "Presuencab_model" );
+        $data['presupuestos'] = $this->Presuencab_model->getPendientes ();
         Template::set ( $data );
         Template::render ();
+    }
+
+    function emitirFactura ( $idPresupuesto ) {
+
     }
 }

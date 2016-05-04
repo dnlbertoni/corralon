@@ -10,8 +10,7 @@ class Stock extends Admin_Controller
         $this->load->model('Articulos_model');
     }
 
-    public function index()
-    {
+    public function index () {
         Template::render();
     }
 

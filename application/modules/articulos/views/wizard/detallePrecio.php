@@ -63,7 +63,7 @@
             <?php echo anchor('articulos/wizard/end/1', 'Salir Asistente', 'id="botonSkip"') ?>
             <br/>
             <?php echo form_label('Costo', 'preciocosto'); ?>
-            <?php echo form_input('preciocosto_articulo', $articulo->PRECIOCOSTO_ARTICULO, 'id="preciocosto" size="8"'); ?>
+            <?php echo form_input ( 'costo_articulo', $articulo->COSTO_ARTICULO, 'id="preciocosto" size="8"' ); ?>
             <div id="botonAjustoCosto">Rectifico Costo</div>
             <br/>
             <?php echo form_label('Markup', 'preciovta'); ?>
@@ -79,7 +79,7 @@
             </div>
             <br/>
             <?php echo form_label('Precio', 'preciovta'); ?>
-            <?php echo form_input('preciovta_articulo', $articulo->PRECIOVTA_ARTICULO, 'id="preciovta" size="8"'); ?>
+            <?php echo form_input ( 'precio_articulo', $articulo->PRECIO_ARTICULO, 'id="preciovta" size="8"' ); ?>
             <br/>
             Tasa Iva
             <div id="radio-iva">

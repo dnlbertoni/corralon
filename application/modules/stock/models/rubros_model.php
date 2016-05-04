@@ -20,4 +20,18 @@ class Rubros_model extends MY_Model
         $this->db->where($this->getPrimaryKey(), $id);
         return $this->db->get()->row()->nombre;
     }
+
+    function getAll ( $estado = false, $paginado = false, $pagina = false ) {
+        $estado = ( $estado ) ? $estado : "ALL";
+        if ( $estado != 'ALL' ) {
+            $this->db->where ( 'estado', $estado );
+        };
+        return $this->db->get ( $this->getTable (), $paginado, $pagina )->result ();
+    }
+
+    function getRubrosConArticulos () {
+        $this->db->select ( 'id_rubro' );
+
+        $this->db->join ( 'stk_rubros as r', 'r.id_rubro=s.id_rubro', 'left' );
+    }
 }

@@ -15,7 +15,7 @@ class Articulos_model extends MY_Model
         if (trim($codigobarra) != '') {
             $this->db->select('codigobarra_articulo as id');
             $this->db->select('descripcion_articulo as nombre');
-            $this->db->select('preciovta_articulo as precio');
+            $this->db->select ( 'precio_articulo as precio' );
             $this->db->select('tasaiva_articulo as iva');
             $this->db->select('estado_articulo as estado');
             $this->db->from($this->tabla);

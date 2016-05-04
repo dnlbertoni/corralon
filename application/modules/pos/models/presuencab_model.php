@@ -14,6 +14,10 @@ class Presuencab_model extends MY_Model {
         $this->setTable ( 'fac_presuencab' );
     }
 
+    function getPendientes () {
+        return $this->getAll ( "P" );
+    }
+
     function graboComprobante ( $datosEncab, $datosMovim ) {
         $this->db->trans_begin();
         //grabo facencab

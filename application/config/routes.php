@@ -37,15 +37,22 @@
 | in the URL cannot be matched to a valid route.
 |
 */
-if ( $_SERVER['REMOTE_ADDR'] === "192.168.10.101" ) {
+if ( $_SERVER['REMOTE_ADDR'] === "192.168.10.2" ) {
     $route['default_controller'] = "pos/factura/presupuesto";
     $route['ticket'] = 'pos/presupuestos';
 } else {
     $route['default_controller'] = "dashboard";
-    $route['ticket'] = 'pos/presupuestoss';
+    $route['ticket'] = 'pos/presupuestos';
 }
 $route['404_override'] = '';
-$route['wizard'] = 'articulos/wizard/index';
+
+//paginacion rubros
+$route['stock/rubros/(:num)'] = 'stock/rubros';
+$route['stock/rubros/'] = 'stock/rubros';
+
+$route['stock/subrubros/(:num)'] = 'stock/subrubros';
+$route['stock/subrubros/'] = 'stock/subrubros';
+
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

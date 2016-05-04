@@ -1,13 +1,18 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Articulos_model extends My_Model
-{
-
-
+class Articulos_model extends My_Model {
     public function __construct()
     {
         parent::__construct();
         $this->setTable('stk_articulos');
+    }
+
+    function getAll ( $estado = false, $paginado = false, $pagina = false ) {
+        $estado = ( $estado ) ? $estado : "ALL";
+        if ( $estado != 'ALL' ) {
+            $this->db->where ( 'estado', $estado );
+        };
+        return $this->db->get ( $this->getTable (), $paginado, $pagina )->result ();
     }
 
     public function getArticulos()
@@ -27,8 +32,8 @@ class Articulos_model extends My_Model
         $this->db->from($this->getTable());
         $this->db->join('stk_submarcas', 'stk_submarcas.id_submarca = stk_articulos.id_marca', 'left');
         $this->db->join('stk_marcas', 'stk_marcas.id_marca = stk_submarcas.id_marca', 'left');
-        $this->db->join('tbl_subrubros', 'tbl_subrubros.id_subrubro = stk_articulos.id_subrubro', 'left');
-        $this->db->join('stk_rubros', 'stk_rubros.id_rubro = tbl_subrubros.id_rubro', 'left');
+        $this->db->join ( 'stk_subrubros', 'stk_subrubros.id_subrubro = stk_articulos.id_subrubro', 'left' );
+        $this->db->join ( 'stk_rubros', 'stk_rubros.id_rubro = stk_subrubros.id_rubro', 'left' );
         $this->db->order_by('idrubro', 'asc');
         $this->db->order_by('idsubrubro', 'asc');
         return $this->db->get()->result();
@@ -51,8 +56,8 @@ class Articulos_model extends My_Model
         $this->db->from($this->getTable());
         $this->db->join('stk_submarcas', 'stk_submarcas.id_submarca = stk_articulos.id_marca', 'left');
         $this->db->join('stk_marcas', 'stk_marcas.id_marca = stk_submarcas.id_marca', 'left');
-        $this->db->join('tbl_subrubros', 'tbl_subrubros.id_subrubro = stk_articulos.id_subrubro', 'left');
-        $this->db->join('stk_rubros', 'stk_rubros.id_rubro = tbl_subrubros.id_rubro', 'left');
+        $this->db->join ( 'stk_subrubros', 'stk_subrubros.id_subrubro = stk_articulos.id_subrubro', 'left' );
+        $this->db->join ( 'stk_rubros', 'stk_rubros.id_rubro = stk_subrubros.id_rubro', 'left' );
         $this->db->where('codigobarra_articulo', $CB);
         return $this->db->get()->row();
     }
@@ -65,7 +70,7 @@ class Articulos_model extends My_Model
         $this->db->select('if(cantxbulto_articulo is null, 0, cantxbulto_articulo) as cantidadBulto', false);
         $this->db->select('if( cantxbulto_subrubro is null, 0, cantxbulto_subrubro) as cantidadBultoSub', false);
         $this->db->from($this->getTable());
-        $this->db->join('tbl_subrubros', 'stk_articulos.id_subrubro = tbl_subrubros.id_subrubro', 'left');
+        $this->db->join ( 'stk_subrubros', 'stk_articulos.id_subrubro = stk_subrubros.id_subrubro', 'left' );
         $this->db->where('codigobarra_articulo', $CB);
         return $this->db->get()->row();
     }

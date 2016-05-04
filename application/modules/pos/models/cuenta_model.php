@@ -9,8 +9,7 @@ class Cuenta_model extends MY_Model
         $this->setTable('cuenta');
     }
 
-    function getByIdComprobante($id)
-    {
+    function getByIdComprobante ( $id ) {
         $this->db->select('cuenta.id                 AS codigo');
         $this->db->select('cuenta.nombre             AS nombre');
         $this->db->select('cuenta.datos_fac          AS datos_fac');

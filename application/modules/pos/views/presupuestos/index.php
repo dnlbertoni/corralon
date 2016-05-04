@@ -32,15 +32,16 @@
                     <div class="btn-toolbar" role="toolbar">
                         <div class="btn-group">
                             <button class="btn btn-danger" id="F1"><span class="badge pull-left"> F1 </span>&nbsp;Cancelar
+                                <i class="fa fa-ban"></i>
                             </button>
                         </div>
                         <div class="btn-group">
                             <button class="btn btn-info" id="F6"><span class="badge pull-left"> F6 </span>&nbsp;Cliente
-                            </button>
+                                <i class="fa fa-user"></i></button>
                             <!--  <button class="btn btn-info" id="F8"><span class="badge pull-left"> F8 -- sacar </span>&nbsp;Forma Pago</button> -->
                         </div>
                         <div class="btn-group">
-                            <?php echo anchor ( 'pos/presupuestos/cierroComprobante', '<span class="badge pull-left"> F12 </span>&nbsp;Impresion', 'role="button" class="btn btn-success" id="F12"' ) ?>
+                            <?php echo anchor ( 'pos/presupuestos/cierroComprobante', '<span class="badge pull-left"> F12 </span>&nbsp;Finalizar <i class="fa fa-check-circle"></i> ', 'role="button" class="btn btn-success" id="F12"' ) ?>
                         </div>
                     </div>
                 </div>
@@ -263,18 +264,23 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Impresion de comprobante...</h4>
+                <h4 class="modal-title">Finalizacion de comprobante...</h4>
             </div>
             <div class="modal-body" id="cartelImpresionCuerpo">
                 <div align="center">
-                    <p>Se esta impriendo el comprobante</p>
-                    <i class="fa fa-spinner fa-spin fa-4x"></i>
-
-                    <p>esta panatalla estara presente mientras se imprime</p>
+                    <div class="btn-group" id="vendedores" data-toggle="buttons">
+                        <?php foreach ( $vendedores as $vendedor ): ?>
+                            <label class="btn btn-default">
+                                <input type="radio" name="vendedor"
+                                       value="<?= $vendedor->id ?>"/><?= $vendedor->nombre ?>
+                            </label>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-success" id="finCerrar" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-danger" id="finPrint" data-dismiss="modal">Imprimir</button>
             </div>
         </div>
     </div>
@@ -316,10 +322,10 @@
                         CambioCliente();
                         break;
                     case 'f8':
-                        CambioCondicion();
+                        $("#F8").click();
                         break;
                     case 'f12':
-                        Imprimo(e);
+                        $("#F12").click();
                         break;
                 }
             }
@@ -346,27 +352,36 @@
             AgregoArticulo();
         });
         //activo botones
-        //$("#F1").button();
         $("#F1").click(function () {
             CanceloComprobante();
         });
-        //$("#F6").button();
+
         $("#F6").click(function () {
             CambioCliente();
         });
-        //$("#F8").button();
+
         $("#F8").click(function () {
             CambioCondicion('agrego');
         });
-        //$("#F12").button();
+
         $("#F12").click(function (e) {
+            e.preventDefault();
             e.stopPropagation();
-            Imprimo(e);
+            $("#cartelImpresion").on("show.bs.modal", function () {
+                $(this).find(".modal-dialog").css("height", 300);
+                $(this).find(".modal-dialog").css("width", 300);
+            });
+            $("#cartelImpresion").modal({keyboard: true});
+            $("#cartelImpresion").modal('show');
         });
         $("#addCart").submit(function (e) {
             e.preventDefault();
         });
         $("#brief > tbody > tr").first().addClass('info');
+        $("#finCerrar").click(function () {
+            vendedor = $("input[name=vendedor]:checked").val();
+            alert(vendedor);
+        });
     });
     function AgregoArticulo(e) {
         e.preventDefault();
@@ -503,14 +518,7 @@
             });
         });
     }
-    function Imprimo(e) {
-        e.preventDefault();
-        $("#cartelImpresion").on("show.bs.modal", function () {
-            $(this).find(".modal-dialog").css("height", 300);
-            $(this).find(".modal-dialog").css("width", 300);
-        });
-        $("#cartelImpresion").modal({keyboard: true});
-        $("#cartelImpresion").modal('show');
+    function Imprimo(e, accion, vendedor) {
         pagina = $("#F12").attr('href');
         tmpfacencab_id = $("#tmpfacencab_id").val();
         $.ajax({
@@ -519,12 +527,13 @@
             global: true,
             type: "POST",
             data: ({
-                tmpfacencab: tmpfacencab_id
+                tmpfacencab: tmpfacencab_id,
+                accion: accion
             }),
             dataType: "json",
             async: true,
             success: function (datos) {
-                // location.reload();
+                location.reload();
             }
         });
     }

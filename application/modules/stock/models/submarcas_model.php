@@ -112,9 +112,9 @@ class Submarcas_model extends MY_Model
         $this->db->select('CONCAT(descripcion_subrubro, " ( ", descripcion_rubro, " ) ") AS rubro', FALSE);
         $this->db->select('wizard AS w');
         $this->db->from('stk_articulos');
-        $this->db->join("tbl_subrubros", "tbl_subrubros.id_subrubro = stk_articulos.id_subrubro", "inner");
+        $this->db->join ( "stk_subrubros", "stk_subrubros.id_subrubro = stk_articulos.id_subrubro", "inner" );
         $this->db->join("stk_submarcas", "stk_articulos.id_marca = stk_submarcas.id_submarca", "right");
-        $this->db->join("stk_rubros", "tbl_subrubros.id_rubro    = stk_rubros.id_rubro", "inner");
+        $this->db->join ( "stk_rubros", "stk_subrubros.id_rubro    = stk_rubros.id_rubro", "inner" );
         if ($id) {
             $this->db->where('stk_articulos.id_marca', $id);
         } else {

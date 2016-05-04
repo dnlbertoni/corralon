@@ -67,12 +67,12 @@ class Empresas_model extends MY_Model
     {
         $this->db->distinct();
         $this->db->select('stk_articulos.id_subrubro as subrubroId');
-        $this->db->select('tbl_subrubros.id_rubro  as rubroId');
+        $this->db->select ( 'stk_subrubros.id_rubro  as rubroId' );
         $this->db->select('descripcion_rubro as rubroNombre');
         $this->db->select('descripcion_subrubro as subrubroNombre');
         $this->db->from('stk_articulos');
-        $this->db->join('tbl_subrubros', 'stk_articulos.id_subrubro = tbl_subrubros.id_subrubro', 'inner');
-        $this->db->join('stk_rubros', 'tbl_subrubros.id_rubro    = stk_rubros.id_rubro', 'inner');
+        $this->db->join ( 'stk_subrubros', 'stk_articulos.id_subrubro = stk_subrubros.id_subrubro', 'inner' );
+        $this->db->join ( 'stk_rubros', 'stk_subrubros.id_rubro    = stk_rubros.id_rubro', 'inner' );
         $this->db->join('stk_submarcas', 'stk_articulos.id_marca    = stk_submarcas.id_submarca', 'inner');
         $this->db->where('stk_submarcas.id_marca', $idEmpresa);
         $this->db->order_by('rubroId');
@@ -131,11 +131,11 @@ class Empresas_model extends MY_Model
         $this->db->select('COUNT(stk_articulos.id_subrubro) / COUNT(stk_articulos.id_articulo)*100 as aciertoRubro', false);
         $this->db->select('stk_articulos.id_subrubro as subrubroId');
         $this->db->select('descripcion_subrubro as subrubroNombre');
-        $this->db->select('tbl_subrubros.id_rubro  as rubroId');
+        $this->db->select ( 'stk_subrubros.id_rubro  as rubroId' );
         $this->db->select('descripcion_rubro as rubroNombre');
         $this->db->from('stk_articulos');
-        $this->db->join('tbl_subrubros', 'stk_articulos.id_subrubro    = tbl_subrubros.id_subrubro', 'inner');
-        $this->db->join('stk_rubros', 'stk_rubros.id_rubro          = tbl_subrubros.id_rubro', 'inner');
+        $this->db->join ( 'stk_subrubros', 'stk_articulos.id_subrubro    = stk_subrubros.id_subrubro', 'inner' );
+        $this->db->join ( 'stk_rubros', 'stk_rubros.id_rubro          = stk_subrubros.id_rubro', 'inner' );
         $this->db->where('stk_articulos.empresa', $idEmpresa);
         $this->db->group_by('stk_articulos.id_subrubro');
         $this->db->order_by('rubroNombre', 'ASC');
@@ -169,13 +169,13 @@ class Empresas_model extends MY_Model
                       ID_SUBRUBRO as subrubroId,
                       DESCRIPCION_SUBRUBRO as subrubroNombre,
                       DESCRIPCION_RUBRO AS rubroNombre
-              FROM (tbl_subrubros)
-              INNER JOIN stk_rubros ON tbl_subrubros.id_rubro = stk_rubros.id_rubro
+              FROM (stk_subrubros)
+              INNER JOIN stk_rubros ON stk_subrubros.id_rubro = stk_rubros.id_rubro
               WHERE id_subrubro NOT IN(
                                   SELECT stk_articulos.id_subrubro as subrubroId
                                   FROM (stk_articulos)
-                                  INNER JOIN tbl_subrubros ON stk_articulos.id_subrubro = tbl_subrubros.id_subrubro
-                                  INNER JOIN stk_rubros    ON stk_rubros.id_rubro       = tbl_subrubros.id_rubro
+                                  INNER JOIN stk_subrubros ON stk_articulos.id_subrubro = stk_subrubros.id_subrubro
+                                  INNER JOIN stk_rubros    ON stk_rubros.id_rubro       = stk_subrubros.id_rubro
                                   WHERE `stk_articulos`.`empresa` = '$idEmpresa'
                                 )
               ORDER BY stk_rubros.DESCRIPCION_RUBRO, DESCRIPCION_SUBRUBRO ";

@@ -20,7 +20,7 @@ class Preciosmovim_model extends MY_Model
     function creoTablaPrimeraVez()
     {
         $this->db->select('id_articulo as id');
-        $this->db->select('preciovta_articulo AS precio');
+        $this->db->select ( 'precio_articulo AS precio' );
         $this->db->select('fechamodif_articulo AS fecha');
         $this->db->select('fechaprint as impreso');
         $this->db->from('stk_articulos');
