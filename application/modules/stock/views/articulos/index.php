@@ -9,7 +9,7 @@
 
 <div class="section">
     <div class="row">
-        <div class="col-md-10">
+        <div class="col-md-9">
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h4 class="panel-title ">Articulos</h4>
@@ -55,6 +55,19 @@
                 <div class="panel-footer">
                     <?php echo $paginacion ?>
                 </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-title">Operaciones Masivas</div>
+                </div>
+                <div class="panel-body">
+                    <ul class="list-group">
+                        <li class="list-group-item">Lista de Precios Proveedor</li>
+                    </ul>
+                </div>
+                <div class="panel-footer"></div>
             </div>
         </div>
     </div>

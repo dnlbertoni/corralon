@@ -1,4 +1,3 @@
-<div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">Configuraciones</h1>
@@ -377,7 +376,7 @@
 
 <script>
     $(document).ready(function () {
-// Empty modal content when modal is closed
+        // Empty modal content when modal is closed
         $('#remoteModal').on('hidden.bs.modal', function () {
             $(this).removeData('bs.modal');
         });

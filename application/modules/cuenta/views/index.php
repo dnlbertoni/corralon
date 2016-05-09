@@ -1,53 +1,41 @@
-Filtrar: <?php echo form_input(array('id' => 'nombreTXT', 'name' => 'nombreTXT')); ?>
-<div style="clear:both"><br/></div>
-<?php echo anchor('cuenta/index/1', 'Clientes', 'class="boton"'); ?>
-<?php echo anchor('cuenta/index/2', 'Proveedores', 'class="boton"'); ?>
-<table id="datos">
-    <thead>
-    <tr>
-        <th>Codigo</th>
-        <th>Nombre</th>
-        <th>CUIT</th>
-        <th>Tipo</th>
-        <th colspan="2">Acciones</th>
-    </tr>
-    </thead>
-    <tbody>
-    <?php foreach ($cuentas as $cuenta): ?>
-        <tr>
-            <td><?php echo $cuenta->id ?></td>
-            <td><?php echo $cuenta->nombre ?></td>
-            <td><?php echo $cuenta->cuit ?></td>
-            <td><?php echo $cuenta->tipo ?></td>
-            <td><?php echo anchor('cuenta/editar/' . $cuenta->id, 'Editar', 'class="botonEdit"') ?></td>
-            <td><?php echo anchor('cuenta/borrar/' . $cuenta->id, 'Borrar', 'class="botonDel"') ?></td>
-        </tr>
-    <?php endforeach; ?>
-    </tbody>
-</table>
+<div class="section">
+    <div class="row">
+        <h3><?= $title ?></h3>
+        <div class="col-md-12">
+            <table class="table table-responsive">
+                <thead>
+                <tr>
+                    <th>Codigo</th>
+                    <th>Nombre</th>
+                    <th>CUIT</th>
+                    <th>Tipo</th>
+                    <th colspan="2">
+                        <a href="/cuenta/crear" class="btn btn-lg btn-success" data-toggle="modal" data-target="#add"><i
+                                class="fa fa-check"></i> Agregar Cuenta</a>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach ( $cuentas as $cuenta ): ?>
+                    <tr>
+                        <td><?php echo $cuenta->id ?></td>
+                        <td><?php echo $cuenta->nombre ?></td>
+                        <td><?php echo $cuenta->cuit ?></td>
+                        <td><?php echo $cuenta->tipo ?></td>
+                        <td><?php echo anchor ( 'cuenta/editar/' . $cuenta->id, 'Editar', 'class="btn btn-info"' ) ?></td>
+                        <td><?php echo anchor ( 'cuenta/borrar/' . $cuenta->id, '<i class="fa fa-trash"></i>', 'class="btn btn-danger"' ) ?></td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
-<script>
-    $(document).ready(function () {
-        var largo = $("tbody > tr:visible").length;
-        if (largo < 150) {
-            pongoOpciones();
-        }
-        var theTable = $('#datos');
-        $("#nombreTXT").keyup(function () {
-            $.uiTableFilter(theTable, this.value);
-            var largo = $("tbody > tr:visible").length;
-            if (largo < 150) {
-                pongoOpciones();
-            }
-        });
-        $(".boton").button();
-        $("#nombreTXT").focus();
-        $("#nombreSearch").click(function () {
-            $("#nombreTXT").focus();
-        });
-    });
-    function pongoOpciones() {
-        $(".botonEdit").button({text: false, icons: {primary: 'ui-icon-pencil'}});
-        $(".botonDel").button({text: false, icons: {primary: 'ui-icon-trash'}});
-    }
-</script>
+<!-- Modal -->
+<div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="add" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+        </div>   <!-- /.modal-content -->
+    </div>   <!-- /.modal-dialog -->
+</div>   <!-- /.modal -->

@@ -1,30 +1,30 @@
 <?php
 
-class Cuenta extends MY_Controller
-{
-    function __construct()
-    {
+/**
+ * Class Cuenta
+ *
+ * @property  Cuenta_model $Cuenta_model
+ */
+class Cuenta extends Admin_Controller {
+    function __construct () {
         parent::__construct();
-        $this->load->model('Cuenta_model', '', TRUE);
-        Template::set('title', 'Modulo Cuentas');
-        // panel de tareas Regulares
-        $datos['tareasSet'] = true;
-        $datos['tareas'][] = array('cuenta/crear', 'Agregar');
-        $datos['tareas'][] = array('cuenta/topdf/listado/1/1', 'Listado Cliente CTACTE');
-        Template::set($datos);
-        Template::set_block('tareas', 'tareas'); // panel de tareas
+        $this->load->model ( 'Cuenta_model' );
     }
 
     function index($tipo = false)
     {
         $data['cuentas'] = $this->Cuenta_model->getIndex($tipo);
-        Assets::add_js('ui-tableFilter');
+        if ( $tipo ) {
+            $data['title'] = ( $tipo == 1 ) ? "Clientes" : "Proveedores";
+        } else {
+            $data['title'] = "Clientes & Proveedores";
+        }
         Template::set($data);
         Template::render();
     }
 
-    function crear()
-    {
+    function crear () {
+        $this->output->enable_profiler ( false );
         // set configurar varaibles comunes
         $data['title'] = 'Agregar Cuenta';
         $data['message'] = '';
@@ -48,10 +48,7 @@ class Cuenta extends MY_Controller
         $this->load->model('Condiva_model', '', true);
         $data['accion'] = 'cuenta/crearDo';
         $data['condiva'] = $this->Condiva_model->toDropDown();
-        //Assets::add_js('cuenta/editar');
-        Template::set($data);
-        Template::set_view('cuenta/editar');
-        Template::render();
+        $this->load->view ( 'cuenta/editar', $data );
     }
 
     function crearDo()

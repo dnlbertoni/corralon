@@ -7,6 +7,7 @@
  * Time: 09:13 PM
  *
  * @property Articulos_model $Articulos_model
+ * @property Cuenta_model $Cuenta_model
  */
 class Articulos extends Admin_Controller {
 
@@ -25,6 +26,12 @@ class Articulos extends Admin_Controller {
         $articulos = $this->Articulos_model->getAll ( false, $this->pagination->per_page, $this->uri->segment ( 3 ) );
         Template::set ( 'articulos', $articulos );
         Template::set ( 'paginacion', $this->pagination->create_links () );
+        Template::render ();
+    }
+
+    function importar ( $tipo = "proveedor" ) {
+        Template::set ( 'tipo', $tipo );
+        Template::set_view ( 'stock/articulos/importar' );
         Template::render ();
     }
 }

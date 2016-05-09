@@ -15,15 +15,10 @@
     <!-- Add custom CSS here -->
     <link href="/themes/citrus/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 
-    <?php //echo Assets::css('bootstrap') ?>
-
     <!-- JavaScript -->
     <script src="/themes/citrus/js/jquery2.js"></script>
     <script src="/themes/citrus/js/bootstrapCitrus.js"></script>
-    <script src="/themes/citrus/js/citrus.js"></script>
 
-    <?php //echo Assets::js() ?>
-    <?php //echo Assets::css() ?>
 </head>
 
 <body>
@@ -32,17 +27,18 @@
 
 
 <div class="container">
-    <?php echo Template::yield1(); ?>
-    <hr>
-
+    <div class="section">
+        <?php echo Template::yield1 (); ?>
+    </div>
     <footer>
+        <hr/>
         <div class="row">
             <div class="col-lg-12">
                 <p>Copyright &copy; 2016</p>
             </div>
         </div>
     </footer>
-
 </div><!-- /.container -->
+
 </body>
 </html>
