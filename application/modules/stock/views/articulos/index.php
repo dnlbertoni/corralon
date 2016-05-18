@@ -64,7 +64,7 @@
                 </div>
                 <div class="panel-body">
                     <ul class="list-group">
-                        <li class="list-group-item">Lista de Precios Proveedor</li>
+                        <?php echo anchor ( 'stock/articulos/importar', '<li class="list-group-item">Lista de Precios Proveedor</li>' ); ?>
                     </ul>
                 </div>
                 <div class="panel-footer"></div>

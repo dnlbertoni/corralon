@@ -8,12 +8,14 @@
  *
  * @property Articulos_model $Articulos_model
  * @property Cuenta_model $Cuenta_model
+ * @property ProveedoresArticulos_model $ProveedoresArticulos_model
  */
 class Articulos extends Admin_Controller {
 
     function __construct () {
         parent::__construct ();
         $this->load->model ( 'Articulos_model' );
+        $this->load->model ( 'Cuenta_model' );
     }
 
     function index () {
@@ -31,7 +33,81 @@ class Articulos extends Admin_Controller {
 
     function importar ( $tipo = "proveedor" ) {
         Template::set ( 'tipo', $tipo );
+        Template::set ( 'proveedoresSel', $this->Cuenta_model->toDropDown ( 'id', 'nombre', 2 ) );
         Template::set_view ( 'stock/articulos/importar' );
+        Template::render ();
+    }
+
+    function do_importar () {
+        $this->output->enable_profiler ( false );
+        $this->load->library ( 'PHPExcel' );
+        $directorio = ( __DIR__ );
+        $config['upload_path'] = $directorio . '/../../../../assets/tmp/';
+        $config['allowed_types'] = 'xls|xlsx';
+        $config['max_size'] = '2048';
+
+        $this->load->library ( 'upload', $config );
+
+        $error = "no errores";
+        if ( !$this->upload->do_upload () ) {
+            $error = $this->upload->display_errors ();
+        } else {
+            $archivo = $this->upload->data ();
+            $nombreArchivo = $archivo['full_path'];
+
+            //creando un objeto lector y cargando el fichero
+            $objReader = PHPExcel_IOFactory::createReader ( 'Excel2007' );
+            $objPHPExcel = $objReader->load ( $nombreArchivo );
+            //$objPHPExcel = PHPExcel_IOFactory::createReaderForFile($nombreArchivo);
+
+            //iterando por el contenido de las celdas
+            foreach ( $objPHPExcel->getWorksheetIterator () as $HojaTrabajo ) {
+                $titulo = $HojaTrabajo->getTitle ();
+                $MayorFila = $HojaTrabajo->getHighestRow ();
+                $MayorColumna = $HojaTrabajo->getHighestColumn ();
+                $MayorColumnaIndex = PHPExcel_Cell::columnIndexFromString ( $MayorColumna );
+                $nrColumns = ord ( $MayorColumna ) - 64;
+                $total_filas = $MayorFila - 1;
+                $encabenzado = array ();
+                for ( $fila = 1; $fila < $MayorFila + 1; $fila++ ) {
+                    for ( $columna = 0; $columna < $MayorColumnaIndex; $columna++ ) {
+                        $celda = $HojaTrabajo->getCellByColumnAndRow ( $columna, $fila );
+                        if ( $fila == 1 ) {
+                            $encabenzado[$columna] = $celda->getValue ();
+                        } else {
+                            $sub = $encabenzado[$columna];
+                            $datos[$fila][$sub] = $celda->getValue ();
+                        }
+                    }
+                }
+                $data[0] = $datos;
+            }
+        }
+        unlink ( $nombreArchivo );
+        header ( 'Content-Type: application/json' );
+        echo json_encode ( $data[0] );
+    }
+
+    function comparar () {
+        $this->load->model ( "ProveedoresArticulos_model" );
+        foreach ( $_POST as $key => $value ) {
+            if ( $key != "idProveedor" ) {
+                $subAux = explode ( '_', $key );
+                $codigo = $subAux[1];
+                $clave = $subAux[0];
+                $data['articulosProveedor'][$codigo][$clave] = $value;
+                $data['articulosProveedor'][$codigo]['accion'] = "add";
+            }
+        }
+        $data['articulosEncontrados'] = $this->ProveedoresArticulos_model->getByProveedor ( $this->input->post ( "idProveedor" ) );
+        foreach ( $data['articulosEncontrados'] as $articulosEncontrados ) {
+            foreach ( $data['articulosProveedor'] as $key => $value ) {
+                if ( $articulosEncontrados->codigoProveedor == $key ) {
+                    $data['articulosProveedor'][$key]['accion'] = "edit";
+                }
+            }
+        }
+        Template::set ( $data );
         Template::render ();
     }
 }

@@ -51,4 +51,18 @@ class Cuenta_model extends MY_Model{
         $this->db->where('id', $id);
         return $this->db->get()->row()->nombre;
     }
+
+    function toDropDown ( $campoId, $campoNombre, $tipo ) {
+        $this->db->select ( $campoId );
+        $this->db->select ( $campoNombre );
+        $this->db->from ( $this->getTable () );
+        $this->db->where ( 'tipo', $tipo );
+        $this->db->order_by ( $campoNombre );
+        $query = $this->db->get ();
+        $datos = array ( 'S' => "Seleccione..." );
+        foreach ( $query->result () as $item ) {
+            $datos[$item->{$campoId}] = $item->{$campoNombre};
+        }
+        return $datos;
+    }
 }
