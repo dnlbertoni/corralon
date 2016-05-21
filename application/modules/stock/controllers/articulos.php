@@ -9,6 +9,8 @@
  * @property Articulos_model $Articulos_model
  * @property Cuenta_model $Cuenta_model
  * @property ProveedoresArticulos_model $ProveedoresArticulos_model
+ * @property Subrubros_model $Subrubros_model
+ * @property Submarcas_model $Submarcas_model
  */
 class Articulos extends Admin_Controller {
 
@@ -16,6 +18,9 @@ class Articulos extends Admin_Controller {
         parent::__construct ();
         $this->load->model ( 'Articulos_model' );
         $this->load->model ( 'Cuenta_model' );
+        $this->load->model ( 'Subrubros_model' );
+        $this->load->model ( 'Submarcas_model' );
+
     }
 
     function index () {
@@ -107,6 +112,8 @@ class Articulos extends Admin_Controller {
                 }
             }
         }
+        $data['subrubrosSel'] = $this->Subrubros_model->toDropDown ( 'id_subrubro', 'descripcion_subrubro' );
+        $data['submarcasSel'] = $this->Submarcas_model->toDropDown ( 'id_submarca', 'detalle_submarca' );
         Template::set ( $data );
         Template::render ();
     }
