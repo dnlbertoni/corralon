@@ -16,10 +16,10 @@
                     <div class="input-group">
                         <input type="text" class="form-control">
                         <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">Buscar</button>
+                            <button class="btn btn-default" type="button"><i class="fa fa-search"></i> Buscar</button>
+                            <?php echo anchor ( 'stock/articulos/nuevo', '<i class="fa fa-plus-circle"></i> Nuevo', 'class="btn btn-info"' ) ?>
                         </span>
                     </div><!-- /input-group -->
-                    <button class="btn btn-info btn-xs"><i class="fa fa-plus-circle"></i>Nuevo</button>
                 </div>
                 <div class="panel-body">
                     <table class="table table-responsive">
@@ -63,9 +63,9 @@
                     <div class="panel-title">Operaciones Masivas</div>
                 </div>
                 <div class="panel-body">
-                    <ul class="list-group">
-                        <?php echo anchor ( 'stock/articulos/importar', '<li class="list-group-item">Lista de Precios Proveedor</li>' ); ?>
-                    </ul>
+                    <div class="list-group">
+                        <?php echo anchor ( 'stock/articulos/importar', 'Lista de Precios Proveedor', 'class="list-group-item list-group-item-success"' ); ?>
+                    </div>
                 </div>
                 <div class="panel-footer"></div>
             </div>

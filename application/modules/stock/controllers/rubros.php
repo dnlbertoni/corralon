@@ -29,8 +29,8 @@ class Rubros extends Admin_Controller {
         Template::render ();
     }
 
-    function create () {
-        Template::set_view ( 'stock/rubros/view' );
+    function nuevo () {
+        Template::set_view ( 'stock/rubros/edit' );
         Template::render ();
     }
 }

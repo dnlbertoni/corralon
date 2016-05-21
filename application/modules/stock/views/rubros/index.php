@@ -12,14 +12,13 @@
         <div class="col-md-8">
             <div class="panel panel-danger">
                 <div class="panel-heading">
-                    <h4 class="panel-title ">Rubros</h4>
                     <div class="input-group">
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" placeholder="Rubros">
                         <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">Buscar</button>
+                            <button class="btn btn-default" type="button"><i class="fa fa-search"></i> Buscar</button>
+                            <?php echo anchor ( 'stock/rubros/nuevo', '<i class="fa fa-plus-circle"></i> Nuevo', 'class="btn btn-info"' ) ?>
                         </span>
                     </div><!-- /input-group -->
-                    <button class="btn btn-info btn-xs"><i class="fa fa-plus-circle"></i>Nuevo</button>
                 </div>
                 <div class="panel-body">
                     <table class="table table-responsive">
@@ -59,3 +58,11 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $("#btn-nuevoRubro").click(function () {
+
+        });
+    });
+</script>
