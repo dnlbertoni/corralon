@@ -46,6 +46,11 @@ if ( $_SERVER['REMOTE_ADDR'] === "192.168.10.2" ) {
 }
 $route['404_override'] = '';
 
+
+$route['default_controller'] = "dashboard";
+$route['ticket'] = 'pos/presupuestos';
+
+
 //paginacion rubros
 $route['stock/rubros/(:num)'] = 'stock/rubros';
 $route['stock/rubros/'] = 'stock/rubros';

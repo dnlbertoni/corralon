@@ -22,7 +22,6 @@ class Articulos extends Admin_Controller {
         $this->load->model ( 'Submarcas_model' );
 
     }
-
     function index () {
         $this->load->library ( 'pagination' ); //Cargamos la librería de paginación
         $this->load->config ( 'pagination' );
@@ -36,13 +35,28 @@ class Articulos extends Admin_Controller {
         Template::render ();
     }
 
+    function nuevo () {
+        Template::set ( 'articulo', $this->Articulos_model->getInicial () );
+        Template::set ( 'accion', 'stock/articulos/nuevoDo' );
+        Template::set_view ( 'stock/articulos/edit' );
+        Template::render ();
+    }
+
+    function nuevoDo () {
+        foreach ( $_POST as $key => $value ) {
+            if ( $key != "ID_ARTICULO" ) {
+                $datos[$key] = $value;
+            }
+        }
+        $this->Articulos_model->add ( $datos );
+        //Template::redirect('stock/aticulos');
+    }
     function importar ( $tipo = "proveedor" ) {
         Template::set ( 'tipo', $tipo );
         Template::set ( 'proveedoresSel', $this->Cuenta_model->toDropDown ( 'id', 'nombre', 2 ) );
         Template::set_view ( 'stock/articulos/importar' );
         Template::render ();
     }
-
     function do_importar () {
         $this->output->enable_profiler ( false );
         $this->load->library ( 'PHPExcel' );
@@ -92,7 +106,6 @@ class Articulos extends Admin_Controller {
         header ( 'Content-Type: application/json' );
         echo json_encode ( $data[0] );
     }
-
     function comparar () {
         $this->load->model ( "ProveedoresArticulos_model" );
         foreach ( $_POST as $key => $value ) {

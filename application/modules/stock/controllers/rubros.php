@@ -30,7 +30,48 @@ class Rubros extends Admin_Controller {
     }
 
     function nuevo () {
+        Template::set ( 'accion', 'stock/rubros/nuevoDo' );
+        $unidades = array ( 'UNI' => 'UNI', 'KG' => 'KG', 'MTS' => 'MTS' );
+        Template::set ( 'unidadSel', $unidades );
+        Template::set ( 'rubro', $this->Rubros_model->getInicial () );
         Template::set_view ( 'stock/rubros/edit' );
         Template::render ();
     }
+
+    function nuevoDo () {
+        foreach ( $_POST as $key => $value ) {
+            if ( $key != "ID_RUBRO" ) {
+                if ( gettype ( $value ) == "string" ) {
+                    $value = strtoupper ( $value );
+                }
+                $datos[$key] = $value;
+            }
+        }
+        $this->Rubros_model->add ( $datos );
+        Template::redirect ( 'stock/rubros' );
+    }
+
+    function edit ( $id ) {
+        Template::set ( 'accion', 'stock/rubros/editDo' );
+        $unidades = array ( 'UNI' => 'UNI', 'KG' => 'KG', 'MTS' => 'MTS' );
+        Template::set ( 'unidadSel', $unidades );
+        Template::set ( 'rubro', $this->Rubros_model->getById ( $id ) );
+        Template::set_view ( 'stock/rubros/edit' );
+        Template::render ();
+    }
+
+    function editDo () {
+        foreach ( $_POST as $key => $value ) {
+            if ( $key != "ID_RUBRO" ) {
+                if ( gettype ( $value ) == "string" ) {
+                    $value = strtoupper ( $value );
+                }
+                $datos[$key] = $value;
+            }
+        }
+        $id = $_POST['ID_RUBRO'];
+        $this->Rubros_model->update ( $datos, $id );
+        // Template::redirect('stock/rubros');
+    }
+
 }

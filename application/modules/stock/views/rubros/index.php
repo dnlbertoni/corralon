@@ -41,7 +41,7 @@
                                         class="label label-<?= ( $rubro->ESTADO_RUBRO == 1 ) ? "success" : "danger" ?>"><?= ( $rubro->ESTADO_RUBRO == 1 ) ? "Activo" : "Suspendido"; ?></span>
                                 </td>
                                 <td>
-                                    <button class="btn btn-info btn-xs"><i class="fa fa-pencil-square-o"></i></button>
+                                    <?php echo anchor ( 'stock/rubros/edit/' . $rubro->ID_RUBRO, '<i class="fa fa-pencil-square-o"></i>', ' class="btn btn-info btn-xs"' ) ?>
                                     <button class="btn btn-warning btn-xs"><i class="fa fa-ban"></i></button>
                                     <button class="btn btn-danger btn-xs" aria-describedby="Borrar"><i
                                             class="fa fa-trash-o"></i></button>
