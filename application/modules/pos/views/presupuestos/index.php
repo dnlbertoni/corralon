@@ -378,9 +378,9 @@
             e.preventDefault();
         });
         $("#brief > tbody > tr").first().addClass('info');
-        $("#finCerrar").click(function () {
+        $("#finCerrar").click(function (e) {
             vendedor = $("input[name=vendedor]:checked").val();
-            alert(vendedor);
+            Imprimo(e, "cerrar", vendedor);
         });
     });
     function AgregoArticulo(e) {
@@ -528,6 +528,7 @@
             type: "POST",
             data: ({
                 tmpfacencab: tmpfacencab_id,
+                vendedor: vendedor,
                 accion: accion
             }),
             dataType: "json",

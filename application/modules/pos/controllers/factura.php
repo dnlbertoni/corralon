@@ -5,8 +5,7 @@ class Factura extends MY_Controller
     var $puesto;
     var $PrinterRemito;
 
-    function __construct()
-    {
+    function __construct () {
         parent::__construct();
         $this->puesto = PUESTO;
         $this->PrinterRemito = 2; // 1 controlador 2 laser
@@ -229,6 +228,7 @@ class Factura extends MY_Controller
                 $ptorem = 90 + $puesto;
                 $numrem = $this->Numeradores_model->getNextRemito($ptorem);
                 $firma = ($vale == 0) ? false : true;
+                $detalle = 1;
                 if ($this->PrinterRemito == 1) {
                     $data['file'] = $this->_imprimeDNF($ptorem, $numrem, $puesto, $idencab, $cliente, $items, $detalle, $firma);
                 } else {

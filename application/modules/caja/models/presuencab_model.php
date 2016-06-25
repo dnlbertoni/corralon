@@ -16,7 +16,9 @@ class Presuencab_model extends MY_Model {
     }
 
     function getPendientes () {
+        $this->db->select ( "fac_presuencab.id" );
         $this->db->select ( "fecha" );
+        $this->db->select ( "vendedor_id as vendedor" );
         $this->db->select ( "CONCAT(puesto,'-',numero) as comprobante" );
         $this->db->select ( "cuenta.nombre as cliente" );
         $this->db->select ( "importe" );
@@ -57,4 +59,36 @@ class Presuencab_model extends MY_Model {
         return $q;
     }
 
+    function getComprobante ( $id ) {
+        $this->db->from ( $this->tablaMovim );
+        $this->db->where ( 'idencab', $id );
+        return $this->db->get ()->result ();
+    }
+
+    function getTotales ( $id ) {
+        $this->db->select ( 'SUM(cantidad_movim * preciovta_movim) AS Total', false );
+        $this->db->select ( 'COUNT(codigobarra_movim) AS Bultos', false );
+        $this->db->from ( $this->tablaMovim );
+        $this->db->where ( 'idencab', $id );
+        return $this->db->get ()->row ();
+    }
+
+    function getArticulos ( $id ) {
+        $this->db->select ( 'codigobarra_movim AS Codigobarra' );
+        $this->db->select ( 'descripcion_movim AS Nombre' );
+        $this->db->select ( 'cantidad_movim AS Cantidad' );
+        $this->db->select ( 'preciovta_movim AS Precio' );
+        $this->db->select ( 'tasaiva_movim AS Tasa' );
+        $this->db->select ( '(cantidad_movim * preciovta_movim ) AS Importe', false );
+        $this->db->select ( 'id As codmov' );
+        $this->db->from ( $this->tablaMovim );
+        $this->db->where ( 'idcencab', $id );
+        $this->db->order_by ( 'id', 'DESC' );
+        $q = $this->db->get ();
+        if ( $q->num_rows () > 0 ) {
+            return $q->result ();
+        } else {
+            return false;
+        }
+    }
 }

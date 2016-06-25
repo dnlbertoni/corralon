@@ -17,6 +17,7 @@
                     <th>Fecha</th>
                     <th>Presupuesto</th>
                     <th>Cliente</th>
+                    <th>Vendedor</th>
                     <th>Importe</th>
                     <th>&nbsp;</th>
                 </tr>
@@ -27,8 +28,13 @@
                         <td><?= $p->fecha ?></td>
                         <td><?= $p->comprobante ?></td>
                         <td><?= $p->cliente ?></td>
+                        <td><?= $p->vendedor ?></td>
                         <td><?= $p->importe ?></td>
-                        <td>acciones</td>
+                        <td>
+                            <?php echo anchor ( 'caja/imprimir/controlador/' . $p->id, '<i class="fa fa-print"></i> Facturar', 'class="btn btn-xs btn-success"' ) ?>
+                            <?php echo anchor ( 'caja/imprimir/pdf/' . $p->id, '<i class="fa fa-file-pdf-o"></i>', 'class="btn btn-xs btn-info"' ) ?>
+                            <?php echo anchor ( 'caja/anular/' . $p->id, '<i class="fa fa-ban"></i>', 'class="btn btn-xs btn-danger"' ) ?>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
                 </tbody>

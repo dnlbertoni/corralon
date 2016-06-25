@@ -169,6 +169,9 @@ class Presupuestos extends Admin_Controller {
         //Template::render();
     }
     function cierroComprobante () {
+        if ( $this->input->post ( 'accion' ) == "cierre" ) {
+            $this->Imprime = false;
+        }
         $this->output->enable_profiler ( false );
         $tmpfacenab_id = $this->input->post ( 'tmpfacencab' );
         //leo comporobante completo
@@ -237,6 +240,7 @@ class Presupuestos extends Admin_Controller {
         $datosEncab = array (
             'puesto' => $comprobante->puesto,
             'numero' => $comprobante->numero,
+            'vendedor_id' => $this->input->post ( 'vendedor' ),
             'cuenta_id' => $comprobante->cuenta_id,
             'importe' => $comprobante->importe,
             'neto' => $comprobante->importe - $ivatot,
