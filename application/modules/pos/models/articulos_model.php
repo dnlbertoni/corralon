@@ -23,7 +23,7 @@ class Articulos_model extends MY_Model
             $this->db->limit(1);
             return $this->db->get()->row();
         } else {
-            return false;
+            return null;
         }
     }
 

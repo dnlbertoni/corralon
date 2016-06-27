@@ -11,6 +11,8 @@ class Hasar340 {
     var $puertoTCP;
     var $Conexion;
     var $sp;
+    var $estadoConexion;
+    var $estadoDetalle;
 
     function __construct ( $ip = false ) {
         if ( $ip ) {
@@ -65,9 +67,14 @@ class Hasar340 {
     function Conecto () {
         $coneccion = fsockopen ( $this->getHost (), $this->getPuertoTCP (), $error, $errorTexto );
         $this->setConexion ( $coneccion );
-        $respuesta['error'] = ( $error != 0 ) ? false : true;
-        $respuesta['mensaje'] = $errorTexto;
-        return $respuesta;
+        if ( !$this->getConexion () ) {
+            $this->setEstadoConexion ( $error );
+            $this->setEstadoDetalle ( $errorTexto );
+        } else {
+            $this->setEstadoConexion ( 0 );
+            $this->setEstadoDetalle ( "Conectado" );
+        }
+        return $this->setEstadoConexion ();
     }
 
     function EnvioComando ( $comando ) {
@@ -104,7 +111,7 @@ class Hasar340 {
         return $this->EnvioComando ( $commando );
     }
 
-    function ItemsFactura ( $items ) {
+    function ItemFactura ( $items ) {
         foreach ( $items as $item ) {
             $iva = number_format ( $item->iva, 2, '.', '' );
             $precio = number_format ( $item->precio, 2, '.', '' );
@@ -130,4 +137,33 @@ class Hasar340 {
         $command = chr ( 69 ) . $this->sp . 2;
         return $this->EnvioComando ( $command );
     }
+
+    /**
+     * @return mixed
+     */
+    public function getEstadoConexion () {
+        return $this->estadoConexion;
+    }
+
+    /**
+     * @param mixed $estadoConexion
+     */
+    public function setEstadoConexion ( $estadoConexion ) {
+        $this->estadoConexion = $estadoConexion;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEstadoDetalle () {
+        return $this->estadoDetalle;
+    }
+
+    /**
+     * @param mixed $estadoDetalle
+     */
+    public function setEstadoDetalle ( $estadoDetalle ) {
+        $this->estadoDetalle = $estadoDetalle;
+    }
+
 }

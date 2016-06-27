@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Class Factura
+ *
+ * @property Numeradores_model $Numeradores_model
+ * @property Cuenta_model $Cuenta_model
+ * @property Hasar $Hasar
+ * @property Tmpmovim_model $Tmpmovim_model
+ * @property Facencab_model $Facencab_model
+ * @property Articulos_model $Articulos_model
+ */
 class Factura extends MY_Controller
 {
     var $puesto;
@@ -68,9 +78,6 @@ class Factura extends MY_Controller
                 $tmp_precio = $tmp_arti[1];
                 $codigobarra = $tmp_arti[2];
                 break;
-            default:
-                $codigobarra = $codigobarra;
-                break;
         };
         /*******************************************
          * busco el articulo y la info que necesito *
@@ -107,7 +114,7 @@ class Factura extends MY_Controller
          * agrego o quito del comprobante el articulo *
          *********************************************/
         if ($accion == "add" && trim($codigobarra) != '') {
-            $resultado = $this->Tmpmovim_model->agregoAlComprobante($id_tmpencab, $codigobarra, $cantidad, $precio, $puesto, $cuenta);
+            $this->Tmpmovim_model->agregoAlComprobante ( $id_tmpencab, $codigobarra, $cantidad, $precio );
         };
         $data['valorCero'] = ($precio == 0 && trim($codigobarra) != '' && $data['existe']) ? true : false;
         $data['puesto'] = $puesto;
@@ -243,6 +250,9 @@ class Factura extends MY_Controller
                 $data['accion'] = 'printRemitoDoLaser';
                 $data['Imprimo'] = 'Comprobante';
                 break;
+            default:
+                $data = array ();
+                break;
         };
         $this->load->view('pos/factura/carga', $data);
     }
@@ -267,7 +277,7 @@ class Factura extends MY_Controller
         $this->load->view('pos/factura/carga', $data);
     }
 
-    function printCtaCteLaser($cuenta, $puesto, $numero, $importe, $idFacencab, $items)
+    function printCtaCteLaser ( $cuenta, $puesto, $importe, $idFacencab, $items )
     {
         $this->output->enable_profiler(true);
         //preparo el comprobante a imprimir
@@ -289,19 +299,19 @@ class Factura extends MY_Controller
 
     function printTicketDo()
     {
-        $this->load->library('hasar');
+        $this->load->library ( 'Hasar' );
         $puesto = $this->input->post('puesto');
         $idencab = $this->input->post('idencab');
         $cuenta = $this->Tmpmovim_model->getCuenta($idencab, $puesto);
         $tipcom_id = $this->input->post('tipcom');
         $DNF = $this->input->post('DNF');
         $estado = ($DNF == 1) ? 9 : 1;
-        $this->hasar->setPuesto($puesto);
-        $this->hasar->nombres($this->input->post('file'));
-        $respuesta = $this->hasar->RespuestaFull();
+        $this->Hasar->setPuesto ( $puesto );
+        $this->Hasar->nombres ( $this->input->post ( 'file' ) );
+        $respuesta = $this->Hasar->RespuestaFull ();
         //$respEstado = $this->hasar->Estado();
         //$cuenta = $this->Tmpmovim_model->getCuenta($idencab, $puesto);
-        $numero = $this->hasar->last_print;
+        $numero = $this->Hasar->last_print;
         $items = $this->Tmpmovim_model->itemsComprobante($puesto, $idencab);
         $letra = "T";
         $ivamax = 0;

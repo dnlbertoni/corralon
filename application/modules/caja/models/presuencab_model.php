@@ -82,7 +82,7 @@ class Presuencab_model extends MY_Model {
         $this->db->select ( '(cantidad_movim * preciovta_movim ) AS Importe', false );
         $this->db->select ( 'id As codmov' );
         $this->db->from ( $this->tablaMovim );
-        $this->db->where ( 'idcencab', $id );
+        $this->db->where ( 'idencab', $id );
         $this->db->order_by ( 'id', 'DESC' );
         $q = $this->db->get ();
         if ( $q->num_rows () > 0 ) {

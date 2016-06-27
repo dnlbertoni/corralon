@@ -219,7 +219,7 @@ class MY_Model extends CI_Model
     public function getById($id)
     {
         if (!is_numeric($id)) {
-            log_message('error', 'Got not numeric id: ' . $id);
+            log_message ( 'error', 'No es un numero: ' . $id );
             return FALSE;
         } else {
             $this->db->from($this->getTable());

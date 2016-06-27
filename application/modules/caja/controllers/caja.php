@@ -8,14 +8,17 @@
  * @property Facencab_model $Facencab_model
  * @property Presuencab_model $Presuencab_model
  * @property Cuenta_model $Cuenta_model
+ * @property Numeradores_model $Numeradores_model
+ * @property Hasar340 $Hasar340
  */
 class Caja extends Admin_Controller {
-
+    var $PrinterRemito;
     function __construct () {
         parent::__construct();
         $this->load->model ( 'Cajaencab_model' );
         $this->load->model ( "Presuencab_model" );
         $this->load->model ( "Cuenta_model" );
+        $this->PrinterRemito = 2; //por laser
     }
 
     function index () {
@@ -32,6 +35,73 @@ class Caja extends Admin_Controller {
 
     function openDo () { }
 
+    function close () {
+        $data['puesto'] = $this->getPuesto ();
+        $data['caja'] = $this->Cajaencab_model->getCajaPuesto ( $this->getPuesto (), 1 );
+        $data['fecha'] = $this->getFecha ();
+        Template::set ( $data );
+        Template::render ();
+    }
+
+    function cierreJournal () {
+        $cierre = new Hasar();
+        $cierre->setRuta ( "/var/www/html/corralon/assets/tmp/fiscal" );
+        $tipo = $this->input->post ( 'tipo' );
+        $cierre->setPuesto ( intval ( $this->getPuesto () ) );
+        $comprobante = "cierre";
+        $nom_archiv = $comprobante . $tipo;
+        $cierre->nombres ( $nom_archiv );
+        $respuesta = $cierre->CierreJournal ( $tipo );
+        if ( $tipo == 'Z' ) {
+            $total = floatval ( $cierre->importe_cierre );
+            $neto = floatval ( $cierre->importe_cierre ) - floatval ( $this->hasar->iva_cierre );
+            $porcentaje = 0.90;
+            $ivamax = ( $neto * $porcentaje * 0.21 );
+            $ivamin = ( $neto * ( 1 - $porcentaje ) * 0.105 );
+            $diff = floatval ( $cierre->iva_cierre ) - ( $ivamax + $ivamin );
+            $porcDiff = $diff / floatval ( $this->hasar->iva_cierre );
+            $vez = 0;
+            while ( $vez != 30 ) {
+                $porcentaje += $porcDiff;
+                $ivamax = round ( ( $neto * $porcentaje * 0.21 ), 2 );
+                $ivamin = round ( ( $neto * ( 1 - $porcentaje ) * 0.105 ), 2 );
+                $diff = floatval ( $cierre->iva_cierre ) - ( $ivamax + $ivamin );
+                $porcDiff = ( $diff / floatval ( $cierre->iva_cierre ) );
+                //echo $diff ,"<br />";
+                $vez++;
+            };
+            // compilo del objeto de carga
+            $fechoy = getdate ();
+            $periva = $fechoy['year'] * 100 + $fechoy['mon'];
+            $periva = intval ( $periva );
+            $fecha = $fechoy['year'] . '-' . $fechoy['mon'] . '-' . $fechoy['mday'];
+            $datos = array ( 'tipcom_id' => 4,
+                'puesto' => 3,
+                'numero' => $cierre->numero_cierre,
+                'letra' => 'Z',
+                'fecha' => $fecha,
+                'cuenta_id' => 1,
+                'importe' => $cierre->importe_cierre,
+                'neto' => $neto,
+                'ivamin' => $ivamin,
+                'ivamax' => $ivamax,
+                'ingbru' => 0,
+                'impint' => $cierre->impint_cierre,
+                'percep' => 0,
+                'periva' => $periva,
+                'estado' => 1 );
+            $data['datos'] = $datos;
+            $id = $this->Facencab_model->save ( $datos );
+            $data ['fac'] = $this->Facencab_model->getRegistro ( $id );
+            $data ['tipcom_nombre'] = $this->Tipcom_model->getNombre ( $tipcom );
+            Assets::add_js ( 'pos/muestroZ' );
+            Template::set ( $data );
+            Template::set_view ( 'pos/muestroZ' );
+            Template::render ();
+        } else {
+            Template::redirect ( 'caja' );
+        };
+    }
     function facturar () {
         $data['presupuestos'] = $this->Presuencab_model->getPendientes ();
         Template::set ( $data );
@@ -39,12 +109,13 @@ class Caja extends Admin_Controller {
     }
 
     function imprimir ( $formato, $idPresupuesto ) {
+        $this->load->model ( 'Numeradores_model' );
         $pressupuesto = $this->Presuencab_model->getById ( $idPresupuesto );
         $presumovim = $this->Presuencab_model->getComprobante ( $idPresupuesto );
         //$this->output->enable_profiler(true);
         //preparo el comprobante a imprimir
-        $total = $this->Presuencab_model->getTotales ( $idPresupuesto );
-        $cliente = $this->Cuenta_model->getById ( $pressupuesto->cuenta_id );
+        $total = $this->Presuencab_model->getTotales ( $idPresupuesto )->Total;
+        $cliente = $this->Cuenta_model->getByIdComprobante ( $pressupuesto->cuenta_id );
         $items = $this->Presuencab_model->getArticulos ( $idPresupuesto );
         $vale = false;
         switch ( $formato ) {
@@ -59,17 +130,6 @@ class Caja extends Admin_Controller {
                 break;
         };
         switch ( $tipcom_id ) {
-            case 1:
-                $nom_archiv = $this->_imprimeTicket ( $this->getPuesto (), $idPresupuesto, $items, $total );
-                $data['file'] = $nom_archiv;
-                $data['puesto'] = $this->getPuesto ();
-                $data['idencab'] = $idPresupuesto;
-                $data['cuenta'] = $pressupuesto->cuenta_id;
-                $data['tipcom_id'] = 1;
-                $data['DNF'] = $vale;
-                $data['accion'] = 'printTicketDo';
-                $data['Imprimo'] = 'Ticket';
-                break;
             case 2:
                 $data['file'] = $this->_imprimeFactura ( $this->getPuesto (), $idPresupuesto, $items, $total, $cliente );
                 $data['puesto'] = $this->getPuesto ();
@@ -137,64 +197,6 @@ class Caja extends Admin_Controller {
         $data['accion'] = 'printCtaCteDo';
         $data['Imprimo'] = 'Compr. CtaCte';
         $this->load->view ( 'pos/factura/carga', $data );
-    }
-
-    function printTicketDo () {
-        $this->load->library ( 'hasar' );
-        $puesto = $this->input->post ( 'puesto' );
-        $idencab = $this->input->post ( 'idencab' );
-        $cuenta = $this->Tmpmovim_model->getCuenta ( $idencab, $puesto );
-        $tipcom_id = $this->input->post ( 'tipcom' );
-        $DNF = $this->input->post ( 'DNF' );
-        $estado = ( $DNF == 1 ) ? 9 : 1;
-        $this->hasar->setPuesto ( $puesto );
-        $this->hasar->nombres ( $this->input->post ( 'file' ) );
-        $respuesta = $this->hasar->RespuestaFull ();
-        //$respEstado = $this->hasar->Estado();
-        //$cuenta = $this->Tmpmovim_model->getCuenta($idencab, $puesto);
-        $numero = $this->hasar->last_print;
-        $items = $this->Tmpmoººvim_model->itemsComprobante ( $puesto, $idencab );
-        $letra = "T";
-        $ivamax = 0;
-        $ivamin = 0;
-        foreach ( $items as $item ) {
-            $datosMovim[] = array (
-                'tipcomid_movim' => $tipcom_id,
-                'puesto_movim' => $puesto,
-                'numero_movim' => $numero,
-                'letra_movim' => $letra,
-                'id_articulo' => $item->id_articulo,
-                'codigobarra_movim' => $item->codigobarra,
-                'cantidad_movim' => $item->cantidad,
-                'preciovta_movim' => $item->precio,
-                'tasaiva_movim' => $item->iva
-            );
-            if ( $item->iva > 20 ) {
-                $ivamax += ( $item->precio / ( 1 + ( $item->iva / 100 ) ) ) * $item->iva / 100;
-            } else {
-                $ivamin += ( $item->precio / ( 1 + ( $item->iva / 100 ) ) ) * $item->iva / 100;
-            }
-        }
-        $datosEncab = array (
-            'tipcom_id' => $tipcom_id,
-            'puesto' => $puesto,
-            'numero' => $numero,
-            'letra' => $letra,
-            'cuenta_id' => $cuenta,
-            'importe' => $this->hasar->importe,
-            'neto' => $this->hasar->importe - $this->hasar->ivatot,
-            'ivamin' => $ivamin,
-            'ivamax' => $ivamax,
-            'impint' => 0,
-            'ingbru' => 0,
-            'percep' => 0,
-            'estado' => $estado
-        );
-        $idFacencab = $this->Facencab_model->graboComprobante ( $datosEncab, $datosMovim );
-        if ( $DNF == 1 ) {
-            $this->printCtaCte ( $cuenta, $puesto, $numero, $this->hasar->importe, $idFacencab );
-        };
-        //$this->load->view('pos/carga');
     }
 
     function printFacturaDo () {
@@ -403,39 +405,53 @@ class Caja extends Admin_Controller {
         $num = $this->Numeradores_model->updateCompCtaCte ( $ptorem, $numero + 1 );
     }
 
-    function _imprimeTicket ( $puesto, $idencab, $items, $total ) {
-        $this->load->library ( "hasar" );
-        $this->load->library ( "ticket" );
-        $this->ticket->setPuesto ( $puesto );
-        $comprobante = "t";
-        $nom_archiv = $comprobante . $idencab;
-        $this->ticket->nombres ( $nom_archiv );
-        $this->ticket->AbrirTicket ();
-        //$Cf->TextoTicket();
-        $this->ticket->ItemTicket ( $items );
-        $this->ticket->SubTotalTicket ();
-        $this->ticket->TotalTicket ( $total );
-        $this->ticket->CerrarTicket ();
-        return $nom_archiv;
-    }
-
     function _imprimeFactura ( $puesto, $idencab, $items, $total, $cliente ) {
         $this->load->library ( "hasar" );
-        $this->load->library ( "df" );
-        $this->df->setPuesto ( $puesto );
+        $this->load->library ( "df330" );
+        $this->load->library ( "Hasar340" );
+
+        $this->df330->setRuta ( "/var/www/html/corralon/assets/tmp/fiscal" );
+        $this->df330->setPuesto ( $puesto );
         $comprobante = "f";
         $nom_archiv = $comprobante . $idencab;
-        $this->df->nombres ( $nom_archiv );
+        $this->df330->nombres ( $nom_archiv );
         $tipdoc = ( $cliente->tipdoc == 2 ) ? "C" : 2;
         $cliNom = ( $cliente->datos_fac == 1 ) ? $cliente->nombre_facturacion : $cliente->nombre;
-        $this->df->DatosCliente ( $cliNom, $cliente->cuit, $cliente->letra615, $tipdoc );
+        $this->df330->DatosCliente ( $cliNom, $cliente->cuit, $cliente->letra615, $tipdoc );
         $tiplet = ( $cliente->condiva == 1 ) ? "A" : "B";
-        $this->df->AbrirFactura ( $tiplet );
-        $this->df->ItemFactura ( $items );
-        $this->df->SubTotalFactura ();
-        $this->df->TotalFactura ( $total );
-        $this->df->CerrarFactura ();
-        return $nom_archiv;
+        $this->df330->AbrirFactura ( $tiplet );
+        $this->df330->ItemFactura ( $items );
+        $this->df330->SubTotalFactura ();
+        $this->df330->TotalFactura ( $total );
+        $this->df330->CerrarFactura ();
+        $respuesta = $this->df330->RespuestaFull ();
+        /*
+        $factura = new Hasar340();
+        $factura->setHost('192.168.10.2');
+        $estadoConexion = $factura->Conecto();
+        echo $factura->getEstadoConexion();
+        echo $factura->getEstadoConexion();
+        if($estadoConexion==0){
+            $comprobante = "f";
+            $nom_archiv = $comprobante . $idencab;
+            //$this->df330->nombres ( $nom_archiv );
+            $tipdoc = ( $cliente->tipdoc == 2 ) ? "C" : 2;
+            $cliNom = ( $cliente->datos_fac == 1 ) ? $cliente->nombre_facturacion : $cliente->nombre;
+            $factura->DatosCliente ( $cliNom, $cliente->cuit, $cliente->letra615, $tipdoc, $cliente->direccion );
+            $tiplet = ( $cliente->condiva == 1 ) ? "A" : "B";
+            $factura->AbrirFactura ( $tiplet );
+            $factura->ItemFactura ( $items );
+            $factura->SubTotalFactura ();
+            $factura->TotalFactura ( $total );
+            $factura->CerrarFactura ();
+            $factura->Desconecto();
+        }else{
+            echo "No Encuentra Controlador";
+        }
+        */
+        $respuesta = $this->df330->RespuestaFull ();
+        die( var_dump ( $respuesta ) );
+        //return $nom_archiv;
     }
 
     function _imprimeDNF ( $ptorem, $numrem, $puesto, $idencab, $cliente, $items, $detalle = 0, $firma = false ) {
@@ -588,14 +604,14 @@ class Caja extends Admin_Controller {
             $this->fpdf->SetFont ( 'Arial', '', '10' );
             $linea = ( $hoja == 0 ) ? $renglon * 5 + 30 : $renglon * 5 + 35;
             $this->fpdf->SetXY ( 0, $linea );
-            $this->fpdf->Cell ( 10, 5, $item->cantidad, 0, 0, 'L' );
+            $this->fpdf->Cell ( 10, 5, $item->Cantidad, 0, 0, 'L' );
             $this->fpdf->SetXY ( 10, $linea );
-            $this->fpdf->Cell ( 80, 5, substr ( $item->detalle, 0, 27 ), 0, 0, 'L' );
+            $this->fpdf->Cell ( 80, 5, substr ( $item->Nombre, 0, 27 ), 0, 0, 'L' );
             $this->fpdf->SetXY ( 70, $linea );
-            $this->fpdf->Cell ( 10, 5, $item->precio, 0, 0, 'R' );
+            $this->fpdf->Cell ( 10, 5, $item->Precio, 0, 0, 'R' );
             $this->fpdf->SetXY ( 85, $linea );
-            $this->fpdf->Cell ( 10, 5, sprintf ( "%4.2f", $item->precio * $item->cantidad ), 0, 1, 'R' );
-            $total += ( $item->cantidad * $item->precio );
+            $this->fpdf->Cell ( 10, 5, sprintf ( "%4.2f", $item->Precio * $item->Cantidad ), 0, 1, 'R' );
+            $total += ( $item->Cantidad * $item->Precio );
             $renglon++;
             $resto--;
             if ( $renglon > $maxLin ) {
@@ -622,8 +638,9 @@ class Caja extends Admin_Controller {
             $this->fpdf->SetXY ( 0, $linea + 22 );
             $this->fpdf->Cell ( 0, 5, "Firma del Cliente", 0, 1, 'C' );
         };
-        $nombre = "/var/www/fiscal/" . PUESTO . "/pdf/ticket.pdf";
-        $this->fpdf->Output ( $nombre, 'F' );
+        $pathPDF = "/var/www/html/corralon/assets/tmp/fiscal/%s/pdf/%04.0f-%08.0f.pdf";
+        $nombre = sprintf ( $pathPDF, intval ( $this->getPuesto () ), $ptorem, $numrem );
+        $this->fpdf->Output ( $nombre, 'I' );
         $cmd = sprintf ( "lp -o media=Custom.100x148mm %s -d %s", $nombre, PRREMITO );
         shell_exec ( $cmd );
         return $nombre;

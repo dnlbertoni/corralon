@@ -1,6 +1,7 @@
 <?php
 
 class Cuenta_model extends MY_Model{
+    var $tablaCondiva = "cfg_condiva";
 
     function __construct(){
         parent::__construct();
@@ -64,5 +65,23 @@ class Cuenta_model extends MY_Model{
             $datos[$item->{$campoId}] = $item->{$campoNombre};
         }
         return $datos;
+    }
+
+    function getByIdComprobante ( $id ) {
+        $this->db->select ( 'cuenta.id                 AS codigo' );
+        $this->db->select ( 'cuenta.nombre             AS nombre' );
+        $this->db->select ( 'cuenta.datos_fac          AS datos_fac' );
+        $this->db->select ( 'cuenta.direccion          AS direccion' );
+        $this->db->select ( 'cuenta.nombre_facturacion AS nombre_facturacion' );
+        $this->db->select ( 'cuenta.cuit               AS cuit' );
+        $this->db->select ( 'cuenta.condiva_id         AS condiva' );
+        $this->db->select ( 'cuenta.tipdoc             AS tipdoc' );
+        $this->db->select ( 'cuenta.ctacte             AS ctacte' );
+        $this->db->select ( 'cfg_condiva.letra615          AS letra615' );
+        $this->db->from ( $this->getTable () );
+        $this->db->join ( $this->tablaCondiva, 'condiva_id = cfg_condiva.id', 'inner' );
+        $this->db->where ( 'cuenta.id', $id );
+        $this->db->limit ( 1 );
+        return $this->db->get ()->row ();
     }
 }

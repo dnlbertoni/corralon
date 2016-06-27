@@ -37,10 +37,10 @@ class Df extends hasar
     function ItemFactura($items)
     {//item documento factura
         foreach ($items as $item) {
-            $iva = number_format($item->iva, 2, '.', '');
-            $precio = number_format($item->precio, 2, '.', '');
-            $cantidad = number_format($item->cantidad, 2, '.', '');
-            $command = "B" . $this->fs . substr($item->detalle, 0, 20) . $this->fs . $cantidad . $this->fs . $precio . $this->fs . $iva . $this->fs . "M" . $this->fs . '0.0' . $this->fs . $this->display . $this->fs . "T" . "\n";
+            $iva = number_format ( $item->Tasa, 2, '.', '' );
+            $precio = number_format ( $item->Precio, 2, '.', '' );
+            $cantidad = number_format ( $item->Cantidad, 2, '.', '' );
+            $command = "B" . $this->fs . substr ( $item->Nombre, 0, 20 ) . $this->fs . $cantidad . $this->fs . $precio . $this->fs . $iva . $this->fs . "M" . $this->fs . '0.0' . $this->fs . $this->display . $this->fs . "T" . "\n";
             $estado = $this->EscriboArchivoMandar($command);
         }
         return $estado;
