@@ -348,7 +348,7 @@ class Hasar {
     function RespuestaTexto($linea)
     {
         $campos = explode("|", $linea);
-        $etado_impre = $this->StatusImpresora($campos[1]);
+        $estado_impre = $this->StatusImpresora ( $campos[1] );
         $estado_fiscal = $this->StatusFiscal($campos[2]);
         $estado['estado'] = "OK";
         $estado['detalle'] = "Ninguno";
@@ -363,7 +363,24 @@ class Hasar {
         return $estado;
     }
 
-    function RespuestaItem($linea)
+    function RespuestaItem($linea) {
+        $campos = explode ( "|", $linea );
+        $estado_impre = $this->StatusImpresora ( $campos[1] );
+        $estado_fiscal = $this->StatusFiscal ( $campos[2] );
+        $estado['estado'] = "OK";
+        $estado['detalle'] = "Ninguno";
+        if ( $estado_impre['estado'] == "Error" ) {
+            $estado['estado'] = "Error Impresora";
+            $estado['detalle'] .= $estado_impre['detalle'];
+        };
+        if ( $estado_fiscal['estado'] == "Error" ) {
+            $estado['estado'] = "Error Fiscal";
+            $estado['detalle'] .= $estado_fiscal['detalle'];
+        };
+        return $estado;
+    }
+
+    function RespuestaCliente ( $linea )
     {
         $campos = explode("|", $linea);
         $estado_impre = $this->StatusImpresora($campos[1]);

@@ -6,6 +6,8 @@
  * Time: 08:57 PM
  */
 ?>
+<link href="/assets/css/bootstrap-dialog.css" stylesheet" type="text/css" />
+<script src="/assets/js/bootstrap-dialog.js"></script>
 
 <div class="section">
     <div class="row">
@@ -31,8 +33,8 @@
                         <td><?= $p->vendedor ?></td>
                         <td><?= $p->importe ?></td>
                         <td>
-                            <?php echo anchor ( 'caja/imprimir/controlador/' . $p->id, '<i class="fa fa-print"></i> Facturar', 'class="btn btn-xs btn-success"' ) ?>
-                            <?php echo anchor ( 'caja/imprimir/pdf/' . $p->id, '<i class="fa fa-file-pdf-o"></i>', 'class="btn btn-xs btn-info"' ) ?>
+                            <?php echo anchor ( 'caja/imprimir/controlador/' . $p->id, '<i class="fa fa-print"></i> Facturar', 'class="btn btn-xs btn-success btn-cf"' ) ?>
+                            <?php echo anchor ( 'caja/imprimir/pdf/' . $p->id, '<i class="fa fa-file-pdf-o"></i>', 'class="btn btn-xs btn-info btn-pdf"' ) ?>
                             <?php echo anchor ( 'caja/anular/' . $p->id, '<i class="fa fa-ban"></i>', 'class="btn btn-xs btn-danger"' ) ?>
                         </td>
                     </tr>
@@ -43,4 +45,33 @@
     </div>
 </div>
 
+<script>
+    $(document).ready(function () {
+        $(".btn-cf").click(function (e) {
+            e.preventDefault();
+            url = $(this).attr('href');
+            BootstrapDialog.show({
+                message: $('<div></div>').load(url)
+            });
+        });
+        $(".btn-pdf").click(function (e) {
+            e.preventDefault();
+            url = $(this).attr('href');
+            tipo = BootstrapDialog.TYPE_WARNING;
+            BootstrapDialog.show({
+                type: tipo,
+                title: "Impresion",
+                message: function (dialog) {
+                    var $message = $('<div></div>');
+                    var pageToLoad = dialog.getData('pageToLoad');
+                    $message.load(pageToLoad);
 
+                    return $message;
+                },
+                data: {
+                    'pageToLoad': url
+                }
+            });
+        });
+    });
+</script>

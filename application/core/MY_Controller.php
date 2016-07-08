@@ -113,6 +113,13 @@ class Admin_Controller extends MY_Controller {
         return $this->Cfgpuestos_model->getPuesto ( $this->input->ip_address () );
     }
 
+    function getPuestoCnf () {
+        return $this->Cfgpuestos_model->getPuestoCnf ( $this->input->ip_address () );
+    }
+
+    function getImpresora () {
+        return $this->Cfgpuestos_model->getImpresora ( $this->input->ip_address () );
+    }
     function getFecha ( $tipo = "humano" ) {
         $fecha = new DateTime();
         switch ( $tipo ) {

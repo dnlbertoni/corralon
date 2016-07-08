@@ -40,11 +40,10 @@ define('VERSION', '4.01');
 
 switch ($_SERVER['REMOTE_ADDR']) {
     case '192.168.1.102':
-        $puesto = 3;
-        $rutaUniversal = '/var/www/fiscal';
+        $puesto = 4;
         break;
     default:
-        $puesto = 4;
+        $puesto = 3;
         break;
 }
 switch (ENVIRONMENT) {
@@ -56,7 +55,7 @@ switch (ENVIRONMENT) {
         break;
 }
 define('TMP', BASEPATH . '../assets/tmp/');
-define('PUESTO', $puesto);
+define ( 'PUESTO_DEFAULT', $puesto );
 define('PRREMITO', 'laser03');
 define('PRCARTEL', 'laser03');
 define('ABSOLUT_PATH', $rutaUniversal);

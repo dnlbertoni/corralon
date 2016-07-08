@@ -95,7 +95,11 @@ class Articulos extends Admin_Controller {
                             $encabenzado[$columna] = $celda->getValue ();
                         } else {
                             $sub = $encabenzado[$columna];
-                            $datos[$fila][$sub] = $celda->getValue ();
+                            if ( gettype ( $celda->getValue () ) == "string" ) {
+                                $datos[$fila][$sub] = strtoupper ( trim ( $celda->getValue () ) );
+                            } else {
+                                $datos[$fila][$sub] = $celda->getValue ();
+                            }
                         }
                     }
                 }
@@ -125,9 +129,68 @@ class Articulos extends Admin_Controller {
                 }
             }
         }
+        $data['cuenta_id'] = $this->input->post ( 'idProveedor' );
         $data['subrubrosSel'] = $this->Subrubros_model->toDropDown ( 'id_subrubro', 'descripcion_subrubro' );
         $data['submarcasSel'] = $this->Submarcas_model->toDropDown ( 'id_submarca', 'detalle_submarca' );
         Template::set ( $data );
         Template::render ();
+    }
+
+    function agregarDeLote () {
+        $this->output->enable_profiler ( true );
+        $datos = array ( 'DESCRIPCION_ARTICULO' => $this->input->get ( 'descripcion' ),
+            'COSTO_ARTICULO' => $this->input->get ( 'costo' ),
+            'MARKUP_ARTICULO' => $this->input->get ( 'markup' ),
+            'PRECIO_ARTICULO' => $this->input->get ( 'precio' ),
+            'TASAIVA_ARTICULO' => 21,
+            'ID_SUBRUBRO' => $this->input->get ( 'subrubro' ),
+            'ID_SUBMARCA' => $this->input->get ( 'submarca' ),
+            'SERVICIO_ARTICULO' => 0,
+            'ESTADO_ARTICULO' => 1,
+        );
+        $idArticulo = $this->Articulos_model->add ( $datos );
+        $this->Articulos_model->update ( array ( 'CODIGOBARRA_ARTICULO' => $idArticulo ), $idArticulo );
+        if ( $this->input->get ( 'codigoProveedor' ) != '' ) {
+            $datosProveedor = array (
+                'cuenta_id' => $this->input->get ( 'cuenta_id' ),
+                'articulo_id' => $idArticulo,
+                'codigo_prov' => $this->input->get ( 'codigoProveedor' ),
+                'estado' => 1
+            );
+            $resultado = $this->ProveedoresArticulos_model->add ( $datosProveedor );
+        }
+        header ( 'Content-Type: application/json' );
+        echo json_encode ( array ( 'estado' => 'Procesado' ) );
+    }
+
+    function modificarDeLote () {
+        $datos = array (
+            'COSTO_ARTICULO' => $this->input->get ( 'costo' ),
+            'MARKUP_ARTICULO' => $this->input->get ( 'markup' ),
+            'PRECIO_ARTICULO' => $this->input->get ( 'precio' ),
+        );
+        $idArticulo = $this->input->get ( 'id_articulo' );
+        $resultado = $this->Articulos_model->add ( $datos );
+        if ( $this->input->get ( 'codigoProveedor' ) != '' ) {
+            $datosProveedor = array (
+                'cuenta_id' => $this->input->get ( 'cuenta_id' ),
+                'articulo_id' => $idArticulo,
+                'codigo_prov' => $this->input->get ( 'codigoProveedor' ),
+                'estado' => 1
+            );
+            $relacion = $this->ProveedoresArticulos_model->existeRelacion ( $this->input->get ( 'cuenta_id' ), $idArticulo );
+            if ( $relacion ) {
+                $resultado = $this->ProveedoresArticulos_model->update ( $datosProveedor, $relacion );
+            } else {
+                $resultado = $this->ProveedoresArticulos_model->add ( $datosProveedor );
+            }
+        }
+        header ( 'Content-Type: application/json' );
+        echo json_encode ( array ( 'estado' => 'Procesado' ) );
+    }
+
+    function searchAjax () {
+        $this->input->post ( 'valor' );
+
     }
 }

@@ -18,6 +18,7 @@ class Caja extends Admin_Controller {
         $this->load->model ( 'Cajaencab_model' );
         $this->load->model ( "Presuencab_model" );
         $this->load->model ( "Cuenta_model" );
+        $this->load->model ( "Facencab_model" );
         $this->PrinterRemito = 2; //por laser
     }
 
@@ -93,7 +94,7 @@ class Caja extends Admin_Controller {
             $data['datos'] = $datos;
             $id = $this->Facencab_model->save ( $datos );
             $data ['fac'] = $this->Facencab_model->getRegistro ( $id );
-            $data ['tipcom_nombre'] = $this->Tipcom_model->getNombre ( $tipcom );
+            $data ['tipcom_nombre'] = $this->Tipcom_model->getNombre ( 4 );
             Assets::add_js ( 'pos/muestroZ' );
             Template::set ( $data );
             Template::set_view ( 'pos/muestroZ' );
@@ -102,6 +103,7 @@ class Caja extends Admin_Controller {
             Template::redirect ( 'caja' );
         };
     }
+
     function facturar () {
         $data['presupuestos'] = $this->Presuencab_model->getPendientes ();
         Template::set ( $data );
@@ -110,12 +112,11 @@ class Caja extends Admin_Controller {
 
     function imprimir ( $formato, $idPresupuesto ) {
         $this->load->model ( 'Numeradores_model' );
-        $pressupuesto = $this->Presuencab_model->getById ( $idPresupuesto );
-        $presumovim = $this->Presuencab_model->getComprobante ( $idPresupuesto );
-        //$this->output->enable_profiler(true);
+        $presupuesto = $this->Presuencab_model->getById ( $idPresupuesto );
+        $this->output->enable_profiler ( false );
         //preparo el comprobante a imprimir
         $total = $this->Presuencab_model->getTotales ( $idPresupuesto )->Total;
-        $cliente = $this->Cuenta_model->getByIdComprobante ( $pressupuesto->cuenta_id );
+        $cliente = $this->Cuenta_model->getByIdComprobante ( $presupuesto->cuenta_id );
         $items = $this->Presuencab_model->getArticulos ( $idPresupuesto );
         $vale = false;
         switch ( $formato ) {
@@ -132,17 +133,15 @@ class Caja extends Admin_Controller {
         switch ( $tipcom_id ) {
             case 2:
                 $data['file'] = $this->_imprimeFactura ( $this->getPuesto (), $idPresupuesto, $items, $total, $cliente );
-                $data['puesto'] = $this->getPuesto ();
                 $data['idencab'] = $idPresupuesto;
-                $data['cuenta'] = $pressupuesto->cuenta_id;
                 $data['tipcom_id'] = 2;
                 $data['DNF'] = $vale;
                 $data['accion'] = 'printFacturaDo';
                 $data['Imprimo'] = 'Factura';
                 break;
             case 6:
-                $ptorem = 90 + $this->getPuesto ();
-                $numrem = $this->Numeradores_model->getNextRemito ( $ptorem );
+                $ptorem = $this->getPuestoCnf ();
+                $numrem = $this->Numeradores_model->getNextRemito ( $ptorem, true );
                 $firma = ( $vale == 0 ) ? false : true;
                 $detalle = true;
                 if ( $this->PrinterRemito == 1 ) {
@@ -150,23 +149,211 @@ class Caja extends Admin_Controller {
                 } else {
                     $data['file'] = $this->_imprimeDNFLaser ( $ptorem, $numrem, $this->getPuesto (), $idPresupuesto, $cliente, $items, false );
                 };
-                $data['puesto'] = $this->getPuesto ();
                 $data['idencab'] = $idPresupuesto;
-                $data['cuenta'] = $pressupuesto->cuenta_id;
                 $data['tipcom_id'] = 6;
+                $data['numero'] = $numrem;
                 $data['DNF'] = $vale;
                 $data['accion'] = 'printRemitoDoLaser';
                 $data['Imprimo'] = 'Comprobante';
                 break;
         };
+        $data['tabla'] = $this->Presuencab_model->getTable ();
+        //header('Content-Type: application/json');
+        //echo json_encode($data);
+        $this->load->view ( 'caja/carga', $data );
+    }
+
+    function printFacturaDo () {
+        $this->load->library ( 'hasar' );
+        $idencab = $this->input->post ( 'idencab' );
+        $tipcom_id = $this->input->post ( 'tipcom' );
+        $DNF = $this->input->post ( 'DNF' );
+        $estado = ( $DNF == 1 ) ? 9 : 1;
+        $hasar = new Hasar();
+        $hasar->setPuesto ( $this->getPuesto () );
+        $hasar->nombres ( $this->input->post ( 'file' ) );
+        $respuesta = $hasar->RespuestaFull ();
+        //$respEstado = $this->hasar->Estado();
+        //$cuenta = $this->Tmpmovim_model->getCuenta($idencab, $puesto);
+        $numero = $hasar->last_print;
+        $comprobante = $this->Presuencab_model->getComprobante ( $idencab );
+        $items = $this->Presuencab_model->getArticulos ( $idencab );
+        $cliente = $this->Cuenta_model->getByIdComprobante ( $comprobante->cuenta_id );
+        $letra = ( $cliente->condiva == 1 ) ? "A" : "B";
+        $ivamax = 0;
+        $ivamin = 0;
+        foreach ( $items as $item ) {
+            $datosMovim[] = array (
+                'tipcomid_movim' => $tipcom_id,
+                'puesto_movim' => $this->getPuesto (),
+                'numero_movim' => $numero,
+                'letra_movim' => $letra,
+                'id_articulo' => $item->id_articulo,
+                'codigobarra_movim' => $item->codigobarra,
+                'cantidad_movim' => $item->cantidad,
+                'preciovta_movim' => $item->precio,
+                'tasaiva_movim' => $item->iva
+            );
+            if ( $item->iva > 20 ) {
+                $ivamax += ( $item->precio / ( 1 + ( $item->iva / 100 ) ) ) * $item->iva / 100;
+            } else {
+                $ivamin += ( $item->precio / ( 1 + ( $item->iva / 100 ) ) ) * $item->iva / 100;
+            }
+        }
+        $datosEncab = array (
+            'tipcom_id' => $tipcom_id,
+            'puesto' => $this->getPuesto (),
+            'numero' => $numero,
+            'letra' => $letra,
+            'cuenta_id' => $comprobante->cuenta_id,
+            'importe' => $hasar->importe,
+            'neto' => $hasar->importe - $hasar->ivatot,
+            'ivamin' => $ivamin,
+            'ivamax' => $ivamax,
+            'impint' => 0,
+            'ingbru' => 0,
+            'percep' => 0,
+            'estado' => $estado
+        );
+        $idFacencab = $this->Facencab_model->graboComprobante ( $datosEncab, $datosMovim );
+        $this->Presuencab_model->setFacturado ( $idencab, $idFacencab );
+        if ( $DNF == 1 ) {
+            $this->printCtaCte ( $comprobante->cuenta_id, $this->getPuesto (), $numero, $hasar->importe, $idFacencab );
+        };
+    }
+
+    function printRemitoDo () {
+        $this->load->library ( 'hasar' );
+        $hasar = new Hasar();
+        $puesto = $this->getPuesto ();
+        $idencab = $this->input->post ( 'idencab' );
+        $tipcom_id = $this->input->post ( 'tipcom' );
+        $DNF = $this->input->post ( 'DNF' );
+        $estado = ( $DNF == 1 ) ? 9 : 1;
+        $ptorem = $this->getPuestoCnf ();
+        $comprobante = $this->Presuencab_model->getComprobante ( $idencab );
+        $numero = $comprobante->numero;
+        $hasar->setPuesto ( $puesto );
+        $hasar->nombres ( $this->input->post ( 'file' ) );
+        $respuesta = $this->hasar->RespuestaFull ();
+        //$respEstado = $this->hasar->Estado();
+        //$cuenta = $this->Tmpmovim_model->getCuenta($idencab, $puesto);
+        $items = $this->Presuencab_model->getArticulos ( $idencab );
+        $cliente = $this->Cuenta_model->getByIdComprobante ( $comprobante->cuenta_id );
+        $letra = "R";
+        $ivamax = 0;
+        $ivamin = 0;
+        $importe = 0;
+        $neto = 0;
+        $negativo = ( $tipcom_id == 9 ) ? -1 : 1;
+        foreach ( $items as $item ) {
+            $datosMovim[] = array (
+                'tipcomid_movim' => $tipcom_id,
+                'puesto_movim' => $ptorem,
+                'numero_movim' => $numero,
+                'letra_movim' => $letra,
+                'id_articulo' => $item->id_articulo,
+                'codigobarra_movim' => $item->codigobarra,
+                'cantidad_movim' => $item->cantidad,
+                'preciovta_movim' => $item->precio,
+                'tasaiva_movim' => $item->iva
+            );
+            if ( $item->iva > 20 ) {
+                $ivamax += ( $item->precio / ( 1 + ( $item->iva / 100 ) ) ) * $item->iva / 100;
+            } else {
+                $ivamin += ( $item->precio / ( 1 + ( $item->iva / 100 ) ) ) * $item->iva / 100;
+            }
+            $importe += $item->precio * $item->cantidad;
+            $neto += $item->precio / ( 1 + ( $item->iva / 100 ) ) * $item->cantidad;
+        }
+        $datosEncab = array (
+            'tipcom_id' => $tipcom_id,
+            'puesto' => $ptorem,
+            'numero' => $numero,
+            'letra' => $letra,
+            'cuenta_id' => $comprobante->cuenta_id,
+            'importe' => $importe,
+            'neto' => $neto,
+            'ivamin' => $ivamin,
+            'ivamax' => $ivamax,
+            'impint' => 0,
+            'ingbru' => 0,
+            'percep' => 0,
+            'estado' => $estado
+        );
+        $idFacencab = $this->Facencab_model->graboComprobante ( $datosEncab, $datosMovim );
+        $this->Presuencab_model->setFacturado ( $idencab, $idFacencab );
+        //$this->load->view('pos/carga');
+        if ( $DNF == 1 ) {
+            $this->printCtaCte ( $comprobante->cuenta_id, $puesto, $numero, $importe * $negativo, $idFacencab );
+        };
+    }
+
+    function printRemitoDoLaser () {
+        $idencab = $this->input->post ( 'idencab' );
+        $tipcom_id = $this->input->post ( 'tipcom' );
+        $DNF = $this->input->post ( 'DNF' );
+        $estado = ( $DNF == 1 ) ? 9 : 1;
+        $ptorem = $this->getPuestoCnf ();
+        $comprobante = $this->Presuencab_model->getById ( $idencab );
+        $numero = $comprobante->numero;
+        $items = $this->Presuencab_model->getComprobante ( $idencab );
+        $letra = "R";
+        $ivamax = 0;
+        $ivamin = 0;
+        $importe = 0;
+        $neto = 0;
+        $negativo = ( $tipcom_id == 9 ) ? -1 : 1;
+        foreach ( $items as $item ) {
+            $datosMovim[] = array (
+                'tipcomid_movim' => $tipcom_id,
+                'puesto_movim' => $ptorem,
+                'numero_movim' => $numero,
+                'letra_movim' => $letra,
+                'id_articulo' => $item->id_articulo,
+                'codigobarra_movim' => $item->codigobarra_movim,
+                'cantidad_movim' => $item->cantidad_movim,
+                'preciovta_movim' => $item->preciovta_movim,
+                'tasaiva_movim' => $item->tasaiva_movim
+            );
+            if ( $item->tasaiva_movim > 20 ) {
+                $ivamax += ( $item->preciovta_movim / ( 1 + ( $item->tasaiva_movim / 100 ) ) ) * $item->tasaiva_movim / 100;
+            } else {
+                $ivamin += ( $item->preciovta_movim / ( 1 + ( $item->tasaiva_movim / 100 ) ) ) * $item->tasaiva_movim / 100;
+            }
+            $importe += $item->preciovta_movim * $item->cantidad_movim;
+            $neto += $item->preciovta_movim / ( 1 + ( $item->tasaiva_movim / 100 ) ) * $item->cantidad_movim;
+        }
+        $datosEncab = array (
+            'tipcom_id' => $tipcom_id,
+            'puesto' => $ptorem,
+            'numero' => $numero,
+            'letra' => $letra,
+            'cuenta_id' => $comprobante->cuenta_id,
+            'importe' => $importe,
+            'neto' => $neto,
+            'ivamin' => $ivamin,
+            'ivamax' => $ivamax,
+            'impint' => 0,
+            'ingbru' => 0,
+            'percep' => 0,
+            'estado' => $estado
+        );
+        $idFacencab = $this->Facencab_model->graboComprobante ( $datosEncab, $datosMovim );
+        $this->Presuencab_model->setFacturado ( $idencab, $idFacencab );
+        if ( $DNF == 1 ) {
+            $this->printCtaCteLaser ( $comprobante->cuenta_id, $this->getPuesto (), $numero, $importe * $negativo, $idFacencab, $items );
+        } else {
+            echo "termino";
+        }
     }
 
     function printCtaCte ( $cuenta, $puesto, $numero, $importe, $idFacencab ) {
-        $this->output->enable_profiler ( true );
+        $this->output->enable_profiler ( false );
         //preparo el comprobante a imprimir
         $cliente = $this->Cuenta_model->getByIdComprobante ( $cuenta );
         $ptorem = 80 + $puesto;
-        $numrem = $this->Numeradores_model->getNextCompCtaCte ( $ptorem );
+        $numrem = $this->Numeradores_model->getNextCompCtaCte ( $ptorem, true );
         $numeroFac = $this->Facencab_model->getNumeroFromIdencab ( $idFacencab );
         //genero el archivo
         $data['file'] = $this->_imprimeDNFCtaCte ( $ptorem, $numrem, $puesto, $numeroFac, $cliente, $importe );
@@ -177,18 +364,18 @@ class Caja extends Admin_Controller {
         $data['importe'] = $importe;
         $data['accion'] = 'printCtaCteDo';
         $data['Imprimo'] = 'Compr. CtaCte';
-        $this->load->view ( 'pos/factura/carga', $data );
+        $this->load->view ( 'caja/carga', $data );
     }
 
     function printCtaCteLaser ( $cuenta, $puesto, $numero, $importe, $idFacencab, $items ) {
-        $this->output->enable_profiler ( true );
+        $this->output->enable_profiler ( false );
         //preparo el comprobante a imprimir
         $cliente = $this->Cuenta_model->getByIdComprobante ( $cuenta );
         $ptorem = 80 + $puesto;
-        $numrem = $this->Numeradores_model->getNextCompCtaCte ( $ptorem );
+        $numrem = $this->Numeradores_model->getNextCompCtaCte ( $ptorem, true );
         $numeroFac = $this->Facencab_model->getNumeroFromIdencab ( $idFacencab );
         //genero el archivo
-        $data['file'] = $this->_imprimeDNFLaser ( $ptorem, $numrem, 90 + $puesto, $numeroFac, $cliente, $items, true );
+        $data['file'] = $this->_imprimeDNFLaser ( $ptorem, $numrem, $this->getPuestoCnf (), $numeroFac, $cliente, $items, true );
         $data['puesto'] = $puesto;
         $data['idencab'] = $idFacencab;
         $data['cuenta'] = $cuenta;
@@ -196,200 +383,16 @@ class Caja extends Admin_Controller {
         $data['importe'] = $importe;
         $data['accion'] = 'printCtaCteDo';
         $data['Imprimo'] = 'Compr. CtaCte';
-        $this->load->view ( 'pos/factura/carga', $data );
-    }
-
-    function printFacturaDo () {
-        $this->load->library ( 'hasar' );
-        $puesto = $this->input->post ( 'puesto' );
-        $idencab = $this->input->post ( 'idencab' );
-        $cuenta = $this->Tmpmovim_model->getCuenta ( $idencab, $puesto );
-        $tipcom_id = $this->input->post ( 'tipcom' );
-        $DNF = $this->input->post ( 'DNF' );
-        $estado = ( $DNF == 1 ) ? 9 : 1;
-        $this->hasar->setPuesto ( $puesto );
-        $this->hasar->nombres ( $this->input->post ( 'file' ) );
-        $respuesta = $this->hasar->RespuestaFull ();
-        //$respEstado = $this->hasar->Estado();
-        //$cuenta = $this->Tmpmovim_model->getCuenta($idencab, $puesto);
-        $numero = $this->hasar->last_print;
-        $items = $this->Tmpmovim_model->itemsComprobante ( $puesto, $idencab );
-        $cliente = $this->Cuenta_model->getByIdComprobante ( $cuenta );
-        $letra = ( $cliente->condiva == 1 ) ? "A" : "B";
-        $ivamax = 0;
-        $ivamin = 0;
-        foreach ( $items as $item ) {
-            $datosMovim[] = array (
-                'tipcomid_movim' => $tipcom_id,
-                'puesto_movim' => $puesto,
-                'numero_movim' => $numero,
-                'letra_movim' => $letra,
-                'id_articulo' => $item->id_articulo,
-                'codigobarra_movim' => $item->codigobarra,
-                'cantidad_movim' => $item->cantidad,
-                'preciovta_movim' => $item->precio,
-                'tasaiva_movim' => $item->iva
-            );
-            if ( $item->iva > 20 ) {
-                $ivamax += ( $item->precio / ( 1 + ( $item->iva / 100 ) ) ) * $item->iva / 100;
-            } else {
-                $ivamin += ( $item->precio / ( 1 + ( $item->iva / 100 ) ) ) * $item->iva / 100;
-            }
-        }
-        $datosEncab = array (
-            'tipcom_id' => $tipcom_id,
-            'puesto' => $puesto,
-            'numero' => $numero,
-            'letra' => $letra,
-            'cuenta_id' => $cuenta,
-            'importe' => $this->hasar->importe,
-            'neto' => $this->hasar->importe - $this->hasar->ivatot,
-            'ivamin' => $ivamin,
-            'ivamax' => $ivamax,
-            'impint' => 0,
-            'ingbru' => 0,
-            'percep' => 0,
-            'estado' => $estado
-        );
-        $idFacencab = $this->Facencab_model->graboComprobante ( $datosEncab, $datosMovim );
-        if ( $DNF == 1 ) {
-            $this->printCtaCte ( $cuenta, $puesto, $numero, $this->hasar->importe, $idFacencab );
-        };
-    }
-
-    function printRemitoDo () {
-        $this->load->library ( 'hasar' );
-        $puesto = $this->input->post ( 'puesto' );
-        $idencab = $this->input->post ( 'idencab' );
-        $cuenta = $this->Tmpmovim_model->getCuenta ( $idencab, $puesto );
-        $tipcom_id = $this->input->post ( 'tipcom' );
-        $DNF = $this->input->post ( 'DNF' );
-        $estado = ( $DNF == 1 ) ? 9 : 1;
-        $ptorem = 90 + $puesto;
-        $numero = $this->Numeradores_model->getNextRemito ( $ptorem );
-        $this->hasar->setPuesto ( $puesto );
-        $this->hasar->nombres ( $this->input->post ( 'file' ) );
-        $respuesta = $this->hasar->RespuestaFull ();
-        //$respEstado = $this->hasar->Estado();
-        //$cuenta = $this->Tmpmovim_model->getCuenta($idencab, $puesto);
-        $items = $this->Tmpmovim_model->itemsComprobante ( $puesto, $idencab );
-        $cliente = $this->Cuenta_model->getByIdComprobante ( $cuenta );
-        $letra = "R";
-        $ivamax = 0;
-        $ivamin = 0;
-        $importe = 0;
-        $neto = 0;
-        $negativo = ( $tipcom_id == 9 ) ? -1 : 1;
-        foreach ( $items as $item ) {
-            $datosMovim[] = array (
-                'tipcomid_movim' => $tipcom_id,
-                'puesto_movim' => $ptorem,
-                'numero_movim' => $numero,
-                'letra_movim' => $letra,
-                'id_articulo' => $item->id_articulo,
-                'codigobarra_movim' => $item->codigobarra,
-                'cantidad_movim' => $item->cantidad,
-                'preciovta_movim' => $item->precio,
-                'tasaiva_movim' => $item->iva
-            );
-            if ( $item->iva > 20 ) {
-                $ivamax += ( $item->precio / ( 1 + ( $item->iva / 100 ) ) ) * $item->iva / 100;
-            } else {
-                $ivamin += ( $item->precio / ( 1 + ( $item->iva / 100 ) ) ) * $item->iva / 100;
-            }
-            $importe += $item->precio * $item->cantidad;
-            $neto += $item->precio / ( 1 + ( $item->iva / 100 ) ) * $item->cantidad;
-        }
-        $datosEncab = array (
-            'tipcom_id' => $tipcom_id,
-            'puesto' => $ptorem,
-            'numero' => $numero,
-            'letra' => $letra,
-            'cuenta_id' => $cuenta,
-            'importe' => $importe,
-            'neto' => $neto,
-            'ivamin' => $ivamin,
-            'ivamax' => $ivamax,
-            'impint' => 0,
-            'ingbru' => 0,
-            'percep' => 0,
-            'estado' => $estado
-        );
-        $idFacencab = $this->Facencab_model->graboComprobante ( $datosEncab, $datosMovim );
-        $num = $this->Numeradores_model->updateRemito ( $ptorem, $numero + 1 );
-        //$this->load->view('pos/carga');
-        if ( $DNF == 1 ) {
-            $this->printCtaCte ( $cuenta, $puesto, $numero, $importe * $negativo, $idFacencab );
-        };
-    }
-
-    function printRemitoDoLaser () {
-        $puesto = $this->input->post ( 'puesto' );
-        $idencab = $this->input->post ( 'idencab' );
-        $cuenta = $this->Tmpmovim_model->getCuenta ( $idencab, $puesto );
-        $tipcom_id = $this->input->post ( 'tipcom' );
-        $DNF = $this->input->post ( 'DNF' );
-        $estado = ( $DNF == 1 ) ? 9 : 1;
-        $ptorem = 90 + $puesto;
-        $numero = $this->Numeradores_model->getNextRemito ( $ptorem );
-        $items = $this->Tmpmovim_model->itemsComprobante ( $puesto, $idencab );
-        $cliente = $this->Cuenta_model->getByIdComprobante ( $cuenta );
-        $letra = "R";
-        $ivamax = 0;
-        $ivamin = 0;
-        $importe = 0;
-        $neto = 0;
-        $negativo = ( $tipcom_id == 9 ) ? -1 : 1;
-        foreach ( $items as $item ) {
-            $datosMovim[] = array (
-                'tipcomid_movim' => $tipcom_id,
-                'puesto_movim' => $ptorem,
-                'numero_movim' => $numero,
-                'letra_movim' => $letra,
-                'id_articulo' => $item->id_articulo,
-                'codigobarra_movim' => $item->codigobarra,
-                'cantidad_movim' => $item->cantidad,
-                'preciovta_movim' => $item->precio,
-                'tasaiva_movim' => $item->iva
-            );
-            if ( $item->iva > 20 ) {
-                $ivamax += ( $item->precio / ( 1 + ( $item->iva / 100 ) ) ) * $item->iva / 100;
-            } else {
-                $ivamin += ( $item->precio / ( 1 + ( $item->iva / 100 ) ) ) * $item->iva / 100;
-            }
-            $importe += $item->precio * $item->cantidad;
-            $neto += $item->precio / ( 1 + ( $item->iva / 100 ) ) * $item->cantidad;
-        }
-        $datosEncab = array (
-            'tipcom_id' => $tipcom_id,
-            'puesto' => $ptorem,
-            'numero' => $numero,
-            'letra' => $letra,
-            'cuenta_id' => $cuenta,
-            'importe' => $importe,
-            'neto' => $neto,
-            'ivamin' => $ivamin,
-            'ivamax' => $ivamax,
-            'impint' => 0,
-            'ingbru' => 0,
-            'percep' => 0,
-            'estado' => $estado
-        );
-        $idFacencab = $this->Facencab_model->graboComprobante ( $datosEncab, $datosMovim );
-        $num = $this->Numeradores_model->updateRemito ( $ptorem, $numero + 1 );
-        if ( $DNF == 1 ) {
-            $this->printCtaCteLaser ( $cuenta, $puesto, $numero, $importe * $negativo, $idFacencab, $items );
-        } else {
-            echo "termino";
-        }
+        $this->load->view ( 'caja/carga', $data );
     }
 
     function printCtaCteDo () {
         $this->load->model ( 'Ctactemovim_model', '', true );
-        $puesto = $this->input->post ( 'puesto' );
+        $puesto = $this->getPuesto ();
         $idencab = $this->input->post ( 'idencab' );
-        $cuenta = $this->input->post ( 'cuentaAjax' );
-        $importe = $this->input->post ( 'importe' );
+        $comprobante = $this->Facencab_model->getById ( $idencab );
+        $cuenta = $comprobante->cuenta_id;
+        $importe = $comprobante->importe;
         $estado = 'P';
         $ptorem = 80 + $puesto;
         $numero = $this->Numeradores_model->getNextCompCtaCte ( $ptorem );
@@ -402,8 +405,9 @@ class Caja extends Admin_Controller {
             'estado' => $estado
         );
         $this->Ctactemovim_model->graboComprobante ( $datosEncab );
-        $num = $this->Numeradores_model->updateCompCtaCte ( $ptorem, $numero + 1 );
+        //$num = $this->Numeradores_model->updateCompCtaCte ( $ptorem, $numero + 1 );
     }
+
 
     function _imprimeFactura ( $puesto, $idencab, $items, $total, $cliente ) {
         $this->load->library ( "hasar" );
@@ -424,7 +428,7 @@ class Caja extends Admin_Controller {
         $this->df330->SubTotalFactura ();
         $this->df330->TotalFactura ( $total );
         $this->df330->CerrarFactura ();
-        $respuesta = $this->df330->RespuestaFull ();
+        //$respuesta = $this->df330->RespuestaFull ();
         /*
         $factura = new Hasar340();
         $factura->setHost('192.168.10.2');
@@ -449,9 +453,7 @@ class Caja extends Admin_Controller {
             echo "No Encuentra Controlador";
         }
         */
-        $respuesta = $this->df330->RespuestaFull ();
-        die( var_dump ( $respuesta ) );
-        //return $nom_archiv;
+        return $nom_archiv;
     }
 
     function _imprimeDNF ( $ptorem, $numrem, $puesto, $idencab, $cliente, $items, $detalle = 0, $firma = false ) {
@@ -545,7 +547,7 @@ class Caja extends Admin_Controller {
         $this->load->view ( 'pos/factura/carga' );
     }
 
-    function _imprimeDNFLaser ( $ptorem, $numrem, $puesto, $idencab, $cliente, $items, $firma = false ) {
+    function _imprimeDNFLaser ( $ptorem, $numrem, $puesto, $idencab, $cliente, $items, $firma = false, $imprime = false ) {
         /**
          * imprime comprobante de remito por PDF
          *
@@ -640,9 +642,11 @@ class Caja extends Admin_Controller {
         };
         $pathPDF = "/var/www/html/corralon/assets/tmp/fiscal/%s/pdf/%04.0f-%08.0f.pdf";
         $nombre = sprintf ( $pathPDF, intval ( $this->getPuesto () ), $ptorem, $numrem );
-        $this->fpdf->Output ( $nombre, 'I' );
-        $cmd = sprintf ( "lp -o media=Custom.100x148mm %s -d %s", $nombre, PRREMITO );
-        shell_exec ( $cmd );
+        $this->fpdf->Output ( $nombre, 'F' );
+        if ( $imprime ) {
+            $cmd = sprintf ( "lp -o media=Custom.100x148mm %s -d %s", $nombre, $this->getImpresora () );
+            shell_exec ( $cmd );
+        }
         return $nombre;
     }
 }

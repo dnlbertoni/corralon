@@ -25,6 +25,7 @@ class Presuencab_model extends MY_Model {
         //$this->db->select("vendedor");
         $this->db->from ( $this->getTable () );
         $this->db->join ( "cuenta", "cuenta.id=cuenta_id", "inner" );
+        $this->db->where ( 'fac_presuencab.estado', 'P' );
         return $this->db->get ()->result ();
     }
 
@@ -90,5 +91,12 @@ class Presuencab_model extends MY_Model {
         } else {
             return false;
         }
+    }
+
+    function setFacturado ( $idPresu, $idFacencab ) {
+        $this->db->set ( 'facencab_id', $idFacencab );
+        $this->db->set ( 'estado', 'F' );
+        $this->db->where ( 'id', $idPresu );
+        return $this->db->update ( $this->getTable () );
     }
 }

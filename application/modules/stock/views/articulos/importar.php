@@ -55,6 +55,8 @@
                             <th>Codigor</th>
                             <th>Descripcion</th>
                             <th>Costo</th>
+                            <th>Markup</th>
+                            <th>Precio</th>
                         </tr>
                         </thead>
                         <tbody id="datosAimportar">
@@ -87,11 +89,16 @@
                 type: 'POST',
                 success: function (data) {
                     $.each(data, function (linea, dato) {
+                        costo = (!isNaN(parseFloat(dato.Costo))) ? parseFloat(dato.Costo) : 0;
+                        markup = (!isNaN(parseFloat(dato.Markup))) ? parseFloat(dato.Markup) : 0;
+                        precio = (!isNaN(parseFloat(dato.Precio))) ? parseFloat(dato.Precio) : 0;
                         fila = "<tr id='" + linea + "'>";
                         fila += "<td>" + linea + "</td>";
-                        fila += "<td><input type='hidden' value='" + dato.codigoProveedor + "' name='codigo_" + dato.codigoProveedor + "' />" + dato.codigoProveedor + "</td>";
-                        fila += "<td><input type='hidden' value='" + dato.Descripcion + "' name='descripcion_" + dato.codigoProveedor + "' />" + dato.Descripcion + "</td>";
-                        fila += "<td><input type='hidden' value='" + dato.Costo + "' name='costo_" + dato.codigoProveedor + "' />" + dato.Costo + "</td>";
+                        fila += "<td><input type='hidden' value='" + dato.codigoProveedor + "' name='codigo_" + linea + "' />" + dato.codigoProveedor + "</td>";
+                        fila += "<td><input type='hidden' value='" + dato.Descripcion + "' name='descripcion_" + linea + "' />" + dato.Descripcion + "</td>";
+                        fila += "<td><input type='hidden' value='" + costo + "' name='costo_" + linea + "' />" + costo + "</td>";
+                        fila += "<td><input type='hidden' value='" + markup + "' name='markup_" + linea + "' />" + markup + "</td>";
+                        fila += "<td><input type='hidden' value='" + precio + "' name='precio_" + linea + "' />" + precio + "</td>";
                         fila += "</tr>";
                         $("#datosAimportar").append(fila);
                     });

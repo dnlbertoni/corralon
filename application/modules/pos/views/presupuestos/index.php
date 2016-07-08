@@ -1,3 +1,7 @@
+<link href="/assets/css/easy-autocomplete.min.css" rel="stylesheet">
+<link href="/assets/css/bootstrap-dialog.css" rel="stylesheet">
+<script src="/assets/js/jquery.easy-autocomplete.min.js"></script>
+<script src="/assets/js/bootstrap-dialog.js"></script>
 <div class="section">
     <div class="row ">
         <div class="panel panel-primary">
@@ -14,7 +18,13 @@
                         <?php echo form_label ( 'Articulo', 'codigobarra', ' class="control-label"' ); ?>
                     </div>
                     <div class="col-xs-8 right">
-                        <?php echo form_input ( 'codigobarra', '', 'id="codigobarra" data-toggle="tooltip" data-placement="top" title="articulo | (cant)*(articulo) | (cant)*(precio)*(articulo)" class="form-control"' ); ?>
+                        <div class="input-group">
+                            <?php echo form_input ( 'codigobarra', '', 'id="codigobarra" data-toggle="tooltip" data-placement="top" title="articulo | (cant)*(articulo) | (cant)*(precio)*(articulo)" class="form-control"' ); ?>
+                            <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" id="btn-search-codigo"><i
+                                    class="fa fa-search"></i></button>
+                        </span>
+                        </div>
                     </div>
                     <?php echo form_close (); ?>
                     <input type="hidden" id="paginaPrecio"
@@ -381,6 +391,25 @@
         $("#finCerrar").click(function (e) {
             vendedor = $("input[name=vendedor]:checked").val();
             Imprimo(e, "cerrar", vendedor);
+        });
+        $("#btn-search-codigo").click(function (e) {
+            e.preventDefault();
+            url = $(this).attr('href');
+            tipo = BootstrapDialog.TYPE_WARNING;
+            BootstrapDialog.show({
+                type: 'success',
+                title: "Busqueda Articulo",
+                message: function (dialog) {
+                    var $message = $('<div></div>');
+                    var pageToLoad = dialog.getData('pageToLoad');
+                    $message.load(pageToLoad);
+
+                    return $message;
+                },
+                data: {
+                    'pageToLoad': url
+                }
+            });
         });
     });
     function AgregoArticulo(e) {
