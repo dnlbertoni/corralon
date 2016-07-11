@@ -29,4 +29,18 @@ class ProveedoresArticulos_model extends MY_Model {
         $this->db->where ( 'a.id_articulo=stk_proveedores_articulos.articulo_id', '', false );
         return $this->db->get ()->result ();
     }
+
+    function existeRelacion ( $cuenta_id, $articulo_id ) {
+        $this->db->select ( 'id' );
+        $this->db->from ( $this->getTable () );
+        $this->db->where ( 'cuenta_id', $cuenta_id );
+        $this->db->where ( 'articulo_id', $articulo_id );
+        $this->db->limit ( 1 );
+        $q = $this->db->get ();
+        if ( count ( $q ) > 0 ) {
+            return $q->row ()->id;
+        } else {
+            return false;
+        }
+    }
 }
