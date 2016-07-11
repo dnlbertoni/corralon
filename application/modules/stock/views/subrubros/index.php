@@ -1,88 +1,68 @@
-<div style="text-align:center;">
-    <h1>Subrubros</h1>
-    <div>Filtrar <?php echo form_input ( 'filtro', '', 'id="filtro"' ); ?></div>
-    <table id="datos">
-        <thead>
-        <th>Codigo</th>
-        <th>Nombre</th>
-        <th>Rubro</th>
-        <th>Nombre para el Producto</th>
-        <th>Cant. Art.</th>
-        <th>Asistente</th>
-        <th>&nbsp;</th>
-        </thead>
-        <?php $total = 0; ?>
-        <?php foreach ( $subrubros as $subrubro ): ?>
-            <?php $clase = ( $subrubro->articulos == $subrubro->Warticulos ) ? 'est_w' : 'est_nw' ?>
-            <tr>
-                <td><?php echo $subrubro->ID_SUBRUBRO ?></td>
-                <td><?php echo $subrubro->DESCRIPCION_SUBRUBRO ?></td>
-                <td><?php echo $subrubro->rubro ?></td>
-                <td class="alias"><?php echo $subrubro->ALIAS_SUBRUBRO ?></td>
-                <td class="<?php echo $clase ?>"><?php echo $subrubro->articulos ?></td>
-                <td class="<?php echo $clase ?>"><?php echo $subrubro->Warticulos ?></td>
-                <?php $total += $subrubro->articulos; ?>
-                <td>
-                    <?php echo anchor ( 'articulos/subrubros/verArticulos/' . $subrubro->ID_SUBRUBRO, 'Ver Articulos', "class='botVerArt ajax'" ); ?>
-                    <?php echo anchor ( 'articulos/subrubros/editar/' . $subrubro->ID_SUBRUBRO, 'Editar', "class='botEdit'" ); ?>
-                    <?php echo anchor ( 'articulos/subrubros/borrar/' . $subrubro->ID_SUBRUBRO, 'Borrar', 'class="botDel"' ) ?>
-                </td>
-            </tr>
-        <?php endforeach; ?>
-        <tr>
-            <th colspan="4">Total Ariculos</th>
-            <th><?php echo $total ?></th>
-            <th>&nbsp;</th>
-        </tr>
-    </table>
-    <?php echo anchor ( 'articulos/subrubros/agregar', "Agregar", "class='boton'" ); ?>
-    <?php echo anchor ( 'articulos/', 'Menu Articulos', "class='boton'" ); ?>
+<?php
+/**
+ * Created by PhpStorm.
+ * User: dyf
+ * Date: 20/04/2016
+ * Time: 11:17 PM
+ */
+?>
+<div class="section">
+    <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-md-8">
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Subrubros">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button"><i class="fa fa-search"></i> Buscar</button>
+                            <?php echo anchor ( 'stock/subrubros/nuevo', '<i class="fa fa-plus-circle"></i> Nuevo', 'class="btn btn-info"' ) ?>
+                        </span>
+                    </div><!-- /input-group -->
+                </div>
+                <div class="panel-body">
+                    <table class="table table-responsive">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Descripcion</th>
+                            <th>Unidad</th>
+                            <th>&nbsp;</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                        </thead>
+                        <tbody class="table-content">
+                        <?php foreach ( $subrubros as $subrubro ): ?>
+                            <tr>
+                                <td><?= $subrubro->ID_SUBRUBRO; ?></td>
+                                <td><?= $subrubro->DESCRIPCION_SUBRUBRO; ?></td>
+                                <td><?= $subrubro->UNIDAD_SUBRUBRO; ?></td>
+                                <td><span
+                                        class="label label-<?= ( $subrubro->ESTADO_SUBRUBRO == 1 ) ? "success" : "danger" ?>"><?= ( $subrubro->ESTADO_SUBRUBRO == 1 ) ? "Activo" : "Suspendido"; ?></span>
+                                </td>
+                                <td>
+                                    <?php echo anchor ( 'stock/rubros/edit/' . $subrubro->ID_SUBRUBRO, '<i class="fa fa-pencil-square-o"></i>', ' class="btn btn-info btn-xs"' ) ?>
+                                    <button class="btn btn-warning btn-xs"><i class="fa fa-ban"></i></button>
+                                    <button class="btn btn-danger btn-xs" aria-describedby="Borrar"><i
+                                            class="fa fa-trash-o"></i></button>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="panel-footer">
+                    <?php echo $paginacion ?>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
 
 <script>
     $(document).ready(function () {
-        var theTable = $("#datos");
-        $("#filtro").keyup(function () {
-            $.uiTableFilter(theTable, this.value);
-        });
-        $(".boton").button();
-        $(".boton").css('margin-right', '5px');
-        $(".boton").css('margin-left', '5px');
-        $("#botSearch").click(function () {
-            buscoSubmarca();
-        });
-        $(".alias").each(function () {
-            var valor = $.trim($(this).text());
-            if (valor == '') {
-                $(this).addClass('est_0');
-            }
-        });
-        $(".botVerArt").button({icons: {primary: 'ui-icon-zoomin'}, text: false});
-        $(".botEdit").button({icons: {primary: 'ui-icon-pencil'}, text: false});
-        $(".botDel").button({icons: {primary: 'ui-icon-trash'}, text: false});
-        $(".ajax").click(function (e) {
-            e.preventDefault();
-            url = $(this).attr('href');
-            var titulo = $(this).text();
-            var dialogOpts = {
-                modal: true,
-                bgiframe: true,
-                autoOpen: false,
-                height: 600,
-                width: 850,
-                title: titulo,
-                draggable: true,
-                resizeable: true,
-                close: function () {
-                    $('#ventanaAjax').dialog("destroy");
-                    location.reload();
-                }
-            };
-            $("#ventanaAjax").dialog(dialogOpts);   //end dialog
-            $("#ventanaAjax").load(url, [], function () {
-                $("#ventanaAjax").dialog("open");
-            });
+        $("#btn-nuevoSubrubro").click(function () {
+
         });
     });
 </script>

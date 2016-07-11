@@ -137,7 +137,8 @@ class Articulos extends Admin_Controller {
     }
 
     function agregarDeLote () {
-        $this->output->enable_profiler ( true );
+        $this->output->enable_profiler ( false );
+        $this->load->model ( "ProveedoresArticulos_model" );
         $datos = array ( 'DESCRIPCION_ARTICULO' => $this->input->get ( 'descripcion' ),
             'COSTO_ARTICULO' => $this->input->get ( 'costo' ),
             'MARKUP_ARTICULO' => $this->input->get ( 'markup' ),
@@ -149,8 +150,8 @@ class Articulos extends Admin_Controller {
             'ESTADO_ARTICULO' => 1,
         );
         $idArticulo = $this->Articulos_model->add ( $datos );
-        $this->Articulos_model->update ( array ( 'CODIGOBARRA_ARTICULO' => $idArticulo ), $idArticulo );
-        if ( $this->input->get ( 'codigoProveedor' ) != '' ) {
+        $this->Articulos_model->update ( array ( 'CODIGOBARRA_ARTICULO' => $idArticulo, "PRECIO_ARTICULO" => $this->input->get ( 'precio' ) ), $idArticulo );
+        if ( $this->input->get ( 'codigoProveedor' ) != '' && $this->input->get ( 'codigoProveedor' ) != 'null' ) {
             $datosProveedor = array (
                 'cuenta_id' => $this->input->get ( 'cuenta_id' ),
                 'articulo_id' => $idArticulo,

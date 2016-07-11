@@ -57,6 +57,24 @@ class Cfgpuestos_model extends MY_Model
         }
     }
 
+    function getRutaPuesto ( $ip ) {
+        $this->db->select ( 'puerto_cf as puesto' );
+        $this->db->from ( $this->getTable () );
+        $this->db->where ( 'ip', $ip );
+        $r = $this->db->get ();
+        switch ( count ( $r ) ) {
+            case 0:
+                return false;
+                break;
+            case 1:
+                return $r->row ()->puesto;
+                break;
+            default:
+                return $r->result ();
+                break;
+        }
+    }
+
     function getImpresora ( $ip ) {
         $this->db->select ( 'impresora as impresora' );
         $this->db->from ( $this->getTable () );

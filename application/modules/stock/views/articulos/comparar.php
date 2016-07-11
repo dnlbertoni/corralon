@@ -59,7 +59,7 @@
                         </div>
                     </div>
                     <div class="panel-footer">
-                        boton
+                        Faltan Procesar <span class="badge-info" id="cantFaltanEncontrados"></span>
                     </div>
                 </div>
             </div>
@@ -119,7 +119,7 @@
                         </div>
                     </div>
                     <div class="panel-footer">
-                        boton
+                        Faltan Procesar <span class="badge-info" id="cantFaltanNoEncontrados"></span>
                     </div>
                 </div>
             </div>
@@ -166,20 +166,23 @@
     </div>
 <script>
     $(document).ready(function () {
+        $("#cantFaltanEncontrados").html($("#datosEncontrados").find("tr").length);
+        $("#cantFaltanNoEncontrados").html($("#datosNoEncontrados").find("tr").length);
         $(".btn-insert").click(function () {
             lineaHTML = $(this).parent().parent().html();
+            renglon = $(this).parent().parent();
             datos = $(this).parent().parent().find("input").serialize();
             datos += "&";
             datos += $(this).parent().parent().find("select").serialize();
-            alert(datos);
+            //alert(datos);
             $.ajax({
                 type: "GET",
                 url: '/stock/articulos/agregarDeLote',
                 data: datos,
                 dataType: "json",
                 success: function (data) {
+                    renglon.remove();
                     Procesado(lineaHTML);
-                    $(this).parent().parent().remove();
                 },
                 error: function () {
                     alert('Ocurrio un error en la insercion');

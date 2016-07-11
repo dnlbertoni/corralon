@@ -117,6 +117,11 @@ class Admin_Controller extends MY_Controller {
         return $this->Cfgpuestos_model->getPuestoCnf ( $this->input->ip_address () );
     }
 
+    function getRutaPuesto () {
+        return $this->Cfgpuestos_model->getRutaPuesto ( $this->input->ip_address () );
+    }
+
+
     function getImpresora () {
         return $this->Cfgpuestos_model->getImpresora ( $this->input->ip_address () );
     }

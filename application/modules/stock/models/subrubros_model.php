@@ -28,6 +28,14 @@ class Subrubros_model extends MY_Model
         return $this->db->get()->result();
     }
 
+    function getAll ( $estado = false, $paginado = false, $pagina = false ) {
+        $estado = ( $estado ) ? $estado : "ALL";
+        if ( $estado != 'ALL' ) {
+            $this->db->where ( 'estado', $estado );
+        };
+        return $this->db->get ( $this->getTable (), $paginado, $pagina )->result ();
+    }
+
     function getAllConRubros()
     {
         $this->db->select('ID_SUBRUBRO');
