@@ -25,23 +25,25 @@
                         <thead>
                         <tr>
                             <th>#</th>
+                            <th>Rubro</th>
                             <th>Descripcion</th>
-                            <th>Unidad</th>
+                            <th>CantxBultos</th>
                             <th>&nbsp;</th>
                             <th>&nbsp;</th>
                         </tr>
                         </thead>
                         <tbody class="table-content">
-                        <?php foreach ( $subrubros as $subrubro ): ?>
+                        <?php foreach ( $subrubros as $rubro ): ?>
                             <tr>
-                                <td><?= $subrubro->ID_SUBRUBRO; ?></td>
-                                <td><?= $subrubro->DESCRIPCION_SUBRUBRO; ?></td>
-                                <td><?= $subrubro->UNIDAD_SUBRUBRO; ?></td>
+                                <td><?= $rubro->ID_SUBRUBRO; ?></td>
+                                <td><?= $rubro->ID_RUBRO; ?></td>
+                                <td><?= $rubro->DESCRIPCION_SUBRUBRO; ?></td>
+                                <td><?= $rubro->CANTXBULTO_SUBRUBRO; ?></td>
                                 <td><span
-                                        class="label label-<?= ( $subrubro->ESTADO_SUBRUBRO == 1 ) ? "success" : "danger" ?>"><?= ( $subrubro->ESTADO_SUBRUBRO == 1 ) ? "Activo" : "Suspendido"; ?></span>
+                                        class="label label-<?= ( $rubro->ESTADO_SUBRUBRO == 1 ) ? "success" : "danger" ?>"><?= ( $rubro->ESTADO_SUBRUBRO == 1 ) ? "Activo" : "Suspendido"; ?></span>
                                 </td>
                                 <td>
-                                    <?php echo anchor ( 'stock/rubros/edit/' . $subrubro->ID_SUBRUBRO, '<i class="fa fa-pencil-square-o"></i>', ' class="btn btn-info btn-xs"' ) ?>
+                                    <?php echo anchor ( 'stock/subrubros/edit/' . $rubro->ID_SUBRUBRO, '<i class="fa fa-pencil-square-o"></i>', ' class="btn btn-info btn-xs"' ) ?>
                                     <button class="btn btn-warning btn-xs"><i class="fa fa-ban"></i></button>
                                     <button class="btn btn-danger btn-xs" aria-describedby="Borrar"><i
                                             class="fa fa-trash-o"></i></button>
@@ -61,7 +63,7 @@
 
 <script>
     $(document).ready(function () {
-        $("#btn-nuevoSubrubro").click(function () {
+        $("#btn-nuevoRubro").click(function () {
 
         });
     });

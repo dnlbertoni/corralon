@@ -8,6 +8,13 @@ class Subrubros_model extends MY_Model
         $this->setTable ( "stk_subrubros" );
     }
 
+    function getAll ( $estado = false, $paginado = false, $pagina = false ) {
+        $estado = ( $estado ) ? $estado : "ALL";
+        if ( $estado != 'ALL' ) {
+            $this->db->where ( 'estado', $estado );
+        };
+        return $this->db->get ( $this->getTable (), $paginado, $pagina )->result ();
+    }
     function ListaSelect($campoId = "id_subrubro", $campoNombre = "descripcion_subrubro")
     {
         return $this->toDropDown($campoId, $campoNombre);
@@ -26,14 +33,6 @@ class Subrubros_model extends MY_Model
         $this->db->where('id_rubro', $id);
         $this->db->order_by('nombre');
         return $this->db->get()->result();
-    }
-
-    function getAll ( $estado = false, $paginado = false, $pagina = false ) {
-        $estado = ( $estado ) ? $estado : "ALL";
-        if ( $estado != 'ALL' ) {
-            $this->db->where ( 'estado', $estado );
-        };
-        return $this->db->get ( $this->getTable (), $paginado, $pagina )->result ();
     }
 
     function getAllConRubros()

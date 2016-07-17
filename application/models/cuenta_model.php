@@ -33,7 +33,7 @@ class Cuenta_model extends MY_Model{
         $this->db->select('id, nombre, cuit, letra');
         $search = '%' . $valor . '%';
         $this->db->from($this->getTable());
-        $this->db->like('nombre', $valor);
+        $this->db->like ( 'nombre', $search );
         $q = $this->db->get();
         return $q->result();
         //return $this->db->_compile_select();
@@ -77,7 +77,7 @@ class Cuenta_model extends MY_Model{
         $this->db->select ( 'cuenta.condiva_id         AS condiva' );
         $this->db->select ( 'cuenta.tipdoc             AS tipdoc' );
         $this->db->select ( 'cuenta.ctacte             AS ctacte' );
-        $this->db->select ( 'cfg_condiva.letra615          AS letra615' );
+        $this->db->select ( 'cfg_condiva.letra615      AS letra615' );
         $this->db->from ( $this->getTable () );
         $this->db->join ( $this->tablaCondiva, 'condiva_id = cfg_condiva.id', 'inner' );
         $this->db->where ( 'cuenta.id', $id );

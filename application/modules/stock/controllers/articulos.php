@@ -138,7 +138,7 @@ class Articulos extends Admin_Controller {
 
     function agregarDeLote () {
         $this->output->enable_profiler ( false );
-        $this->load->model ( "ProveedoresArticulos_model" );
+        $this->load->model ( 'ProveedoresArticulos_model' );
         $datos = array ( 'DESCRIPCION_ARTICULO' => $this->input->get ( 'descripcion' ),
             'COSTO_ARTICULO' => $this->input->get ( 'costo' ),
             'MARKUP_ARTICULO' => $this->input->get ( 'markup' ),

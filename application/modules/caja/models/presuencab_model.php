@@ -55,14 +55,16 @@ class Presuencab_model extends MY_Model {
     }
 
     function save ( $datos ) {
-        $this->db->insert ( $this->tabla, $datos );
+        $this->db->insert ( $this->getTable (), $datos );
         $q = $this->db->insert_id ();
         return $q;
     }
 
     function getComprobante ( $id ) {
         $this->db->from ( $this->tablaMovim );
+        $this->db->join ( $this->getTable (), "fac_presuencab.id = fac_presumovim.idencab", "inner" );
         $this->db->where ( 'idencab', $id );
+        //echo $this->db->_compile_select();
         return $this->db->get ()->result ();
     }
 
@@ -75,6 +77,7 @@ class Presuencab_model extends MY_Model {
     }
 
     function getArticulos ( $id ) {
+        $this->db->select ( 'id_articulo' );
         $this->db->select ( 'codigobarra_movim AS Codigobarra' );
         $this->db->select ( 'descripcion_movim AS Nombre' );
         $this->db->select ( 'cantidad_movim AS Cantidad' );
