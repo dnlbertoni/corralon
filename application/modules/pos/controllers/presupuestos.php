@@ -219,7 +219,7 @@ class Presupuestos extends Admin_Controller {
                 $datosMovim[] = array (
                     'tipcomid_movim' => $comprobante->tipcom_id,
                     'puesto_movim' => $comprobante->puesto,
-                    'descripcion_movim' => $item->descripcion,
+                    'descripcion_movim' => $item->detalle,
                     'numero_movim' => $comprobante->numero,
                     'letra_movim' => $letra,
                     'id_articulo' => $item->id_articulo,

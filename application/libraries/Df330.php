@@ -1,17 +1,19 @@
 <?php
 
 class Df330 extends hasar {
-    function DatosCliente ( $nombre, $doc, $respiva, $tipdoc ) {//Datos del cliente
+    function DatosCliente ( $nombre, $doc, $respiva, $tipdoc, $direccion = "" ) {//Datos del cliente
         // nombre = nombre cliente | $doc = cuit o dni o 0 si no es nada |
         // $respiva = "I" si es incripto  "C" si es consumidor final "E" si es excento "M" monotributo
 
         $nombre = substr ( $nombre, 0, 30 );
         $respiva = strtoupper ( $respiva );
-        $command = "b" . $this->fs . $nombre . $this->fs . $doc . $this->fs . $respiva . $this->fs . $tipdoc . "\n";
+        $command = "b" . $this->fs . $nombre . $this->fs . $doc . $this->fs . $respiva . $this->fs . $tipdoc . $this->fs . $direccion . "\n";
         if ( file_exists ( $this->nombre_archivo_tmp ) )
             unlink ( $this->nombre_archivo_tmp );
+        /*
         if ( file_exists ( $this->nombre_archivo_recibir ) )
             unlink ( $this->nombre_archivo_recibir );
+        */
         $estado = $this->AbroArchivoMandar ();
         if ( $estado != "ERROR" )
             $estado = $this->EscriboArchivoMandar ( $command );
@@ -35,7 +37,7 @@ class Df330 extends hasar {
             $iva = number_format ( $item->Tasa, 2, '.', '' );
             $precio = number_format ( $item->Precio, 2, '.', '' );
             $cantidad = number_format ( $item->Cantidad, 2, '.', '' );
-            $command = "B" . $this->fs . substr ( $item->Nombre, 0, 20 ) . $this->fs . $cantidad . $this->fs . $precio . $this->fs . $iva . $this->fs . "M" . $this->fs . '0.0' . $this->fs . $this->display . $this->fs . "T" . "\n";
+            $command = "B" . $this->fs . substr ( $item->Nombre, 0, 50 ) . $this->fs . $cantidad . $this->fs . $precio . $this->fs . $iva . $this->fs . "M" . $this->fs . '0.0' . $this->fs . $this->display . $this->fs . "T" . "\n";
             $estado = $this->EscriboArchivoMandar ( $command );
         }
         return $estado;

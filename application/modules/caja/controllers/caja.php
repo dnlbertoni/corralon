@@ -46,7 +46,9 @@ class Caja extends Admin_Controller {
 
     function cierreJournal () {
         $cierre = new Hasar();
-        $cierre->setRuta ( "/var/www/html/corralon/assets/tmp/fiscal" );
+        //$cierre->setRuta ( "/var/www/html/corralon/assets/tmp/fiscal" );
+        $cierre->setRuta ( 'c:/xampp/htdocs/corralon/assets/tmp/fiscal' );
+
         $tipo = $this->input->post ( 'tipo' );
         $cierre->setPuesto ( intval ( $this->getPuesto () ) );
         $comprobante = "cierre";
@@ -95,7 +97,7 @@ class Caja extends Admin_Controller {
             $id = $this->Facencab_model->save ( $datos );
             $data ['fac'] = $this->Facencab_model->getRegistro ( $id );
             $data ['tipcom_nombre'] = $this->Tipcom_model->getNombre ( 4 );
-            Assets::add_js ( 'pos/muestroZ' );
+            //Assets::add_js ( 'pos/muestroZ' );
             Template::set ( $data );
             Template::set_view ( 'pos/muestroZ' );
             Template::render ();
@@ -164,24 +166,30 @@ class Caja extends Admin_Controller {
     }
 
     function printFacturaDo () {
+        //print_r($_POST);
         $this->load->library ( 'hasar' );
         $idencab = $this->input->post ( 'idencab' );
         $tipcom_id = $this->input->post ( 'tipcom' );
         $DNF = $this->input->post ( 'DNF' );
         $estado = ( $DNF == 1 ) ? 9 : 1;
         $hasar = new Hasar();
+        $hasar->setRuta ( $this->getRutaPuesto () );
         $hasar->setPuesto ( $this->getPuesto () );
         $hasar->nombres ( $this->input->post ( 'file' ) );
         $respuesta = $hasar->RespuestaFull ();
-        //$respEstado = $this->hasar->Estado();
-        //$cuenta = $this->Tmpmovim_model->getCuenta($idencab, $puesto);
+        //print_r($respuesta);
+        //$respEstado = $hasar->Estado();
         $numero = $hasar->last_print;
-        $comprobante = $this->Presuencab_model->getComprobante ( $idencab );
+        //echo $numero;
+        $comprobantes = $this->Presuencab_model->getComprobante ( $idencab );
+        $comprobante = $comprobantes[0];
         $items = $this->Presuencab_model->getArticulos ( $idencab );
+        //echo $comprobante->cuenta_id;
         $cliente = $this->Cuenta_model->getByIdComprobante ( $comprobante->cuenta_id );
         $letra = ( $cliente->condiva == 1 ) ? "A" : "B";
         $ivamax = 0;
         $ivamin = 0;
+        $datosMovim = array ();
         foreach ( $items as $item ) {
             $datosMovim[] = array (
                 'tipcomid_movim' => $tipcom_id,
@@ -189,15 +197,15 @@ class Caja extends Admin_Controller {
                 'numero_movim' => $numero,
                 'letra_movim' => $letra,
                 'id_articulo' => $item->id_articulo,
-                'codigobarra_movim' => $item->codigobarra,
-                'cantidad_movim' => $item->cantidad,
-                'preciovta_movim' => $item->precio,
-                'tasaiva_movim' => $item->iva
+                'codigobarra_movim' => $item->Codigobarra,
+                'cantidad_movim' => $item->Cantidad,
+                'preciovta_movim' => $item->Precio,
+                'tasaiva_movim' => $item->Tasa
             );
-            if ( $item->iva > 20 ) {
-                $ivamax += ( $item->precio / ( 1 + ( $item->iva / 100 ) ) ) * $item->iva / 100;
+            if ( $item->Tasa > 20 ) {
+                $ivamax += ( $item->Precio / ( 1 + ( $item->Tasa / 100 ) ) ) * $item->Tasa / 100;
             } else {
-                $ivamin += ( $item->precio / ( 1 + ( $item->iva / 100 ) ) ) * $item->iva / 100;
+                $ivamin += ( $item->Precio / ( 1 + ( $item->Tasa / 100 ) ) ) * $item->Tasa / 100;
             }
         }
         $datosEncab = array (
@@ -220,6 +228,8 @@ class Caja extends Admin_Controller {
         if ( $DNF == 1 ) {
             $this->printCtaCte ( $comprobante->cuenta_id, $this->getPuesto (), $numero, $hasar->importe, $idFacencab );
         };
+        $resultado['mensaje'] = "OK";
+        echo json_encode ( $resultado );
     }
 
     function printRemitoDo () {
@@ -253,18 +263,18 @@ class Caja extends Admin_Controller {
                 'numero_movim' => $numero,
                 'letra_movim' => $letra,
                 'id_articulo' => $item->id_articulo,
-                'codigobarra_movim' => $item->codigobarra,
-                'cantidad_movim' => $item->cantidad,
-                'preciovta_movim' => $item->precio,
-                'tasaiva_movim' => $item->iva
+                'codigobarra_movim' => $item->Codigobarra,
+                'cantidad_movim' => $item->Cantidad,
+                'preciovta_movim' => $item->Precio,
+                'tasaiva_movim' => $item->Tasa
             );
-            if ( $item->iva > 20 ) {
-                $ivamax += ( $item->precio / ( 1 + ( $item->iva / 100 ) ) ) * $item->iva / 100;
+            if ( $item->Tasa > 20 ) {
+                $ivamax += ( $item->Precio / ( 1 + ( $item->Tasa / 100 ) ) ) * $item->Tasa / 100;
             } else {
-                $ivamin += ( $item->precio / ( 1 + ( $item->iva / 100 ) ) ) * $item->iva / 100;
+                $ivamin += ( $item->Precio / ( 1 + ( $item->Tasa / 100 ) ) ) * $item->Tasa / 100;
             }
-            $importe += $item->precio * $item->cantidad;
-            $neto += $item->precio / ( 1 + ( $item->iva / 100 ) ) * $item->cantidad;
+            $importe += $item->Precio * $item->Cantidad;
+            $neto += $item->Precio / ( 1 + ( $item->Tasa / 100 ) ) * $item->Cantidad;
         }
         $datosEncab = array (
             'tipcom_id' => $tipcom_id,
@@ -287,6 +297,8 @@ class Caja extends Admin_Controller {
         if ( $DNF == 1 ) {
             $this->printCtaCte ( $comprobante->cuenta_id, $puesto, $numero, $importe * $negativo, $idFacencab );
         };
+        $estado['mensaje'] = "OK";
+        echo json_encode ( $estado );
     }
 
     function printRemitoDoLaser () {
@@ -344,8 +356,9 @@ class Caja extends Admin_Controller {
         if ( $DNF == 1 ) {
             $this->printCtaCteLaser ( $comprobante->cuenta_id, $this->getPuesto (), $numero, $importe * $negativo, $idFacencab, $items );
         } else {
-            echo "termino";
+            $estado['mensaje'] = "OK";
         }
+        echo json_encode ( $estado );
     }
 
     function printCtaCte ( $cuenta, $puesto, $numero, $importe, $idFacencab ) {
@@ -412,47 +425,23 @@ class Caja extends Admin_Controller {
     function _imprimeFactura ( $puesto, $idencab, $items, $total, $cliente ) {
         $this->load->library ( "hasar" );
         $this->load->library ( "df330" );
-        $this->load->library ( "Hasar340" );
 
-        $this->df330->setRuta ( "/var/www/html/corralon/assets/tmp/fiscal" );
+        // $this->df330->setRuta ( 'c:/xampp/htdocs/corralon/assets/tmp/fiscal');
+        $this->df330->setRuta ( $this->getRutaPuesto () );
+
         $this->df330->setPuesto ( $puesto );
         $comprobante = "f";
         $nom_archiv = $comprobante . $idencab;
         $this->df330->nombres ( $nom_archiv );
         $tipdoc = ( $cliente->tipdoc == 2 ) ? "C" : 2;
         $cliNom = ( $cliente->datos_fac == 1 ) ? $cliente->nombre_facturacion : $cliente->nombre;
-        $this->df330->DatosCliente ( $cliNom, $cliente->cuit, $cliente->letra615, $tipdoc );
+        $this->df330->DatosCliente ( $cliNom, $cliente->cuit, $cliente->letra615, $tipdoc, $cliente->direccion );
         $tiplet = ( $cliente->condiva == 1 ) ? "A" : "B";
         $this->df330->AbrirFactura ( $tiplet );
         $this->df330->ItemFactura ( $items );
         $this->df330->SubTotalFactura ();
         $this->df330->TotalFactura ( $total );
         $this->df330->CerrarFactura ();
-        //$respuesta = $this->df330->RespuestaFull ();
-        /*
-        $factura = new Hasar340();
-        $factura->setHost('192.168.10.2');
-        $estadoConexion = $factura->Conecto();
-        echo $factura->getEstadoConexion();
-        echo $factura->getEstadoConexion();
-        if($estadoConexion==0){
-            $comprobante = "f";
-            $nom_archiv = $comprobante . $idencab;
-            //$this->df330->nombres ( $nom_archiv );
-            $tipdoc = ( $cliente->tipdoc == 2 ) ? "C" : 2;
-            $cliNom = ( $cliente->datos_fac == 1 ) ? $cliente->nombre_facturacion : $cliente->nombre;
-            $factura->DatosCliente ( $cliNom, $cliente->cuit, $cliente->letra615, $tipdoc, $cliente->direccion );
-            $tiplet = ( $cliente->condiva == 1 ) ? "A" : "B";
-            $factura->AbrirFactura ( $tiplet );
-            $factura->ItemFactura ( $items );
-            $factura->SubTotalFactura ();
-            $factura->TotalFactura ( $total );
-            $factura->CerrarFactura ();
-            $factura->Desconecto();
-        }else{
-            echo "No Encuentra Controlador";
-        }
-        */
         return $nom_archiv;
     }
 
@@ -641,7 +630,8 @@ class Caja extends Admin_Controller {
             $this->fpdf->Cell ( 0, 5, "Firma del Cliente", 0, 1, 'C' );
         };
         $pathPDF = "/var/www/html/corralon/assets/tmp/fiscal/%s/pdf/%04.0f-%08.0f.pdf";
-        $nombre = sprintf ( $pathPDF, intval ( $this->getPuesto () ), $ptorem, $numrem );
+        $pathPDF = "%s/%s/pdf/%04.0f-%08.0f.pdf";
+        $nombre = sprintf ( $pathPDF, $this->getRutaPuesto (), intval ( $this->getPuesto () ), $ptorem, $numrem );
         $this->fpdf->Output ( $nombre, 'F' );
         if ( $imprime ) {
             $cmd = sprintf ( "lp -o media=Custom.100x148mm %s -d %s", $nombre, $this->getImpresora () );

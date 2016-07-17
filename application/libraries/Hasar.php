@@ -12,6 +12,8 @@ class Hasar {
     var $archivo;
     var $nombre_archivo;
     var $nombre_archivo_tmp;
+    var $nombre_archivo_mandar;
+    var $nombre_archivo_recibir;
     var $comando;
     var $estadoArchivo;
     var $display;
@@ -86,9 +88,11 @@ class Hasar {
     {
         $this->nFile = $valor;
         $ruta = $this->getRuta ();
-        $nombre_archivo_tmp = "$ruta/$this->puestoVta/$this->tmp/$this->nFile.txt";
-        $nombre_archivo_snd = "$ruta/$this->puestoVta/$this->mandar/$this->nFile.txt";
-        $nombre_archivo_rec = "$ruta/$this->puestoVta/$this->recibir/$this->nFile.ans";
+        $nombre_archivo_tmp = $ruta . '/' . $this->puestoVta . '/' . $this->tmp . '/' . $this->nFile . '.txt';
+        $nombre_archivo_snd = $ruta . "/" . $this->puestoVta . "/" . $this->mandar . "/" . $this->nFile . '.txt';
+        $nombre_archivo_rec = $ruta . "/" . $this->puestoVta . "/" . $this->recibir . "/" . $this->nFile . '.ans';
+        //$dirAux =(__DIR__);
+        //die($dirAux);
         $this->nombre_archivo_tmp = $nombre_archivo_tmp;
         $this->nombre_archivo_mandar = $nombre_archivo_snd;
         $this->nombre_archivo_recibir = $nombre_archivo_rec;
@@ -328,20 +332,25 @@ class Hasar {
     {
         $campos = explode("|", $linea);
         //print_r($campos);
-        $estado_impre = $this->StatusImpresora($campos[1]);
-        $estado_fiscal = $this->StatusFiscal($campos[2]);
-        // solo valido para 715 y 441
-        //$dato[0]=$campos[3];
-        $estado['estado'] = "OK";
-        $estado['detalle'] = "Ninguno";
-        if ($estado_impre['estado'] == "Error") {
-            $estado['estado'] = "Error Impresora";
-            $estado['detalle'] .= $estado_impre['detalle'];
-        };
-        if ($estado_fiscal['estado'] == "Error") {
-            $estado['estado'] = "Error Fiscal";
-            $estado['detalle'] .= $estado_fiscal['detalle'];
-        };
+        if ( count ( $campos ) > 3 ) {
+            $estado_impre = $this->StatusImpresora ( $campos[1] );
+            $estado_fiscal = $this->StatusFiscal ( $campos[2] );
+            // solo valido para 715 y 441
+            //$dato[0]=$campos[3];
+            $estado['estado'] = "OK";
+            $estado['detalle'] = "Ninguno";
+            if ( $estado_impre['estado'] == "Error" ) {
+                $estado['estado'] = "Error Impresora";
+                $estado['detalle'] .= $estado_impre['detalle'];
+            };
+            if ( $estado_fiscal['estado'] == "Error" ) {
+                $estado['estado'] = "Error Fiscal";
+                $estado['detalle'] .= $estado_fiscal['detalle'];
+            };
+        } else {
+            $estado['estado'] = "Error Lectura Archivo";
+            $estado['detalle'] = "Error Lectura Archivo";
+        }
         return $estado;
     }
 
@@ -363,7 +372,7 @@ class Hasar {
         return $estado;
     }
 
-    function RespuestaItem($linea) {
+    function RespuestaItem ( $linea ) {
         $campos = explode ( "|", $linea );
         $estado_impre = $this->StatusImpresora ( $campos[1] );
         $estado_fiscal = $this->StatusFiscal ( $campos[2] );
@@ -527,9 +536,10 @@ class Hasar {
     {
         $resp = array();
         $band = 1000;
+        //echo $this->nombre_archivo_recibir;
         while (!(file_exists($this->nombre_archivo_recibir))) {
             if ($band == 1000) {
-                //echo "Esperando Respuesa Fiscal, por favor espere...<br />";
+                echo "Esperando Respuesa Fiscal, por favor espere...<br />";
                 sleep(2);
                 $band = 0;
             } else {
@@ -543,6 +553,7 @@ class Hasar {
         $estado = fclose($this->archivo);
         for ($r = 0; $r < count($linea); $r++) {
             $aux = explode("|", $linea[$r]);
+            //echo $aux[0];
             switch ($aux[0]) {
                 case "*":
                     $resp[$r] = $this->RespuestaEstado($linea[$r]);
@@ -593,7 +604,7 @@ class Hasar {
                 $i++;
             if ($bits[$i] == 1) {
                 $error_nible++;
-                echo $i . "<br/>";
+                //echo $i . "<br/>";
                 $answer['detalle'] = $answer['detalle'] . $i . "-" . $this->decodeError ( $i, "Impresora" )->error . "|";
             };
             if ($i == 3 && $error_nible > 0) {
@@ -621,7 +632,7 @@ class Hasar {
                 $i = $i + 2;
             if (intval($bits[$i]) == 1) {
                 $error_nible++;
-                $answer['detalle'] = $answer['detalle'] . $i . "-" . $this->decodeError ( $i, "Controlador" )->erro . "|";
+                $answer['detalle'] = $answer['detalle'] . $i . "-" . $this->decodeError ( $i, "Controlador" )->error . "|";
             }
             if ($i == 7 && $error_nible > 0) {
                 $answer['estado'] = "Error";

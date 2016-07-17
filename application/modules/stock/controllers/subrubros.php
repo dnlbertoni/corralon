@@ -5,8 +5,9 @@
  * User: sistemas
  * Date: 07/07/2016
  * Time: 23:13
+ * @property Rubros_model $Rubros_model
  * @property Subrubros_model $Subrubros_model
- * @property CI_Pagination $pagination*
+ * @property CI_Pagination $pagination
  */
 class Subrubros extends Admin_Controller {
     function __construct () {
@@ -18,7 +19,7 @@ class Subrubros extends Admin_Controller {
     function index () {
         $this->load->library ( 'pagination' ); //Cargamos la librería de paginación
         $this->load->config ( 'pagination' );
-        $config['base_url'] = base_url () . 'stock/rubros/'; // parametro base de la aplicación, si tenemos un .htaccess nos evitamos el index.php
+        $config['base_url'] = base_url () . 'stock/subrubros/'; // parametro base de la aplicación, si tenemos un .htaccess nos evitamos el index.php
         $config['total_rows'] = $this->Subrubros_model->getNumeroFilas ();//calcula el número de filas
         $config["uri_segment"] = 3;//el segmento de la paginación
         $this->pagination->initialize ( $config ); //inicializamos la paginación
@@ -30,9 +31,9 @@ class Subrubros extends Admin_Controller {
 
     function nuevo () {
         Template::set ( 'accion', 'stock/subrubros/nuevoDo' );
-        $unidades = array ( 'UNI' => 'UNI', 'KG' => 'KG', 'MTS' => 'MTS' );
-        Template::set ( 'unidadSel', $unidades );
-        Template::set ( 'rubro', $this->Subrubros_model->getInicial () );
+        $rubros = $this->Rubros_model->toDropDown ( 'ID_RUBRO', 'DESCRIPCION_RUBRO' );
+        Template::set ( 'rubrosSel', $rubros );
+        Template::set ( 'subrubro', $this->Subrubros_model->getInicial () );
         Template::set_view ( 'stock/subrubros/edit' );
         Template::render ();
     }
@@ -46,15 +47,15 @@ class Subrubros extends Admin_Controller {
                 $datos[$key] = $value;
             }
         }
-        $this->Rubros_model->add ( $datos );
+        $this->Subrubros_model->add ( $datos );
         Template::redirect ( 'stock/subrubros' );
     }
 
     function edit ( $id ) {
         Template::set ( 'accion', 'stock/subrubros/editDo' );
-        $unidades = array ( 'UNI' => 'UNI', 'KG' => 'KG', 'MTS' => 'MTS' );
-        Template::set ( 'unidadSel', $unidades );
-        Template::set ( 'rubro', $this->Subrubros_model->getById ( $id ) );
+        $rubros = $this->Rubros_model->toDropDown ( 'ID_RUBRO', 'DESCRIPCION_RUBRO' );
+        Template::set ( 'rubrosSel', $rubros );
+        Template::set ( 'subrubro', $this->Subrubros_model->getById ( $id ) );
         Template::set_view ( 'stock/subrubros/edit' );
         Template::render ();
     }
@@ -70,7 +71,7 @@ class Subrubros extends Admin_Controller {
         }
         $id = $_POST['ID_SUBRUBRO'];
         $this->Subrubros_model->update ( $datos, $id );
-        // Template::redirect('stock/rubros');
+        //Template::redirect('stock/subrubros');
     }
 
 

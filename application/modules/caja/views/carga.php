@@ -25,8 +25,8 @@
             dataType: "html",
             async: true,
             success: function (msg) {
-                dialog.close();
+                location.reload();
             }
-        }).responseText;
+        });
     });
 </script>

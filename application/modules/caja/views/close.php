@@ -37,6 +37,7 @@
                             </table>
                         </div>
                         <button type="button" class="btn btn-info btn-cierre" aria-label="X">Cierre X</button>
+                        <button type="button" class="btn btn-danger btn-cierre" aria-label="Z">Cierre Z</button>
                     </div>
                     <div class="panel-footer">
                         <button class="btn btn-danger">Cnacelar</button>
