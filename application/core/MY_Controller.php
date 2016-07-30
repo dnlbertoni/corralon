@@ -2,7 +2,7 @@
 
 /* load the MX_Loader class */
 /**
- * @property $Cfgpuestos_model $Cfgpuestos_model
+ * @property Cfgpuestos_model $Cfgpuestos_model
  */
 
 /**

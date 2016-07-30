@@ -16,7 +16,7 @@
     <link href="/themes/citrus/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- JavaScript -->
-    <script src="/themes/citrus/js/jquery2.js"></script>
+    <script src="/assets/js/jquery-1.9.js"></script>
     <script src="/themes/citrus/js/bootstrapCitrus.js"></script>
 
 </head>

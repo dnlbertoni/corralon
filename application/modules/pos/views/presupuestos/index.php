@@ -6,24 +6,30 @@
     <div class="row ">
         <div class="panel panel-primary">
             <div class="panel-body">
-                <div class="col-lg-4 col-md-4 col-xs-4">
+                <div class="col-lg-7 col-md-7 col-xs-7">
                     <!--
             <div class="alert alert-info"><?php echo $fechoy ?> <span id="clock"></span></div>
             -->
-                    <?php echo form_open ( 'pos/billing/addArticulo', 'id="addCart"' ); ?>
-                    <input type="hidden" name="tmpfacencab_id" value="<?php echo $tmpfacencab_id ?>"
+                    <?php echo form_open ( 'pos/presupuestos/addArticulo', 'id="addCart"' ); ?>
+                    <input type="hidden" name="tmpfacencab_id" value="<?= $tmpfacencab_id ?>"
                            id="tmpfacencab_id"/>
-
-                    <div class="col-xs-4">
-                        <?php echo form_label ( 'Articulo', 'codigobarra', ' class="control-label"' ); ?>
-                    </div>
-                    <div class="col-xs-8 right">
+                    <div class="col-xs-3">
                         <div class="input-group">
-                            <?php echo form_input ( 'codigobarra', '', 'id="codigobarra" data-toggle="tooltip" data-placement="top" title="articulo | (cant)*(articulo) | (cant)*(precio)*(articulo)" class="form-control"' ); ?>
+                            <?php echo form_input ( 'codigobarra', '', 'id="codigobarra" data-toggle="tooltip" data-placement="top" title="articulo "size="7" class="form-control" placeholder="Articulo"' ); ?>
                             <span class="input-group-btn">
-                            <button class="btn btn-default" type="button" id="btn-search-codigo"><i
-                                    class="fa fa-search"></i></button>
+                                <?php echo anchor ( 'stock/articulos/busquedaAjax', '<i class="fa fa-search"></i>', 'class="btn btn-default" id="btn-search-codigo"' ) ?>
                         </span>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="input-group">
+                            <input type="text" class="form-control input-group-item" id="nombreArticulo" size="60"
+                                   value="" disabled/>
+                        </div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div class="input-group">
+                            <?php echo form_input ( 'cantidad', '', 'id="cantidad" data-toggle="tooltip" data-placement="top" title="cantidad " class="form-control" placeholder="Cantidad"' ); ?>
                         </div>
                     </div>
                     <?php echo form_close (); ?>
@@ -38,7 +44,7 @@
                     <input type="hidden" id="paginaIndex"
                            value="<?php echo base_url (), 'pos/prespuestos' ?>"/>
                 </div>
-                <div class="col-lg-8 col-md-8 col-xs-8">
+                <div class="col-lg-5 col-md-5 col-xs-5">
                     <div class="btn-toolbar" role="toolbar">
                         <div class="btn-group">
                             <button class="btn btn-danger" id="F1"><span class="badge pull-left"> F1 </span>&nbsp;Cancelar
@@ -186,42 +192,6 @@
     </div> <!-- /.row-->
 </div>
 
-<div class="modal fade" id="cliente" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Busco Cliente</h4>
-            </div>
-            <div class="modal-body">
-                <?php echo form_open ( 'cuenta/searchCuentaXDo', 'id="consultaCuenta"' ) ?>
-                <?php echo form_input ( 'cuentaTXT', '', 'id="cuentaTXT"' ) ?>
-                <input type="hidden" id="filtro" value="1"/>
-                <?php echo form_submit ( 'Consultar', 'Consultar' ); ?>
-                <?php echo form_close () ?>
-                <div id="datosCliente">
-                    <table class="table" id="datosClientes">
-                        <thead>
-                        <tr>
-                            <th>Codigo</th>
-                            <th>Nombre</th>
-                            <th>CUIT</th>
-                            <th>Cond. Vta</th>
-                            <th>&nbsp;</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-            </div>
-        </div>
-    </div>
-</div><!-- /.modal -->
 <!-- modal de formas de pago -->
 <div class="modal fade" id="fpago" tabindex="-1" role="dialog" aria-labelledby="myFpagos" aria-hidden="true">
     <div class="modal-dialog modal-sm">
@@ -305,7 +275,6 @@
     </div>
 </div>
 
-
 <div id="precio"></div>
 
 <script>
@@ -329,7 +298,7 @@
                         $("#codigobarra").focus();
                         break;
                     case 'f6':
-                        CambioCliente();
+                        ConsultoCliente(e);
                         break;
                     case 'f8':
                         $("#F8").click();
@@ -355,6 +324,28 @@
                 }
             }
         });
+        $("#codigobarra").change(function () {
+            MuestroDescripcion($(this).val());
+        });
+        /**
+         * agrego cantidad
+         */
+        $("#cantidad").bind('keydown', function (e) {
+            var code = e.keyCode;
+
+            if ($("#cantidad").hasClass('focus')) {
+                if ($("#cantidad").val().trim().length === 0) {
+                    if (code === 13) {
+                        $(this).val('1');
+                        AgregoArticulo(e);
+                    }
+                } else {
+                    if (code === 13) {
+                        AgregoArticulo(e);
+                    }
+                }
+            }
+        });
         // fin de chequeo de teclas de funciones
         // ejecuto el formulario con el lector de codigo de barras
         $("#addCart").submit(function () {
@@ -365,15 +356,12 @@
         $("#F1").click(function () {
             CanceloComprobante();
         });
-
-        $("#F6").click(function () {
-            CambioCliente();
+        $("#F6").click(function (e) {
+            ConsultoCliente(e);
         });
-
         $("#F8").click(function () {
             CambioCondicion('agrego');
         });
-
         $("#F12").click(function (e) {
             e.preventDefault();
             e.stopPropagation();
@@ -394,22 +382,7 @@
         });
         $("#btn-search-codigo").click(function (e) {
             e.preventDefault();
-            url = $(this).attr('href');
-            tipo = BootstrapDialog.TYPE_WARNING;
-            BootstrapDialog.show({
-                type: 'success',
-                title: "Busqueda Articulo",
-                message: function (dialog) {
-                    var $message = $('<div></div>');
-                    var pageToLoad = dialog.getData('pageToLoad');
-                    $message.load(pageToLoad);
-
-                    return $message;
-                },
-                data: {
-                    'pageToLoad': url
-                }
-            });
+            ConsultoPrecio(e);
         });
     });
     function AgregoArticulo(e) {
@@ -432,13 +405,19 @@
                     muestroFpagos();
                     $("#codigobarra").addClass('focus');
                     $("#codigobarra").val('');
+                    $("#cantidad").val('');
                     $("#codigobarra").focus();
-                    $("#loading").fadeOut(100);
                 }
             );
         } else {
             alert('Hubo un ERROR en la estructora de envio de datos');
         }
+    }
+    function MuestroDescripcion(idAticulo) {
+        url =<?php echo "'" . base_url () . "stock/articulos/consultaJson'";?>;
+        $.post(url, {id: idAticulo}, function (data) {
+            $("#nombreArticulo").val(data.DESCRIPCION_ARTICULO);
+        });
     }
     function MuestroError(CB, error, descripcion) {
         alert(CB + " " + descripcion + " " + error);
@@ -472,54 +451,62 @@
     function ConsultoPrecio(e) {
         e.preventDefault();
         $("#codigobarra").removeClass('focus');
-        var dialogOpts = {
-            modal: true,
-            bgiframe: true,
-            autoOpen: false,
-            height: 300,
-            width: 500,
-            title: "Consulta de Precios",
-            draggable: true,
-            resizeable: true,
-            close: function () {
-//          $('#precio').dialog("destroy");
-                $("#codigobarra").addClass('focus');
-                $("#codigobarra").val('');
-                $("#codigobarra").focus();
+        url = $("#btn-search-codigo").attr('href');
+        busqueda = new BootstrapDialog({
+            title: "Busqueda Articulos",
+            message: $('<div></div>').load(url)
+        });
+        busqueda.setSize(BootstrapDialog.SIZE_WIDE);
+        busqueda.setType(BootstrapDialog.TYPE_WARNING);
+        busqueda.realize();
+        busqueda.open();
+        busqueda.onShown(function () {
+            $("#nombreArticuloTXT").focus();
+        });
+        busqueda.onHidden(function () {
+            if ($("#codigobarra").val().trim().length > 0) {
+                MuestroDescripcion($("#codigobarra").val());
+                $("#codigobarra").removeClass('focus');
+                $("#cantidad").addClass("focus");
+                $("#cantidad").focus();
             }
-        };
-        $("#precio").dialog(dialogOpts);   //end dialog
-        $("#precio").load($("#paginaPrecio").val(), [], function () {
-                $("#precio").dialog("open");
-            }
-        );
+        });
     }
+    function ConsultoCliente(e) {
+        e.preventDefault();
+        $("#codigobarra").removeClass('focus');
+        url = "http://192.168.10.10:8080/cuenta/consultaPopUp";
+        //url = $("#F6").attr('href');
+        busquedaCuenta = new BootstrapDialog({
+            title: "Busqueda Cuentas",
+            message: $('<div></div>').load(url),
+            data: {cuenta_id: ""}
+
+        });
+        busquedaCuenta.setSize(BootstrapDialog.SIZE_WIDE);
+        busquedaCuenta.setType(BootstrapDialog.TYPE_WARNING);
+        busquedaCuenta.realize();
+        busquedaCuenta.open();
+        busquedaCuenta.onShown(function () {
+            $("#nombreCuentaTXT").focus();
+        });
+        busquedaCuenta.onHidden(function (data) {
+            if (cuenta_id != "") {
+                url = <?php echo "'" . base_url () . "pos/presupuestos/cambioCuenta/$tmpfacencab_id/'"?>;
+                url += cuenta_id;
+                //$.post(url);
+                location.replace(url);
+            }
+            $("#codigobarra").addClass('focus');
+            $("#codigobarra").focus();
+        });
+    }
+
     function CanceloComprobante() {
         id_temporal = $("#tmpfacencab_id").val();
         pagina = $("#paginaCancelo").val();
         $.post(pagina, {tmpfacencab_id: id_temporal}, function () {
             location.reload();
-        });
-    }
-    function CambioCliente() {
-        $("#cliente").modal({keyboard: true});
-        $("#cliente").modal('show');
-        $("#cliente").on('shown.bs.modal', function () {
-            $("#cuentaTXT").focus();
-        });
-        $("#cliente").on('hide.bs.modal', function () {
-            $("#cuentaTXT").val('');
-            $("#datosClientes > tbody").html('');
-        });
-        $("#cuentaTXT").bind('keyup', function (e) {
-            var code = e.keyCode;
-            if (( code < 90 && code > 57 ) || code === 13 || code === 8) {
-                envioFormCliente();
-            }
-        });
-        $("#consultaCuenta").submit(function (e) {
-            e.preventDefault();
-            envioFormCliente();
         });
     }
     function CambioCondicion(accion) {
@@ -529,7 +516,7 @@
         $("#fpago").modal({keyboard: true});
         $("#fpago").modal('show');
         $("#fpago").on('shown.bs.modal', function () {
-            if (accin = 'cambio') {
+            if (accion = 'cambio') {
                 $("#montoTXT").val(1000);
                 $("#montoTXT").hide();
             } else {
@@ -586,8 +573,8 @@
                     if (dato.fpagos_id == 9) {
                         label = 'alert-danger';
                     } else {
-                        label = 'alert-warning';
-                    }
+                }
+                    label = 'alert-warning';
                 }
                 linea = " <div class='alert " + label + " ' role='alert' >";
                 linea += "<span class='fpagoNombre'>" + dato.pagoNombre + "</span>";
@@ -621,47 +608,6 @@
                 $("#getFpagos").append(linea);
             });
         });
-    }
-    function envioFormCliente() {
-        cuenta = $("#cuentaTXT").val().trim();
-        filtro = $("#filtro").val();
-        pagina = $("#consultaCuenta").attr('action');
-        if (cuenta.length > 0) {
-            $.ajax({
-                url: pagina,
-                contentType: "application/x-www-form-urlencoded",
-                global: false,
-                type: "POST",
-                data: ({
-                    cuentaTXT: cuenta,
-                    filtro: filtro
-                }),
-                dataType: "json",
-                async: true,
-                success: function (msg) {
-                    muestroClientes(msg.cuentas);
-                }
-            }).responseText;
-        }
-    }
-    function muestroClientes(data) {
-        $("#datosClientes > tbody").html('');
-        $.each(data, function (key, cuenta) {
-            url = <?php echo "'" . base_url () . "pos/presupuestos/cambioCuenta/$tmpfacencab_id/'"?>;
-            linea = "<tr><td>" + cuenta.id + "</td>";
-            linea += "<td>" + cuenta.nombre + "</td>";
-            linea += "<td>" + cuenta.cuit + "</td>";
-            if (cuenta.ctacte == 1) {
-                clase = 'btn btn-danger';
-                label = 'Ctacte';
-            } else {
-                clase = 'btn btn-success';
-                label = 'Contado';
-            }
-            linea += "<td><a href='" + url + cuenta.id + "' class='" + clase + " btnCli' id='btn_" + cuenta.id + "'><span class='fa fa-check-circle-o'></span> " + label + "</a></td>";
-            linea += "</tr>";
-            $("#datosClientes > tbody").append(linea);
-        })
     }
     function validoDatosArticulo() {
         if ($('#codigobarra').val().indexOf('*') > -1) {

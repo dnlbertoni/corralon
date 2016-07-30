@@ -55,7 +55,7 @@ class Cuenta_model extends MY_Model
     function ListadoFiltradoNombre($valor, $tipo = 0)
     {
         //$this->db->_reset_select();
-        $this->db->select('id, nombre, cuit, letra, ctacte');
+        $this->db->select ( 'id, nombre, cuit, letra, ctacte, tipo' );
         $search = '%' . $valor . '%';
         $this->db->from($this->getTable());
         $this->db->like('nombre', $valor);
