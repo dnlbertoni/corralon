@@ -15,6 +15,7 @@
  * @property Fpagos_model $Fpagos_model
  * @property Ctactemovim_model $Ctactemovim_model
  * @property Presuencab_model $Presuencab_model
+ * @property Vendedores_model $Vendedores_model
  */
 class Presupuestos extends Admin_Controller {
     var $tipcom;

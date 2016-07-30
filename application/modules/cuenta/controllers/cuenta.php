@@ -149,6 +149,7 @@ class Cuenta extends Admin_Controller {
 
     function searchAjaxDo()
     {
+        $this->output->enable_profiler ( false );
         $valor = strtoupper($this->input->post('nombreTXT'));
         if (is_numeric($valor)) {
             $valor = intval($valor);
@@ -167,7 +168,36 @@ class Cuenta extends Admin_Controller {
         $data['targetCuenta'] = sprintf("'%sindex.php/cuenta/agregar/ajax'", base_url());
         //$this->load->view('cuenta/listadoAjax', $data);
         $jsonString = json_encode($data);
-        header('Content-Type: application/json');
+        //header('Content-Type: application/json');
+        echo $jsonString;
+    }
+
+    function consultaPopUp () {
+        $this->output->enable_profiler ( false );
+        $this->load->view ( 'cuenta/busquedaCuenta' );
+    }
+
+    function consultaJson () {
+        $this->output->enable_profiler ( false );
+        $valor = strtoupper ( $this->input->post ( 'valor' ) );
+        if ( is_numeric ( $valor ) ) {
+            $valor = intval ( $valor );
+            $cuentas = $this->Cuenta_model->getById ( $valor );
+            $data['valor'] = $valor;
+            $data['byId'] = true;
+        } else {
+            $valor = strtoupper ( trim ( $valor ) );
+            $cuentas = $this->Cuenta_model->ListadoFiltradoNombre ( $valor );
+            $data['valor'] = $valor;
+            $data['byId'] = false;
+        }
+        $data['vacio'] = ( $cuentas ) ? false : true;
+        $data['cuentas'] = $cuentas;
+        $data['target'] = $this->input->post ( 'destino' );
+        $data['targetCuenta'] = sprintf ( "'%sindex.php/cuenta/agregar/ajax'", base_url () );
+        //$this->load->view('cuenta/listadoAjax', $data);
+        $jsonString = json_encode ( $data );
+        header ( 'Content-Type: application/json' );
         echo $jsonString;
     }
 

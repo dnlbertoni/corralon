@@ -190,8 +190,21 @@ class Articulos extends Admin_Controller {
         echo json_encode ( array ( 'estado' => 'Procesado' ) );
     }
 
+    function busquedaAjax () {
+        $this->output->enable_profiler ( false );
+        $this->load->view ( 'pos/presupuestos/busquedaArticulo' );
+    }
     function searchAjax () {
-        $this->input->post ( 'valor' );
+        $this->output->enable_profiler ( false );
+        $resultados = $this->Articulos_model->getBusquedaAjax ( $this->input->post ( 'valor' ) );
+        echo json_encode ( $resultados );
+    }
 
+    function consultaJson () {
+        $this->output->enable_profiler ( false );
+        $id = $this->input->post ( 'id' );
+        $articulo = $this->Articulos_model->getById ( $id );
+        header ( 'Content-Type: application/json' );
+        echo json_encode ( $articulo );
     }
 }

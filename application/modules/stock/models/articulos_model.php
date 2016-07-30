@@ -82,6 +82,26 @@ class Articulos_model extends My_Model {
         $this->db->update($this->getTable());
         return true;
     }
+
+    public function getBusquedaAjax ( $valor ) {
+        //$valor = "%" . $valor ."%";
+        $this->db->select ( 'art.ID_ARTICULO as id' );
+        $this->db->select ( 'art.DESCRIPCION_ARTICULO as nombre' );
+        $this->db->select ( 'sub.DESCRIPCION_SUBRUBRO as subrubro' );
+        $this->db->select ( 'marca.DETALLE_SUBMARCA as submarca' );
+        $this->db->select ( 'art.PRECIO_ARTICULO as precio' );
+        $this->db->from ( $this->getTable () . ' as art' );
+        $this->db->join ( 'stk_subrubros as sub', 'sub.ID_SUBRUBRO=art.ID_SUBRUBRO', 'inner' );
+        $this->db->join ( 'stk_submarcas as marca', 'marca.ID_SUBMARCA=art.ID_SUBMARCA', 'inner' );
+        $this->db->like ( 'art.DESCRIPCION_ARTICULO', $valor );
+        $this->db->or_like ( 'sub.DESCRIPCION_SUBRUBRO', $valor );
+        $this->db->or_like ( 'marca.DETALLE_SUBMARCA', $valor );
+        $this->db->order_by ( 'subrubro' );
+        $this->db->order_by ( 'submarca' );
+        $this->db->order_by ( 'nombre' );
+        //echo $this->db->_compile_select();
+        return $this->db->get ()->result ();
+    }
 }
 
 /* End of file articulos_model.php */

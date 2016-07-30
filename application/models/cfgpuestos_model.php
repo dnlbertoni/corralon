@@ -26,9 +26,9 @@ class Cfgpuestos_model extends MY_Model
         $this->db->from($this->getTable());
         $this->db->where('ip', $ip);
         $r = $this->db->get ();
-        switch ( count ( $r ) ) {
+        switch ( $r->num_rows ) {
             case 0:
-                return PUESTO_DEFAULT;
+                return $this->getDefault ( 'puesto_cf' );
                 break;
             case 1:
                 return $r->row ()->puesto;
@@ -44,9 +44,9 @@ class Cfgpuestos_model extends MY_Model
         $this->db->from ( $this->getTable () );
         $this->db->where ( 'ip', $ip );
         $r = $this->db->get ();
-        switch ( count ( $r ) ) {
+        switch ( $r->num_rows ) {
             case 0:
-                return false;
+                return $this->getDefault ( 'puesto_cnf' );
                 break;
             case 1:
                 return $r->row ()->puesto;
@@ -62,9 +62,9 @@ class Cfgpuestos_model extends MY_Model
         $this->db->from ( $this->getTable () );
         $this->db->where ( 'ip', $ip );
         $r = $this->db->get ();
-        switch ( count ( $r ) ) {
+        switch ( $r->num_rows ) {
             case 0:
-                return false;
+                return $this->getDefault ( 'puerto_cf' );
                 break;
             case 1:
                 return $r->row ()->puesto;
@@ -80,9 +80,9 @@ class Cfgpuestos_model extends MY_Model
         $this->db->from ( $this->getTable () );
         $this->db->where ( 'ip', $ip );
         $r = $this->db->get ();
-        switch ( count ( $r ) ) {
+        switch ( $r->num_rows ) {
             case 0:
-                return 'laser';
+                return $this->getDefault ( 'impresora' );
                 break;
             case 1:
                 return $r->row ()->impresora;
@@ -91,6 +91,13 @@ class Cfgpuestos_model extends MY_Model
                 return $r->result ();
                 break;
         }
+    }
+
+    private function getDefault ( $campo ) {
+        $this->db->select ( $campo . ' as puesto' );
+        $this->db->from ( $this->getTable () );
+        $this->db->where ( 'ip', '0.0.0.0' );
+        return $this->db->get ()->row ()->puesto;
     }
 
 }

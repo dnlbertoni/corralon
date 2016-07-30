@@ -37,4 +37,5 @@ class Articulos_model extends MY_Model
         $this->db->insert('stk_articulos_tmp');
         return $this->db->insert_id();
     }
+
 }
