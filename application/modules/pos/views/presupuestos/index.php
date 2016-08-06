@@ -475,7 +475,7 @@
     function ConsultoCliente(e) {
         e.preventDefault();
         $("#codigobarra").removeClass('focus');
-        url = "http://192.168.10.10:8080/cuenta/consultaPopUp";
+        url = <?php echo "'" . base_url () . "cuenta/consultaPopUp'"?>;
         //url = $("#F6").attr('href');
         busquedaCuenta = new BootstrapDialog({
             title: "Busqueda Cuentas",
@@ -491,17 +491,18 @@
             $("#nombreCuentaTXT").focus();
         });
         busquedaCuenta.onHidden(function (data) {
-            if (cuenta_id != "") {
-                url = <?php echo "'" . base_url () . "pos/presupuestos/cambioCuenta/$tmpfacencab_id/'"?>;
-                url += cuenta_id;
-                //$.post(url);
-                location.replace(url);
+            if (typeof cuenta_id != 'undefined') {
+                if (cuenta_id != "") {
+                    url = <?php echo "'" . base_url () . "pos/presupuestos/cambioCuenta/$tmpfacencab_id/'"?>;
+                    url += cuenta_id;
+                    //$.post(url);
+                    location.replace(url);
+                }
             }
             $("#codigobarra").addClass('focus');
             $("#codigobarra").focus();
         });
     }
-
     function CanceloComprobante() {
         id_temporal = $("#tmpfacencab_id").val();
         pagina = $("#paginaCancelo").val();

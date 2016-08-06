@@ -15,17 +15,39 @@ class Presuencab_model extends MY_Model {
         $this->setTable ( 'fac_presuencab' );
     }
 
-    function getPendientes () {
+    function getPendientes ( $fecha ) {
         $this->db->select ( "fac_presuencab.id" );
         $this->db->select ( "fecha" );
-        $this->db->select ( "vendedor_id as vendedor" );
+        $this->db->select ( "v.nombre as vendedor" );
         $this->db->select ( "CONCAT(puesto,'-',numero) as comprobante" );
         $this->db->select ( "cuenta.nombre as cliente" );
         $this->db->select ( "importe" );
         //$this->db->select("vendedor");
         $this->db->from ( $this->getTable () );
         $this->db->join ( "cuenta", "cuenta.id=cuenta_id", "inner" );
+        $this->db->join ( "cfg_vendedores as v", "v.id=vendedor_id", "inner" );
         $this->db->where ( 'fac_presuencab.estado', 'P' );
+        if ( $fecha ) {
+            $this->db->where ( 'fac_presuencab.fecha <=', $fecha );
+        }
+        return $this->db->get ()->result ();
+    }
+
+    function getFacturados ( $fecha = false ) {
+        $this->db->select ( "fac_presuencab.id" );
+        $this->db->select ( "fecha" );
+        $this->db->select ( "v.nombre as vendedor" );
+        $this->db->select ( "CONCAT(puesto,'-',numero) as comprobante" );
+        $this->db->select ( "cuenta.nombre as cliente" );
+        $this->db->select ( "importe" );
+        //$this->db->select("vendedor");
+        $this->db->from ( $this->getTable () );
+        $this->db->join ( "cuenta", "cuenta.id=cuenta_id", "inner" );
+        $this->db->join ( "cfg_vendedores as v", "v.id=vendedor_id", "inner" );
+        $this->db->where ( 'fac_presuencab.estado', 'F' );
+        if ( $fecha ) {
+            $this->db->where ( 'fac_presuencab.fecha', $fecha );
+        }
         return $this->db->get ()->result ();
     }
 
@@ -102,4 +124,12 @@ class Presuencab_model extends MY_Model {
         $this->db->where ( 'id', $idPresu );
         return $this->db->update ( $this->getTable () );
     }
+
+    function setAnulado ( $idPresu ) {
+        $this->db->set ( 'facencab_id', 'NULL' );
+        $this->db->set ( 'estado', 'A' );
+        $this->db->where ( 'id', $idPresu );
+        return $this->db->update ( $this->getTable () );
+    }
+
 }

@@ -13,4 +13,10 @@ class Version extends MY_Controller
         $data['titulo'] = "";
         Template::render();
     }
+
+    function add () {
+        $fecha = new DateTime();
+        $ip = $this->input->ip_address ();
+        Template::render ();
+    }
 }
