@@ -10,7 +10,7 @@ class Facencab_model extends MY_Model {
         $this->setTable ( "fac_facencab" );
     }
 
-    function graboComprobante ( $datosEncab, $datosMovim ) {
+    function graboComprobante ( $datosEncab, $datosMovim, $caja_id = 0 ) {
         $this->db->trans_begin ();
         //grabo facencab
         $this->db->set ( 'fecha', 'NOW()', FALSE );
@@ -31,6 +31,12 @@ class Facencab_model extends MY_Model {
         }
         $this->db->where ( 'puesto_tmpmov', $puesto );
         $this->db->delete ( $this->tablaTmp );
+
+        /**
+         * grabo movimiento de caja
+         * hay que recorrer el tmp_fpagos y por cada uno hay que generar un registo en el cajamovim
+         */
+
         if ( $this->db->trans_status () === FALSE ) {
             $this->db->trans_rollback ();
             return false;
