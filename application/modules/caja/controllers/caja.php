@@ -106,8 +106,16 @@ class Caja extends Admin_Controller {
         };
     }
 
+    function anular ( $idEncab ) {
+        $this->Presuencab_model->setAnulado ( $idEncab );
+        echo json_encode ( array ( "mensaje" => "OK" ) );
+    }
+
     function facturar () {
-        $data['presupuestos'] = $this->Presuencab_model->getPendientes ();
+        $fecha = new DateTime();
+        $data['presupuestos'] = $this->Presuencab_model->getPendientes ( $fecha->format ( "Y-m-d" ) );
+        $data['facturados'] = $this->Presuencab_model->getFacturados ( $fecha->format ( "Y-m-d" ) );
+        $data['fecha'] = $fecha;
         Template::set ( $data );
         Template::render ();
     }

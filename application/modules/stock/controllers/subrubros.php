@@ -23,7 +23,7 @@ class Subrubros extends Admin_Controller {
         $config['total_rows'] = $this->Subrubros_model->getNumeroFilas ();//calcula el número de filas
         $config["uri_segment"] = 3;//el segmento de la paginación
         $this->pagination->initialize ( $config ); //inicializamos la paginación
-        $subrubros = $this->Subrubros_model->getAll ( false, $this->pagination->per_page, $this->uri->segment ( 3 ) );
+        $subrubros = $this->Subrubros_model->getAllConArticulos ( false, $this->pagination->per_page, $this->uri->segment ( 3 ) );
         Template::set ( 'subrubros', $subrubros );
         Template::set ( 'paginacion', $this->pagination->create_links () );
         Template::render ();
@@ -71,7 +71,7 @@ class Subrubros extends Admin_Controller {
         }
         $id = $_POST['ID_SUBRUBRO'];
         $this->Subrubros_model->update ( $datos, $id );
-        //Template::redirect('stock/subrubros');
+        Template::redirect ( 'stock/subrubros' );
     }
 
 

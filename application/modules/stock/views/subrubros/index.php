@@ -26,8 +26,8 @@
                         <tr>
                             <th>#</th>
                             <th>Rubro</th>
-                            <th>Descripcion</th>
-                            <th>CantxBultos</th>
+                            <th>Descripcion Subrubro</th>
+                            <th>Art. asociados</th>
                             <th>&nbsp;</th>
                             <th>&nbsp;</th>
                         </tr>
@@ -36,11 +36,11 @@
                         <?php foreach ( $subrubros as $rubro ): ?>
                             <tr>
                                 <td><?= $rubro->ID_SUBRUBRO; ?></td>
-                                <td><?= $rubro->ID_RUBRO; ?></td>
+                                <td><?= $rubro->rubro; ?></td>
                                 <td><?= $rubro->DESCRIPCION_SUBRUBRO; ?></td>
-                                <td><?= $rubro->CANTXBULTO_SUBRUBRO; ?></td>
+                                <td><?= $rubro->articulos; ?></td>
                                 <td><span
-                                        class="label label-<?= ( $rubro->ESTADO_SUBRUBRO == 1 ) ? "success" : "danger" ?>"><?= ( $rubro->ESTADO_SUBRUBRO == 1 ) ? "Activo" : "Suspendido"; ?></span>
+                                        class="label label-<?= ( $rubro->estado == 1 ) ? "success" : "danger" ?>"><?= ( $rubro->estado == 1 ) ? "Activo" : "Suspendido"; ?></span>
                                 </td>
                                 <td>
                                     <?php echo anchor ( 'stock/subrubros/edit/' . $rubro->ID_SUBRUBRO, '<i class="fa fa-pencil-square-o"></i>', ' class="btn btn-info btn-xs"' ) ?>
