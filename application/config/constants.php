@@ -55,7 +55,7 @@ switch (ENVIRONMENT) {
         break;
 }
 define('TMP', BASEPATH . '../assets/tmp/');
-define ( 'PUESTO_DEFAULT', $puesto );
+define('PUESTO_DEFAULT', $puesto);
 define('PRREMITO', 'laser03');
 define('PRCARTEL', 'laser03');
 define('ABSOLUT_PATH', $rutaUniversal);
