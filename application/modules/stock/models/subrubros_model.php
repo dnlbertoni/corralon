@@ -59,7 +59,7 @@ class Subrubros_model extends MY_Model
         //$this->db->from('stk_articulos');
         $this->db->join ( "stk_subrubros", "stk_subrubros.id_subrubro = stk_articulos.id_subrubro", "right" );
         $this->db->join ( "stk_rubros", "stk_subrubros.id_rubro = stk_rubros.id_rubro", "right" );
-        $this->db->group_by('stk_articulos.id_subrubro');
+        $this->db->group_by('stk_subrubros.id_subrubro');
         if ( $orden == "articulos" ) {
             $this->db->order_by ( $orden, 'DESC' );
         } else {

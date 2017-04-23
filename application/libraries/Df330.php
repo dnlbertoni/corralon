@@ -1,7 +1,8 @@
 <?php
 
 class Df330 extends hasar {
-    function DatosCliente ( $nombre, $doc, $respiva, $tipdoc, $direccion = "" ) {//Datos del cliente
+    function DatosCliente($nombre, $doc, $respiva, $tipdoc, $direccion = "")
+    {//Datos del cliente
         // nombre = nombre cliente | $doc = cuit o dni o 0 si no es nada |
         // $respiva = "I" si es incripto  "C" si es consumidor final "E" si es excento "M" monotributo
 

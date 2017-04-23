@@ -332,18 +332,18 @@ class Hasar {
     {
         $campos = explode("|", $linea);
         //print_r($campos);
-        if ( count ( $campos ) > 3 ) {
-            $estado_impre = $this->StatusImpresora ( $campos[1] );
-            $estado_fiscal = $this->StatusFiscal ( $campos[2] );
+        if (count($campos) > 3) {
+            $estado_impre = $this->StatusImpresora($campos[1]);
+            $estado_fiscal = $this->StatusFiscal($campos[2]);
             // solo valido para 715 y 441
             //$dato[0]=$campos[3];
             $estado['estado'] = "OK";
             $estado['detalle'] = "Ninguno";
-            if ( $estado_impre['estado'] == "Error" ) {
+            if ($estado_impre['estado'] == "Error") {
                 $estado['estado'] = "Error Impresora";
                 $estado['detalle'] .= $estado_impre['detalle'];
             };
-            if ( $estado_fiscal['estado'] == "Error" ) {
+            if ($estado_fiscal['estado'] == "Error") {
                 $estado['estado'] = "Error Fiscal";
                 $estado['detalle'] .= $estado_fiscal['detalle'];
             };
@@ -357,7 +357,7 @@ class Hasar {
     function RespuestaTexto($linea)
     {
         $campos = explode("|", $linea);
-        $estado_impre = $this->StatusImpresora ( $campos[1] );
+        $estado_impre = $this->StatusImpresora($campos[1]);
         $estado_fiscal = $this->StatusFiscal($campos[2]);
         $estado['estado'] = "OK";
         $estado['detalle'] = "Ninguno";
@@ -378,18 +378,18 @@ class Hasar {
         $estado_fiscal = $this->StatusFiscal ( $campos[2] );
         $estado['estado'] = "OK";
         $estado['detalle'] = "Ninguno";
-        if ( $estado_impre['estado'] == "Error" ) {
+        if ($estado_impre['estado'] == "Error") {
             $estado['estado'] = "Error Impresora";
             $estado['detalle'] .= $estado_impre['detalle'];
         };
-        if ( $estado_fiscal['estado'] == "Error" ) {
+        if ($estado_fiscal['estado'] == "Error") {
             $estado['estado'] = "Error Fiscal";
             $estado['detalle'] .= $estado_fiscal['detalle'];
         };
         return $estado;
     }
 
-    function RespuestaCliente ( $linea )
+    function RespuestaCliente($linea)
     {
         $campos = explode("|", $linea);
         $estado_impre = $this->StatusImpresora($campos[1]);
