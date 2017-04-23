@@ -207,4 +207,13 @@ class Articulos extends Admin_Controller {
         header ( 'Content-Type: application/json' );
         echo json_encode ( $articulo );
     }
+
+    function editar($id)
+    {
+        Template::set('articulo', $this->Articulos_model->getById($id));
+        Template::set('accion', 'stock/articulos/editDo');
+        Template::set_view('stock/articulos/edit');
+        Template::render();
+    }
+
 }

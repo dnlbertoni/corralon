@@ -42,7 +42,7 @@
                                         class="label label-<?= ( $articulo->ESTADO_ARTICULO == 1 ) ? "success" : "danger" ?>"><?= ( $articulo->ESTADO_ARTICULO == 1 ) ? "Activo" : "Suspendido"; ?></span>
                                 </td>
                                 <td>
-                                    <button class="btn btn-info btn-xs"><i class="fa fa-pencil-square-o"></i></button>
+                                    <?php echo anchor('stock/articulos/editar/' . $articulo->ID_ARTICULO, '<i class="fa fa-pencil-square-o"></i>', 'class="btn btn-xs btn-info"') ?>
                                     <button class="btn btn-warning btn-xs"><i class="fa fa-ban"></i></button>
                                     <button class="btn btn-danger btn-xs" aria-describedby="Borrar"><i
                                             class="fa fa-trash-o"></i></button>

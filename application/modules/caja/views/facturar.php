@@ -13,7 +13,7 @@
     <div class="row">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <h2>Prespuestos Pendientes para Facturar al dia <?= $fecha->format ( "d/m/Y" ); ?></h2>
+                <h2>Prespuestos Pendientes para Facturar al dia <?= $fecha->format("d/m/Y"); ?></h2>
             </div>
             <div class="panel-body">
                 <div class="table-responsive">
@@ -38,7 +38,7 @@
                                 <td><?= $p->importe ?></td>
                                 <td>
                                     <?php echo anchor ( 'caja/imprimir/controlador/' . $p->id, '<i class="fa fa-print"></i> Facturar', 'class="btn btn-xs btn-success btn-cf"' ) ?>
-                                    <?php echo anchor ( 'caja/imprimir/pdf/' . $p->id, '<i class="fa fa-file-pdf-o"></i>', 'class="btn btn-xs btn-info btn-pdf"' ) ?>
+                                    <?php echo anchor('caja/imprimir/pdf/' . $p->id, '<i class="fa fa-file-pdf-o"></i>', 'class="btn btn-xs btn-info btn-pdf" target="_blank"') ?>
                                     <?php echo anchor ( 'caja/anular/' . $p->id, '<i class="fa fa-ban"></i>', 'class="btn btn-xs btn-danger btn-anular"' ) ?>
                                 </td>
                             </tr>
@@ -54,7 +54,7 @@
         <div class="row">
             <div class="panel panel-success">
                 <div class="panel-heading">
-                    <h2>Prespuestos Facturados del dia <?= $fecha->format ( "d/m/Y" ); ?></h2>
+                    <h2>Prespuestos Facturados del dia <?= $fecha->format("d/m/Y"); ?></h2>
                 </div>
                 <div class="panel-body">
                     <div class="table-responsive">
@@ -103,6 +103,7 @@
                 message: $('<div></div>').load(url)
             });
         });
+        /*
         $(".btn-pdf").click(function (e) {
             e.preventDefault();
             url = $(this).attr('href');
@@ -121,6 +122,9 @@
                     'pageToLoad': url
                 }
             });
+         });*/
+        $(".btn-pdf").click(function () {
+            location.reload();
         });
         $(".btn-anular").click(function (e) {
             url = $(this).attr('href');

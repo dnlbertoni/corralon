@@ -365,12 +365,12 @@
         $("#F12").click(function (e) {
             e.preventDefault();
             e.stopPropagation();
+            $("#cartelImpresion").modal({keyboard: true});
+            $("#cartelImpresion").modal('show');
             $("#cartelImpresion").on("show.bs.modal", function () {
                 $(this).find(".modal-dialog").css("height", 300);
                 $(this).find(".modal-dialog").css("width", 300);
             });
-            $("#cartelImpresion").modal({keyboard: true});
-            $("#cartelImpresion").modal('show');
         });
         $("#addCart").submit(function (e) {
             e.preventDefault();

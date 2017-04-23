@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-require "Fpdf.php";
+require_once "Fpdf.php";
 
 class Fpdfauto extends FPDF
 {
