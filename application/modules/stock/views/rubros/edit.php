@@ -27,7 +27,8 @@
             <br/>
 
             <div>
-                <?php echo form_checkbox ( 'ESTADO_RUBRO', $rubro->ESTADO_RUBRO, ( $rubro->ESTADO_RUBRO == 1 ) ? "checked" : "" ) ?>
+                <input type="hidden" value="0" name="ESTADO_RUBRO"/>
+                <?php echo form_checkbox ( 'ESTADO_RUBRO', 1, ( $rubro->ESTADO_RUBRO == 1 ) ? true : false, 'id="estadoID"' ) ?>
             </div>
             <br/>
             <div>
@@ -41,12 +42,13 @@
 
 <script>
     $(document).ready(function () {
-        $("[name='ESTADO_RUBRO']").bootstrapSwitch({
+        $("#estadoID").bootstrapSwitch({
             onText: "Si",
             offText: "No",
             labelText: "Activo",
             onColor: "success",
-            offColor: "danger"
-        })
+            offColor: "danger",
+            state:<?php  echo ( $subrubro->ESTADO_RUBRO == 1 ) ? "true" : "false"?>
+        });
     })
 </script>

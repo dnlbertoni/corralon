@@ -15,7 +15,6 @@ class Rubros extends Admin_Controller {
         $this->load->model ( 'Rubros_model' );
         $this->load->model ( 'Subrubros_model' );
     }
-
     function index () {
         $this->load->library ( 'pagination' ); //Cargamos la librería de paginación
         $this->load->config ( 'pagination' );
@@ -28,7 +27,6 @@ class Rubros extends Admin_Controller {
         Template::set ( 'paginacion', $this->pagination->create_links () );
         Template::render ();
     }
-
     function nuevo () {
         Template::set ( 'accion', 'stock/rubros/nuevoDo' );
         $unidades = array ( 'UNI' => 'UNI', 'KG' => 'KG', 'MTS' => 'MTS' );
@@ -37,7 +35,6 @@ class Rubros extends Admin_Controller {
         Template::set_view ( 'stock/rubros/edit' );
         Template::render ();
     }
-
     function nuevoDo () {
         foreach ( $_POST as $key => $value ) {
             if ( $key != "ID_RUBRO" ) {
@@ -50,7 +47,6 @@ class Rubros extends Admin_Controller {
         $this->Rubros_model->add ( $datos );
         Template::redirect ( 'stock/rubros' );
     }
-
     function edit ( $id ) {
         Template::set ( 'accion', 'stock/rubros/editDo' );
         $unidades = array ( 'UNI' => 'UNI', 'KG' => 'KG', 'MTS' => 'MTS' );
@@ -59,7 +55,6 @@ class Rubros extends Admin_Controller {
         Template::set_view ( 'stock/rubros/edit' );
         Template::render ();
     }
-
     function editDo () {
         foreach ( $_POST as $key => $value ) {
             if ( $key != "ID_RUBRO" ) {

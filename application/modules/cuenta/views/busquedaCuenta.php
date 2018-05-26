@@ -34,6 +34,9 @@
 
 <script>
     $(document).ready(function () {
+        $("#consultaCuenta").submit(function (e) {
+            e.preventDefault();
+        });
         $("#nombreCuentaTXT").focus();
         $("#nombreCuentaTXT").bind('keyup', function (e) {
             var code = e.keyCode;
@@ -48,7 +51,7 @@
     function envioForm() {
         cuenta = $("#nombreCuentaTXT").val().trim();
         pagina = $("#consultaCuenta").attr('action');
-        if (cuenta.length > 1) {
+        if (cuenta.length > -1) {
             $.post({
                 url: pagina,
                 contentType: "application/x-www-form-urlencoded",
@@ -63,6 +66,8 @@
                     muestroCuentas(data);
                 }
             });
+        }else{
+            alert('muchos clientes');
         }
     }
     function muestroCuentas(data) {

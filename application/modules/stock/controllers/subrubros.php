@@ -98,4 +98,16 @@ class Subrubros extends Admin_Controller {
         $data['articulos'] = $this->Subrubros_model->getArticulosFromSubrubro ( $id );
         $this->load->view ( 'subrubros/listadoArticulos', $data );
     }
+
+    function combosubrubros(){
+        $id = $this->input->post("id");
+        $rpta = '';
+        $subrubros = $this->Subrubros_model->getFromRubro($id);
+        $cant = 0;
+        foreach ($subrubros AS $sub) {
+            $rpta .= sprintf("<option value='%s'%s>%s</option>", $sub->id, ($cant > 0) ? '' : "selected='selected'", $sub->nombre);
+            $cant++;
+        };
+        echo $rpta;
+    }
 }

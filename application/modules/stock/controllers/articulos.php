@@ -10,11 +10,13 @@
  * @property Cuenta_model $Cuenta_model
  * @property ProveedoresArticulos_model $ProveedoresArticulos_model
  * @property Subrubros_model $Subrubros_model
+ * @property Rubros_model $Rubros_model
  * @property Submarcas_model $Submarcas_model
+ * @property CI_Pagination $pagination*
  */
 class Articulos extends Admin_Controller {
 
-    function __construct () {
+    public function __construct () {
         parent::__construct ();
         $this->load->model ( 'Articulos_model' );
         $this->load->model ( 'Cuenta_model' );
@@ -22,7 +24,7 @@ class Articulos extends Admin_Controller {
         $this->load->model ( 'Submarcas_model' );
 
     }
-    function index () {
+    public function index () {
         $this->load->library ( 'pagination' ); //Cargamos la librería de paginación
         $this->load->config ( 'pagination' );
         $config['base_url'] = base_url () . 'stock/articulos/'; // parametro base de la aplicación, si tenemos un .htaccess nos evitamos el index.php
@@ -35,29 +37,97 @@ class Articulos extends Admin_Controller {
         Template::render ();
     }
 
-    function nuevo () {
-        Template::set ( 'articulo', $this->Articulos_model->getInicial () );
-        Template::set ( 'accion', 'stock/articulos/nuevoDo' );
+    public function nuevo () {
+        $this->load->model ( 'Rubros_model' );
+        $rubros = $this->Rubros_model->toDropDown('id_rubro','descripcion_rubro');
+        $subrubros = $this->Subrubros_model->toDropDown('id_subrubro','descripcion_subrubro');
+
+        $articulo = $this->Articulos_model->getInicial ();
+        $articulo->ID_SUBRUBRO=1;
+        $articulo->ESTADO_ARTICULO = ACTIVO;
+        $rubro = $this->Subrubros_model->getById($articulo->ID_SUBRUBRO);
+
+        $tasas = array(21=>"21%",10.5=>"10.50%");
+        Template::set('opcTasas',$tasas);
+        Template::set('selRubros',$rubros);
+        Template::set('selSubrubros',$subrubros);
+        Template::set('rubro',$rubro->ID_RUBRO);
+        Template::set ( 'articulo', $articulo );
+        Template::set ( 'accion', '/stock/articulos/nuevoDo' );
         Template::set_view ( 'stock/articulos/edit' );
         Template::render ();
     }
 
     function nuevoDo () {
         foreach ( $_POST as $key => $value ) {
-            if ( $key != "ID_ARTICULO" ) {
+            if ( ($key != "ID_ARTICULO") && ($key != "ID_RUBRO")) {
+                if(gettype($value)=="string"){
+                    $datos[$key] = strtoupper($value);
+                }else{
+                    $datos[$key] = $value;
+                }
+            }
+        }
+        if(!isset($datos['CODIGOBARRA_ARTICULO'])){
+            $datos['CODIGOBARRA_ARTICULO']=$datos['ID_ARTICULO'];
+        }
+        if(!isset($datos['ID_SUBMARCA'])){
+            $datos['ID_SUBMARCA']=1;
+        }
+        $idarticulo = $this->Articulos_model->add ( $datos );
+        $datos=array();
+        $datos['CODIGOBARRA_ARTICULO']=$idarticulo;
+        $this->Articulos_model->update( $datos, $idarticulo );
+        Template::redirect('stock/articulos');
+    }
+    function consultaJson () {
+        $this->output->enable_profiler ( false );
+        $id = $this->input->post ( 'id' );
+        $articulo = $this->Articulos_model->getById ( $id );
+        header ( 'Content-Type: application/json' );
+        echo json_encode ( $articulo );
+    }
+    function cambioPrecio(){
+        $articulo = $this->Articulos_model->actualizoPrecio($this->input->post('id'),$this->input->post('precio'));
+        Template::redirect("/stock/articulos");
+    }
+    function editar($id){
+        $this->load->model ( 'Rubros_model' );
+        $rubros = $this->Rubros_model->toDropDown('id_rubro','descripcion_rubro');
+        $subrubros = $this->Subrubros_model->toDropDown('id_subrubro','descripcion_subrubro');
+        $articulo = $this->Articulos_model->getById($id);
+        $rubro = $this->Subrubros_model->getById($articulo->ID_SUBRUBRO);
+        $tasas = array(21=>"21%",10.5=>"10.50%");
+        Template::set('opcTasas',$tasas);
+        Template::set('selRubros',$rubros);
+        Template::set('selSubrubros',$subrubros);
+        Template::set('rubro',$rubro->ID_RUBRO);
+        Template::set ( 'articulo', $articulo );
+        Template::set ( 'accion', '/stock/articulos/editDo' );
+        Template::set_view ( 'stock/articulos/edit' );
+        Template::render ();
+    }
+    function editDo () {
+        foreach ( $_POST as $key => $value ) {
+            if ( ($key != "ID_ARTICULO") && ($key != "ID_RUBRO")) {
                 $datos[$key] = $value;
             }
         }
-        $this->Articulos_model->add ( $datos );
-        //Template::redirect('stock/aticulos');
+        $this->Articulos_model->update( $datos, $this->input->post('ID_ARTICULO') );
+        Template::redirect('stock/articulos');
     }
+    function borrar ($id) {
+        $this->Articulos_model->borrar($id );
+        Template::redirect('stock/articulos');
+    }
+
     function importar ( $tipo = "proveedor" ) {
         Template::set ( 'tipo', $tipo );
         Template::set ( 'proveedoresSel', $this->Cuenta_model->toDropDown ( 'id', 'nombre', 2 ) );
         Template::set_view ( 'stock/articulos/importar' );
         Template::render ();
     }
-    function do_importar () {
+    public function do_importar () {
         $this->output->enable_profiler ( false );
         $this->load->library ( 'PHPExcel' );
         $directorio = ( __DIR__ );
@@ -110,7 +180,7 @@ class Articulos extends Admin_Controller {
         header ( 'Content-Type: application/json' );
         echo json_encode ( $data[0] );
     }
-    function comparar () {
+    public function comparar () {
         $this->load->model ( "ProveedoresArticulos_model" );
         foreach ( $_POST as $key => $value ) {
             if ( $key != "idProveedor" ) {
@@ -135,10 +205,9 @@ class Articulos extends Admin_Controller {
         Template::set ( $data );
         Template::render ();
     }
-
-    function agregarDeLote () {
+    public function agregarDeLote () {
         $this->output->enable_profiler ( false );
-        $this->load->model ( 'ProveedoresArticulos_model' );
+        $this->load->model('ProveedoresArticulos_model');
         $datos = array ( 'DESCRIPCION_ARTICULO' => $this->input->get ( 'descripcion' ),
             'COSTO_ARTICULO' => $this->input->get ( 'costo' ),
             'MARKUP_ARTICULO' => $this->input->get ( 'markup' ),
@@ -163,7 +232,6 @@ class Articulos extends Admin_Controller {
         header ( 'Content-Type: application/json' );
         echo json_encode ( array ( 'estado' => 'Procesado' ) );
     }
-
     function modificarDeLote () {
         $datos = array (
             'COSTO_ARTICULO' => $this->input->get ( 'costo' ),
@@ -189,7 +257,6 @@ class Articulos extends Admin_Controller {
         header ( 'Content-Type: application/json' );
         echo json_encode ( array ( 'estado' => 'Procesado' ) );
     }
-
     function busquedaAjax () {
         $this->output->enable_profiler ( false );
         $this->load->view ( 'pos/presupuestos/busquedaArticulo' );
@@ -199,21 +266,4 @@ class Articulos extends Admin_Controller {
         $resultados = $this->Articulos_model->getBusquedaAjax ( $this->input->post ( 'valor' ) );
         echo json_encode ( $resultados );
     }
-
-    function consultaJson () {
-        $this->output->enable_profiler ( false );
-        $id = $this->input->post ( 'id' );
-        $articulo = $this->Articulos_model->getById ( $id );
-        header ( 'Content-Type: application/json' );
-        echo json_encode ( $articulo );
-    }
-
-    function editar($id)
-    {
-        Template::set('articulo', $this->Articulos_model->getById($id));
-        Template::set('accion', 'stock/articulos/editDo');
-        Template::set_view('stock/articulos/edit');
-        Template::render();
-    }
-
 }

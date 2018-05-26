@@ -58,6 +58,8 @@ $route['stock/rubros/'] = 'stock/rubros';
 $route['stock/subrubros/(:num)'] = 'stock/subrubros';
 $route['stock/subrubros/'] = 'stock/subrubros';
 
+$route['stock/articulos/(:num)'] = 'stock/articulos';
+$route['stock/articulos/'] = 'stock/articulos';
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

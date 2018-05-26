@@ -9,7 +9,7 @@
 
 <div class="section">
     <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-10">
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h4 class="panel-title ">Articulos</h4>
@@ -26,9 +26,10 @@
                         <thead>
                         <tr>
                             <th>#</th>
+                            <th>Rubro</th>
+                            <th>Subrubro</th>
                             <th>Descripcion</th>
-                            <th>Unidad</th>
-                            <th>&nbsp;</th>
+                            <th>Precio</th>
                             <th>&nbsp;</th>
                         </tr>
                         </thead>
@@ -36,16 +37,15 @@
                         <?php foreach ( $articulos as $articulo ): ?>
                             <tr>
                                 <td><?= $articulo->ID_ARTICULO; ?></td>
+                                <td><?= $articulo->DESCRIPCION_RUBRO; ?></td>
+                                <td><?= $articulo->DESCRIPCION_SUBRUBRO; ?></td>
                                 <td><?= $articulo->DESCRIPCION_ARTICULO; ?></td>
-                                <td></td>
-                                <td><span
-                                        class="label label-<?= ( $articulo->ESTADO_ARTICULO == 1 ) ? "success" : "danger" ?>"><?= ( $articulo->ESTADO_ARTICULO == 1 ) ? "Activo" : "Suspendido"; ?></span>
-                                </td>
+                                <td><?= $articulo->PRECIO_ARTICULO; ?></td>
                                 <td>
-                                    <?php echo anchor('stock/articulos/editar/' . $articulo->ID_ARTICULO, '<i class="fa fa-pencil-square-o"></i>', 'class="btn btn-xs btn-info"') ?>
-                                    <button class="btn btn-warning btn-xs"><i class="fa fa-ban"></i></button>
-                                    <button class="btn btn-danger btn-xs" aria-describedby="Borrar"><i
-                                            class="fa fa-trash-o"></i></button>
+                                    <span class="label label-<?= ( $articulo->ESTADO_ARTICULO == 1 ) ? "success" : "danger" ?>">
+                                        <?= ( $articulo->ESTADO_ARTICULO == 1 ) ? "Activo" : "Suspendido"; ?></span>
+                                    <?php echo anchor ( 'stock/articulos/editar/'.$articulo->ID_ARTICULO, '<i class="fa fa-pencil-square-o"></i>', 'class="btn btn-xs btn-info"' ) ?>
+                                    <?php echo anchor ( 'stock/articulos/borrar/'.$articulo->ID_ARTICULO, '<i class="fa fa-trash-o"></i>', 'class="btn btn-danger btn-xs" aria-describedby="Borrar"' ) ?>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -57,14 +57,14 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <div class="panel-title">Operaciones Masivas</div>
                 </div>
                 <div class="panel-body">
                     <div class="list-group">
-                        <?php echo anchor ( 'stock/articulos/importar', 'Lista de Precios Proveedor', 'class="list-group-item list-group-item-success"' ); ?>
+                        <?php echo anchor ( 'stock/articulos/importar', 'Lista de Precios', 'class="list-group-item list-group-item-success"' ); ?>
                     </div>
                 </div>
                 <div class="panel-footer"></div>

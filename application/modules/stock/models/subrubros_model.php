@@ -25,8 +25,7 @@ class Subrubros_model extends MY_Model
         return $this->toDropDown_avanzado($campoId, $campoNombre, $campoRelacion);
     }
 
-    function getFromRubro($id)
-    {
+    function getFromRubro($id){
         $this->db->select('id_subrubro as id');
         $this->db->select('descripcion_subrubro as nombre');
         $this->db->from($this->getTable());

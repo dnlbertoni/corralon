@@ -21,7 +21,7 @@ class Cuenta_model extends MY_Model
 
     function getIndex($tipo)
     {
-        $this->db->select('id, nombre, cuit');
+        $this->db->select('id, nombre, cuit, telefono, celular ');
         $this->db->select('if(tipo=1,"Clie","Prov") as tipo', false);
         $this->db->from($this->getTable());
         $this->db->order_by('nombre', 'asc');

@@ -33,6 +33,9 @@
 
 <script>
     $(document).ready(function () {
+        $("#consultaArticulo").submit(function (e) {
+            e.preventDefault();
+        })
         $("#nombreArticuloTXT").focus();
         $("#nombreArticuloTXT").bind('keyup', function (e) {
             var code = e.keyCode;
@@ -48,7 +51,7 @@
         articulo = $("#nombreArticuloTXT").val().trim();
         pagina = $("#consultaArticulo").attr('action');
         if (articulo.length > 1) {
-            $.post({
+            $.ajax({
                 url: pagina,
                 contentType: "application/x-www-form-urlencoded",
                 global: false,

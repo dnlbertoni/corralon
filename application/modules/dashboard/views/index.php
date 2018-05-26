@@ -8,6 +8,35 @@
     <!-- /.row -->
     <div class="row">
         <div class="col-lg-8">
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <i class="fa fa-bar-chart-o fa-fw"></i> Informacion de Reparto
+                    <div class="pull-right">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                                Actions
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu pull-right" role="menu">
+                                <li><a href="#">Action</a>
+                                </li>
+                                <li><a href="#">Another action</a>
+                                </li>
+                                <li><a href="#">Something else here</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li><a href="#">Separated link</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    defino que es parametrizable
+                </div>
+                <!-- /.panel-body -->
+            </div>
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <i class="fa fa-bar-chart-o fa-fw"></i> Informacion de Caja
@@ -99,7 +128,7 @@
                 <!-- /.panel-body -->
             </div>
             <!-- /.panel -->
-            <div class="chat-panel panel panel-default">
+            <div class="chat-panel panel panel-success">
                 <div class="panel-heading">
                     <i class="fa fa-comments fa-fw"></i>
                     Seguridad y Permisos
@@ -238,21 +267,9 @@
     </div>
     <!-- /.row -->
 </div>
-<!-- /#page-wrapper -->
-
-</div>
-<!-- /#wrapper -->
-<!-- Modal Remoto -->
-<div class="modal fade" id="remoteModal" tabindex="-1" role="dialog" aria-labelledby="remoteModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content"></div>
-    </div>
-</div>
 
 <script>
-    $(document).ready(function () {
-// Empty modal content when modal is closed
+    $(document).ready(function () { // Empty modal content when modal is closed
         $('#remoteModal').on('hidden.bs.modal', function () {
             $(this).removeData('bs.modal');
         });

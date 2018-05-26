@@ -83,6 +83,7 @@ class MY_Model extends CI_Model
                     break;
 
                 case 'float':
+                case 'decimal':
                     $value = (float)$value;
                     break;
 

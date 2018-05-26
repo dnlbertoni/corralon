@@ -1,7 +1,6 @@
 <?php
 
-class Iva extends MY_Controller
-{
+class Iva extends Admin_Controller{
     private $Printer;
 
     function __construct()

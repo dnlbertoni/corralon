@@ -5,30 +5,34 @@
             <h3 class="modal-title"><?php echo ( isset( $ocultos ) ) ? 'Cuenta Nro: ' . $ocultos['id'] : 'Crear Cuenta' ?></h3>
         </div>
         <div class="modal-body">
-            <?php echo form_open ( $accion, array ( 'id' => 'cuentaAdd', 'name' => 'cuentaAdd' ), ( isset( $ocultos ) ) ? $ocultos : '' ); ?>
-            <div id="datos">Razon Social:
+            <?php echo form_open ( $accion, array ( 'id' => 'cuentaAdd', 'name' => 'cuentaAdd' ), ( isset( $ocultos ) ) ? $ocultos : 'class="form"' ); ?>
+            <div class="col-md-12">
+                Razon Social:
                 <?php
                 $datainput = array ( 'id' => 'nombre',
                     'name' => 'nombre',
                     'size' => 50,
-                    'value' => $cuenta->nombre );
+                    'value' => $cuenta->nombre,
+                    'class' => 'form-control');
                 echo form_input ( $datainput ); ?>
-                <div>
-                    Datosde Facturacion
-                    <div id="datos_fac">
-                        <?php echo form_label ( 'Mismo Nombre', 'datos_fac1' ); ?>
-                        <?php echo form_radio ( 'datos_fac', '0', ( $cuenta->datos_fac == 0 ) ? true : false, 'id="datos_fac1"' ) ?>
-                        <?php echo form_label ( 'Otros datos', 'datos_fac2' ); ?>
-                        <?php echo form_radio ( 'datos_fac', '1', ( $cuenta->datos_fac == 1 ) ? true : false, 'id="datos_fac2"' ) ?>
-                    </div>
-                    <div id="verDatos">
-                        <?php
-                        $datainput = array ( 'id' => 'nombre_facturacion',
-                            'name' => 'nombre_facturacion',
-                            'size' => 50,
-                            'value' => $cuenta->nombre_facturacion );
-                        echo form_input ( $datainput ); ?>
-                    </div>
+            </div>
+            <div class="col-md-12">
+                Datosde Facturacion
+                <div id="datos_fac">
+                    <?php echo form_label ( 'Mismo Nombre', 'datos_fac1' ); ?>
+                    <?php echo form_radio ( 'datos_fac', '0', ( $cuenta->datos_fac == 0 ) ? true : false, 'id="datos_fac1"' ) ?>
+                    <?php echo form_label ( 'Otros datos', 'datos_fac2' ); ?>
+                    <?php echo form_radio ( 'datos_fac', '1', ( $cuenta->datos_fac == 1 ) ? true : false, 'id="datos_fac2"' ) ?>
+                </div>
+                <div id="verDatos">
+                    <?php
+                    $datainput = array ( 'id' => 'nombre_facturacion',
+                        'name' => 'nombre_facturacion',
+                        'size' => 50,
+                        'value' => $cuenta->nombre_facturacion,
+                        'class' => 'form-control'
+                    );
+                    echo form_input ( $datainput ); ?>
                 </div>
             </div>
             <div id="datos">Condicion de IVA:
@@ -59,6 +63,13 @@
                 $datainput = array ( 'id' => 'telefono',
                     'name' => 'telefono',
                     'value' => $cuenta->telefono );
+                echo form_input ( $datainput ); ?>
+            </div>
+            <div id="datos">Celular:
+                <?php
+                $datainput = array ( 'id' => 'celular',
+                    'name' => 'celular',
+                    'value' => $cuenta->celular );
                 echo form_input ( $datainput ); ?>
             </div>
             <div id="datos">E-mail:

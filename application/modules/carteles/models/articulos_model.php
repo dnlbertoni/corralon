@@ -7,15 +7,15 @@
 
 class Articulos_model extends MY_Model
 {
-    var $tabla = "stk_articulos";
+    private  $tabla = "stk_articulos";
 
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
         $this->setTable("stk_articulos");
     }
 
-    function getDatosBasicos($id)
+    public function getDatosBasicos($id)
     {
         $id = intval($id);
         $this->db->_reset_select();
@@ -26,7 +26,7 @@ class Articulos_model extends MY_Model
         return $this->db->get()->row();
     }
 
-    function getDetalle($codigoBarra)
+    public function getDetalle($codigoBarra)
     {
         $this->db->select('id_articulo as id');
         $this->db->select('descripcion_articulo as nombre');

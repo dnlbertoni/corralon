@@ -16,15 +16,30 @@
  * @property Ctactemovim_model $Ctactemovim_model
  * @property Presuencab_model $Presuencab_model
  * @property Vendedores_model $Vendedores_model
+ * @property Tmpfacnotas_model $Tmpfacnotas_model
+ * @property Cfgtiponotas_model $Cfgtiponotas_model
+ * @property Tipcom_model $Tipcom_model
  */
 class Presupuestos extends Admin_Controller {
-    var $tipcom;
-    var $Imprime;
-    var $Puesto;
+    /**
+     * @var int
+     */
+    private  $tipcom;
+    /**
+     * @var bool
+     */
+    private  $Imprime;
+    /**
+     * @var
+     */
+    private $Puesto;
 
-    function __construct () {
+    /**
+     * Presupuestos constructor.
+     */
+    public function __construct () {
         parent::__construct ();
-        $this->tipcom = 18; //presupuesto
+        $this->setTipcom(18); //presupuesto
         $this->Imprime = false;
 
         $this->PrinterDestino = 2; // 1 controlador 2 laser
@@ -33,23 +48,54 @@ class Presupuestos extends Admin_Controller {
         $this->load->model ( 'Tmpmovim_model', '', true );
         $this->load->model ( 'Tmpfacencab_model' );
         $this->load->model ( 'Tmpfpagos_model' );
-        $this->load->model ( 'Numeradores_model', '', true );
+        $this->load->model ( 'Numeradores_model');
         $this->load->model ( 'Cuenta_model' );
         $this->load->model ( 'Facencab_model' );
         $this->load->model ( 'Fpagos_model' );
         $this->load->model ( 'Ctactemovim_model' );
         $this->load->model ( 'Presuencab_model' );
+        $this->load->model ('Tmpfacnotas_model');
+        $this->load->model ( 'Cfgtiponotas_model');
+        $this->load->model('Tipcom_model');
     }
-    function index () {
+
+    /**
+     * @return int
+     */
+    public function getTipcom () {
+        return $this->tipcom;
+    }
+
+    /**
+     * @param int $tipcom
+     */
+    public function setTipcom ( $tipcom ) {
+        $this->tipcom = $tipcom;
+    }
+    /**
+     *
+     */
+    public function index ($tipcom=18) {
+        $this->setTipcom($tipcom);
         $this->load->model ( "Vendedores_model" );
         //busco datos del previo
-        $presuEncab = $this->Tmpfacencab_model->getDatosUltimo ( $this->Puesto, 18 );
+        $presuEncab = $this->Tmpfacencab_model->getDatosUltimo ( $this->Puesto, $tipcom=18 );
         $data['fechoy'] = $this->getFecha ();
         if ( !$presuEncab ) { //sino existe creo uno en blanco
             $data['puesto'] = $this->getPuesto ();
-            $data['numero'] = $this->Numeradores_model->getNextPresupuesto ( $this->Puesto ) + 1;
+            switch ($this->getTipcom()){
+                case 18:
+                    $data['numero'] = $this->Numeradores_model->getNextPresupuesto ( $this->Puesto ) + 1;
+                    break;
+                case 19:
+                    $data['numero'] = $this->Numeradores_model->getNextPreNCM ( $this->Puesto ) + 1;
+                    break;
+                case 20:
+                    $data['numero'] = $this->Numeradores_model->getNextPreNC ( $this->Puesto ) + 1;
+                    break;
+            }
             $data['idCuenta'] = 1;
-            $data['tipcom_id'] = $this->tipcom;
+            $data['tipcom_id'] = $this->getTipcom();
             $data['nombreCuenta'] = $this->Cuenta_model->getNombre ( 1 );
             //creo el presupuesto
             $numeroTemporal = $this->Tmpfacencab_model->inicializo ( $this->getPuesto (), $data['numero'], $data['tipcom_id'], $data['idCuenta'] );
@@ -69,26 +115,50 @@ class Presupuestos extends Admin_Controller {
         $data['tmpfacencab_id'] = $numeroTemporal;
         $data['fpagos'] = $this->Tmpfpagos_model->getPagosComprobante ( $numeroTemporal );
         $data['total'] = 0;
-        $data['paginaMuestroFpagos'] = "'" . base_url () . "pos/presupuestos/muestroFpagos/" . $numeroTemporal . "'";
-        $data['paginaCambioComprob'] = "'" . base_url () . "pos/presupuestos/cambioTipoComprobante/'";
+        $data['paginaMuestroFpagos'] = "'" . base_url () . "index.php/pos/presupuestos/muestroFpagos/" . $numeroTemporal . "'";
+        $data['paginaCambioComprob'] = "'" . base_url () . "index.php/pos/presupuestos/cambioTipoComprobante/'";
         $data['mediosDePagos'] = $this->Fpagos_model->getAll ();
         $data['tiposMdP'] = array ( 'EFECTIVO' => array ( 'label' => 'success', 'icon' => 'fa-money' ),
             'CTACTE' => array ( 'label' => 'primary', 'icon' => 'fa-users' ),
             'DEBITO' => array ( 'label' => 'primary', 'icon' => 'fa-credit-card' ),
             'TARJETA' => array ( 'label' => 'warning', 'icon' => 'fa-credit-card' ),
             'CHEQUE' => array ( 'label' => 'danger', 'icon' => 'fa-suitcase' ) );
-        $data['vendedores'] = $this->Vendedores_model->getAll ();
+        $vendedores  = $this->Vendedores_model->getAll ();
+        $TextoVendedores = "'".'<div class="btn-group" id="vendedores" data-toggle="buttons">';
+        foreach ( $vendedores as $vendedor ){
+            $TextoVendedores .= ' <label class="btn btn-default">';
+            $TextoVendedores .= ' <input type="radio" name="vendedor" value="'. $vendedor->id .'"/>'. $vendedor->nombre .'</label>';
+        }
+        $TextoVendedores .= '</div>'."'";
+        $data['textoVendedores']= $TextoVendedores;
+        $data['tipoNotasSel']= $this->Cfgtiponotas_model->toDropDown("id", "detalle", "tipcom_id", 2);
+        $data['detallecomprobante'] = $this->Tipcom_model->getNombre($tipcom);
         Template::set ( $data );
         Template::render ();
     }
-    function muestroFpagos ( $tmpfacencab_id ) {
+
+    /**
+     * @param $tmpfacencab_id
+     */
+    public function muestroFpagos ( $tmpfacencab_id ) {
         $this->output->enable_profiler ( false );
         $fpagos = $this->Tmpfpagos_model->getPagosComprobante ( $tmpfacencab_id );
         $jsonString = json_encode ( $fpagos );
         header ( 'Content-Type: application/json' );
         echo $jsonString;
     }
-    function addArticulo () {
+
+    /**
+     *
+     */
+    public function cierreVendedores(){
+
+    }
+
+    /**
+     *
+     */
+    public function addArticulo () {
         $this->output->enable_profiler ( false );
         $codigobarra = $this->input->post ( 'codigobarra' );
         $tmpfacencab_id = $this->input->post ( 'tmpfacencab_id' );
@@ -135,7 +205,11 @@ class Presupuestos extends Admin_Controller {
         header ( 'Content-Type: application/json' );
         echo $jsonString;
     }
-    function delArticulo ( $id ) {
+
+    /**
+     * @param $id
+     */
+    public function delArticulo ( $id ) {
         $tmpfacencab_id = $this->Tmpmovim_model->delArticulo ( $id );
         $totales = $this->Tmpmovim_model->getTotales ( $tmpfacencab_id );//busco totales
         /* actualizo fpagos */
@@ -144,13 +218,22 @@ class Presupuestos extends Admin_Controller {
         //$resultado = $this->Tmpfacencab_model->updateTotales($tmpfacencab_id,$totales->Total);// actualizo totales
         Template::redirect ( 'pos/presupuestos' );
     }
-    function cancelo () {
+
+    /**
+     *
+     */
+    public function cancelo () {
         $id = $this->input->post ( 'tmpfacencab_id' );
         $this->Tmpfpagos_model->vacio ( $id );
         $this->Tmpmovim_model->vacio ( $id );
         $this->Tmpfacencab_model->vacio ( $id );
     }
-    function cambioCuenta ( $tmpfacencab_id, $cuenta_id ) {
+
+    /**
+     * @param $tmpfacencab_id
+     * @param $cuenta_id
+     */
+    public function cambioCuenta ( $tmpfacencab_id, $cuenta_id ) {
         $cliente = $this->Cuenta_model->getByIdComprobante ( $cuenta_id );
         $this->Tmpfacencab_model->cambioCuenta ( $tmpfacencab_id, $cuenta_id );
         /* si es ctecte asumir ctacte com oforma de pago */
@@ -161,7 +244,11 @@ class Presupuestos extends Admin_Controller {
         }
         Template::redirect ( 'pos/presupuestos' );
     }
-    function cambioCondicion () {
+
+    /**
+     *
+     */
+    public function cambioCondicion () {
         $puesto = $this->input->post ( 'puesto' );
         $id_tmpencab = $this->input->post ( 'id_tmpencab' );
         $cuenta = $this->input->post ( 'condVtaId' );
@@ -169,7 +256,11 @@ class Presupuestos extends Admin_Controller {
         $this->Tmpmovim_model->cambioCuenta ( $puesto, $id_tmpencab, $cuenta, $cliente->ctacte );
         //Template::render();
     }
-    function cierroComprobante () {
+
+    /**
+     *
+     */
+    public function cierroComprobante () {
         if ( $this->input->post ( 'accion' ) == "cierre" ) {
             $this->Imprime = false;
         }
@@ -188,15 +279,17 @@ class Presupuestos extends Admin_Controller {
                 break;
             }
         }
-        /*
-       * documentos = tipcom_id
-       * posibles resultados
-       * 1 ticket
-       * 2 factura
-       * 6 dnf
-       * 18 Prespuesto mostrador
-       */
+        /**
+         * documentos = tipcom_id
+         * posibles resultados
+         * 1 ticket
+         * 2 factura
+         * 6 dnf
+         * 18 Prespuesto mostrador
+         * 19 presupuesto para nota de credito
+         **/
         //imprimo comprobante
+
         switch ( intval ( $comprobante->tipcom_id ) ) {
             case 18:
                 $numpre = $this->Numeradores_model->getNextPresupuesto ( $this->getPuesto () );
@@ -204,6 +297,11 @@ class Presupuestos extends Admin_Controller {
                 if ( $this->Imprime ) {
                     $archivo = $this->_imprimeDNFLaser ( $this->getPuesto (), $numpre, $comprobante->puesto, $comprobante->id, $cliente, $renglones, false );
                 };
+                $letra = 'P';
+                break;
+            case 19:
+                $numpre = $this->Numeradores_model->getNextPreNCM( $this->getPuesto () );
+                $ivatot = 0;
                 $letra = 'P';
                 break;
             default:
@@ -242,6 +340,7 @@ class Presupuestos extends Admin_Controller {
         $datosEncab = array (
             'puesto' => $comprobante->puesto,
             'numero' => $comprobante->numero,
+            'tipcom_id'=>$comprobante->tipcom_id,
             'vendedor_id' => $this->input->post ( 'vendedor' ),
             'cuenta_id' => $comprobante->cuenta_id,
             'importe' => $comprobante->importe,
@@ -252,7 +351,7 @@ class Presupuestos extends Admin_Controller {
             'facencab_id' => 'NULL'
         );
         $idPresuencab = $this->Presuencab_model->graboComprobante ( $datosEncab, $datosMovim );
-        $actualizoNumerador = $this->Numeradores_model->updatePresupuesto ( $comprobante->puesto, $comprobante->numero );
+        $actualizoNumerador = $this->Numeradores_model->updatePresupuesto ( $comprobante->puesto, $comprobante->numero, $comprobante->tipcom_id );
 
         /*
          * limpio los temporales
@@ -266,7 +365,18 @@ class Presupuestos extends Admin_Controller {
         echo json_encode ( 'ok' );
     }
 
-    function _imprimeDNFLaser ( $ptorem, $numrem, $puesto, $idencab, $cliente, $items, $firma = false ) {
+    /**
+     * @param      $ptorem
+     * @param      $numrem
+     * @param      $puesto
+     * @param      $idencab
+     * @param      $cliente
+     * @param      $items
+     * @param bool $firma
+     *
+     * @return string
+     */
+    private function _imprimeDNFLaser ( $ptorem, $numrem, $puesto, $idencab, $cliente, $items, $firma = false ) {
         /**
          * imprime comprobante de remito por PDF
          *

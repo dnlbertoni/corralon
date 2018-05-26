@@ -8,7 +8,7 @@ $config['first_link'] = 'Primera';//primer link
 $config['last_link'] = 'Última';//último link
 $config['next_link'] = 'Siguiente';//siguiente link
 $config['prev_link'] = 'Anterior';//anterior link
-$config['per_page'] = 10; //Número de registros mostrados por páginas
+$config['per_page'] = 15; //Número de registros mostrados por páginas
 $config['num_links'] = 5; //Número de links mostrados en la paginación
 
 $config['full_tag_open'] = '<ul class="pagination pagination-md">';

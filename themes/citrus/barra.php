@@ -6,7 +6,7 @@
                 <span class="fa-wrench">Configuraciones</span>
             </button>
             <!-- You'll want to use a responsive image option so this logo looks good on devices - I recommend using something like retina.js (do a quick Google search for it and you'll find it) -->
-            <?php echo anchor('/', 'Corralon del Sur', 'class="navbar-brand"') ?>
+            <?php echo anchor('/', $NombreEmpresa, 'class="navbar-brand"') ?>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">

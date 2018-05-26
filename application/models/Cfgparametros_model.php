@@ -33,13 +33,17 @@ class Cfgparametros_model extends MY_Model{
     }
 
     public function getParametroNombre($nombre){
+        $this->db->select('valor');
         $this->db->from($this->getTable());
         $this->db->where('nombre',$nombre);
-        return $this->db->get()->row();
+        return $this->db->get()->row()->valor;
     }
     public function getParametroId($id){
         $this->db->from($this->getTable());
         $this->db->where('id',$id);
         return $this->db->get()->row();
+    }
+    public function getNombreEmpresa(){
+        return $this->getParametroNombre('nombreEmpresa');
     }
 }

@@ -9,6 +9,8 @@ class Articulos_model extends My_Model {
 
     function getAll ( $estado = false, $paginado = false, $pagina = false ) {
         $estado = ( $estado ) ? $estado : "ALL";
+        $this->db->join('stk_subrubros','stk_subrubros.id_subrubro=stk_articulos.id_subrubro','inner');
+        $this->db->join('stk_rubros','stk_rubros.id_rubro=stk_subrubros.id_rubro','inner');
         if ( $estado != 'ALL' ) {
             $this->db->where ( 'estado', $estado );
         };
@@ -78,6 +80,14 @@ class Articulos_model extends My_Model {
     function actualizoCantidadBultos($id, $cantidadXbultos)
     {
         $this->db->set('CANTXBULTO_ARTICULO', $cantidadXbultos);
+        $this->db->where('ID_ARTICULO', $id);
+        $this->db->update($this->getTable());
+        return true;
+    }
+
+    function actualizoPrecio($id, $precio)
+    {
+        $this->db->set('PRECIO_ARTICULO', $precio);
         $this->db->where('ID_ARTICULO', $id);
         $this->db->update($this->getTable());
         return true;

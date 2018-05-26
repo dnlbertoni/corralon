@@ -88,8 +88,8 @@ class Hasar {
     {
         $this->nFile = $valor;
         $ruta = $this->getRuta ();
-        $nombre_archivo_tmp = $ruta . '/' . $this->puestoVta . '/' . $this->tmp . '/' . $this->nFile . '.txt';
-        $nombre_archivo_snd = $ruta . "/" . $this->puestoVta . "/" . $this->mandar . "/" . $this->nFile . '.txt';
+        $nombre_archivo_tmp = $ruta . '/' . $this->puestoVta . '/' . $this->tmp .     '/' . $this->nFile . '.txt';
+        $nombre_archivo_snd = $ruta . "/" . $this->puestoVta . "/" . $this->mandar.   "/" . $this->nFile . '.txt';
         $nombre_archivo_rec = $ruta . "/" . $this->puestoVta . "/" . $this->recibir . "/" . $this->nFile . '.ans';
         //$dirAux =(__DIR__);
         //die($dirAux);
@@ -332,7 +332,7 @@ class Hasar {
     {
         $campos = explode("|", $linea);
         //print_r($campos);
-        if (count($campos) > 3) {
+        if(count($campos)>3){
             $estado_impre = $this->StatusImpresora($campos[1]);
             $estado_fiscal = $this->StatusFiscal($campos[2]);
             // solo valido para 715 y 441
@@ -347,8 +347,8 @@ class Hasar {
                 $estado['estado'] = "Error Fiscal";
                 $estado['detalle'] .= $estado_fiscal['detalle'];
             };
-        } else {
-            $estado['estado'] = "Error Lectura Archivo";
+        }else{
+            $estado['estado']  = "Error Lectura Archivo";
             $estado['detalle'] = "Error Lectura Archivo";
         }
         return $estado;
@@ -536,7 +536,7 @@ class Hasar {
     {
         $resp = array();
         $band = 1000;
-        //echo $this->nombre_archivo_recibir;
+       //echo $this->nombre_archivo_recibir;
         while (!(file_exists($this->nombre_archivo_recibir))) {
             if ($band == 1000) {
                 echo "Esperando Respuesa Fiscal, por favor espere...<br />";

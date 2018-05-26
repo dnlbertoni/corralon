@@ -48,6 +48,7 @@
  * @property CI_Jquery $jquery                    Jquery Class
  * @property CI_Utf8 $utf8                        Provides support for UTF-8 environments
  * @property CI_Security $security                Security Class, xss, csrf, etc...
+ * @property Cfgparametros_model $Cfgparametros_model
  */
 
 require APPPATH . "third_party/MX/Controller.php";
@@ -97,6 +98,7 @@ class Admin_Controller extends MY_Controller {
         $this->load->model('Modulos_model');
         $this->load->model('Menues_model');
         $this->load->model ( 'Cfgpuestos_model' );
+        $this->load->model("Cfgparametros_model");
         $this->output->enable_profiler(ENVIRONMENT === 'desarrollo');
         /*
          * defino los modulos que van en el menu
@@ -104,8 +106,10 @@ class Admin_Controller extends MY_Controller {
         $modulos = $this->Modulos_model->getAll(ACTIVO);
         $barra = $this->Menues_model->getAll(ACTIVO);
         Template::set_theme('citrus/');
+        Template::set('NombreEmpresa',$this->Cfgparametros_model->getNombreEmpresa());
         Template::set("menu", $barra);
         Template::set("modulos", $modulos);
+        date_default_timezone_set ( "America/Argentina/Buenos_Aires" );
         setlocale(LC_MONETARY, 'es_AR');
     }
 
@@ -150,8 +154,7 @@ class Admin_Controller extends MY_Controller {
     }
 }
 
-class POS_Controller extends MY_Controller
-{
+class POS_Controller extends MY_Controller{
     function __construct()
     {
         parent::__construct();

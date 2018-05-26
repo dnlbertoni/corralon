@@ -39,6 +39,7 @@ class Cuenta extends Admin_Controller {
             'tipdoc' => 1,
             'direccion' => '',
             'telefono' => '',
+            'celular' => '',
             'email' => '',
             'tipo' => 1,
             'estado' => 1,

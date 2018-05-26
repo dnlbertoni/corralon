@@ -15,7 +15,7 @@ class Presuencab_model extends MY_Model {
         $this->setTable ( 'fac_presuencab' );
     }
 
-    function getPendientes ( $fecha ) {
+    function getPendientes ( $fecha, $maximoFacturar=1000 ) {
         $this->db->select ( "fac_presuencab.id" );
         $this->db->select ( "fecha" );
         $this->db->select ( "v.nombre as vendedor" );
@@ -23,6 +23,7 @@ class Presuencab_model extends MY_Model {
         $this->db->select ( "cuenta.nombre as cliente" );
         $this->db->select ( "importe" );
         //$this->db->select("vendedor");
+        $this->db->select('if((importe>'.$maximoFacturar.') and cuenta_id=1,1,0) as nominal');
         $this->db->from ( $this->getTable () );
         $this->db->join ( "cuenta", "cuenta.id=cuenta_id", "inner" );
         $this->db->join ( "cfg_vendedores as v", "v.id=vendedor_id", "inner" );
@@ -130,6 +131,12 @@ class Presuencab_model extends MY_Model {
         $this->db->set ( 'estado', 'A' );
         $this->db->where ( 'id', $idPresu );
         return $this->db->update ( $this->getTable () );
+    }
+    public function setNominal($idencab, $cuenta_id){
+        $this->db->set('cuenta_id', $cuenta_id);
+        $this->db->where('id', $idencab);
+        $this->db->update($this->getTable());
+        return $idencab;
     }
 
 }

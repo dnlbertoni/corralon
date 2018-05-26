@@ -5,12 +5,11 @@
  *
  * @author dnl
  */
-class Conceptos extends MY_Controller
-{
-    function __construct()
+class Conceptos extends Admin_Controller{
+    public function __construct()
     {
         parent::__construct();
-        Template::set_theme('moderno/');
+        //Template::set_theme('moderno/');
     }
 
     function index()

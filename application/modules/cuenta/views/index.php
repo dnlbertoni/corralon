@@ -8,10 +8,12 @@
                     <th>Codigo</th>
                     <th>Nombre</th>
                     <th>CUIT</th>
+                    <th>Telefono</th>
+                    <th>Celular</th>
                     <th>Tipo</th>
-                    <th colspan="2">
-                        <a href="/cuenta/crear" class="btn btn-lg btn-success" data-toggle="modal" data-target="#add"><i
-                                class="fa fa-check"></i> Agregar Cuenta</a>
+                    <th >
+                        <a href="/cuenta/crear" class="btn btn-success" data-toggle="modal" data-target="#add"><i
+                                class="fa fa-plus"></i> Agregar Cuenta</a>
                     </th>
                 </tr>
                 </thead>
@@ -21,9 +23,13 @@
                         <td><?php echo $cuenta->id ?></td>
                         <td><?php echo $cuenta->nombre ?></td>
                         <td><?php echo $cuenta->cuit ?></td>
+                        <td><?php echo $cuenta->telefono ?></td>
+                        <td><?php echo $cuenta->celular ?></td>
                         <td><?php echo $cuenta->tipo ?></td>
-                        <td><?php echo anchor ( 'cuenta/editar/' . $cuenta->id, 'Editar', 'class="btn btn-info"' ) ?></td>
-                        <td><?php echo anchor ( 'cuenta/borrar/' . $cuenta->id, '<i class="fa fa-trash"></i>', 'class="btn btn-danger"' ) ?></td>
+                        <td>
+                            <?php echo anchor ( 'cuenta/editar/' . $cuenta->id, '<i class="fa fa-pencil"></i>', 'class="btn btn-info btn-xs"' ) ?>
+                            <?php echo anchor ( 'cuenta/borrar/' . $cuenta->id, '<i class="fa fa-trash-o"></i>', 'class="btn btn-danger btn-xs"' ) ?>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
                 </tbody>

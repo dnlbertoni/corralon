@@ -67,4 +67,13 @@ class Facencab_model extends MY_Model {
 
 
     }
+    function getResumenPeriodo($fecdes,$fechas,$tipo=2){
+        $this->db->select ( "count(id) as cantidad" );
+        $this->db->select ( "COALESCE(sum(importe),0) total" );
+        $this->db->from ( $this->getTable () );
+        $this->db->where ( 'fac_facencab.tipcom_id', $tipo );
+        $this->db->where ( 'fac_facencab.estado', 1 ); //
+        $this->db->where ( "fac_facencab.fecha between '". $fecdes ."' and '".$fechas ."'" ,null,false );
+        return $this->db->get ()->row ();
+    }
 }

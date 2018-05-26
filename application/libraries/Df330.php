@@ -1,14 +1,13 @@
 <?php
 
 class Df330 extends hasar {
-    function DatosCliente($nombre, $doc, $respiva, $tipdoc, $direccion = "")
-    {//Datos del cliente
+    function DatosCliente ( $nombre, $doc, $respiva, $tipdoc, $direccion="" ) {//Datos del cliente
         // nombre = nombre cliente | $doc = cuit o dni o 0 si no es nada |
         // $respiva = "I" si es incripto  "C" si es consumidor final "E" si es excento "M" monotributo
 
         $nombre = substr ( $nombre, 0, 30 );
         $respiva = strtoupper ( $respiva );
-        $command = "b" . $this->fs . $nombre . $this->fs . $doc . $this->fs . $respiva . $this->fs . $tipdoc . $this->fs . $direccion . "\n";
+        $command = "b" . $this->fs . $nombre . $this->fs . $doc . $this->fs . $respiva . $this->fs . $tipdoc . $this->fs . $direccion  .  "\n";
         if ( file_exists ( $this->nombre_archivo_tmp ) )
             unlink ( $this->nombre_archivo_tmp );
         /*
@@ -64,6 +63,24 @@ class Df330 extends hasar {
         $estado = copy ( $this->nombre_archivo_tmp, $this->nombre_archivo_mandar );
         return $estado;
     }
-}
 
-?>
+    function AbrirDocumemtoHomologado ($tipdoc="R"  ) {
+        /*
+         * R: nota de crédito A
+         * S: nota de crédito B o C
+         * r: Remito
+         */
+        $command = "Ç" . $this->fs . $tipdoc . $this->fs . "T" . "\n";
+        $estado = $this->EscriboArchivoMandar ( $command );
+        return $estado;
+    }
+
+    function CerrarDocumentoHomolagdo ($copias=1) {    //cierro documento factura
+        $command = "ü" . $this->fs . $copias . "\n";
+        $estado = $this->EscriboArchivoMandar ( $command );
+        $estado = $this->CierroArchivoMandar ();
+        $estado = copy ( $this->nombre_archivo_tmp, $this->nombre_archivo_mandar );
+        return $estado;
+    }
+
+}

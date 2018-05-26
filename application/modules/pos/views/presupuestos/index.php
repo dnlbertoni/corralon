@@ -2,11 +2,12 @@
 <link href="/assets/css/bootstrap-dialog.css" rel="stylesheet">
 <script src="/assets/js/jquery.easy-autocomplete.min.js"></script>
 <script src="/assets/js/bootstrap-dialog.js"></script>
-<div class="section">
+    <div class="row">
+    </div>
     <div class="row ">
         <div class="panel panel-primary">
             <div class="panel-body">
-                <div class="col-lg-7 col-md-7 col-xs-7">
+                <div class="col-lg-6 col-md-6 col-xs-6">
                     <!--
             <div class="alert alert-info"><?php echo $fechoy ?> <span id="clock"></span></div>
             -->
@@ -27,7 +28,7 @@
                                    value="" disabled/>
                         </div>
                     </div>
-                    <div class="col-xs-3">
+                    <div class="col-xs-2">
                         <div class="input-group">
                             <?php echo form_input ( 'cantidad', '', 'id="cantidad" data-toggle="tooltip" data-placement="top" title="cantidad " class="form-control" placeholder="Cantidad"' ); ?>
                         </div>
@@ -44,7 +45,7 @@
                     <input type="hidden" id="paginaIndex"
                            value="<?php echo base_url (), 'pos/prespuestos' ?>"/>
                 </div>
-                <div class="col-lg-5 col-md-5 col-xs-5">
+                <div class="col-lg-6 col-md-6 col-xs-6">
                     <div class="btn-toolbar" role="toolbar">
                         <div class="btn-group">
                             <button class="btn btn-danger" id="F1"><span class="badge pull-left"> F1 </span>&nbsp;Cancelar
@@ -57,7 +58,10 @@
                             <!--  <button class="btn btn-info" id="F8"><span class="badge pull-left"> F8 -- sacar </span>&nbsp;Forma Pago</button> -->
                         </div>
                         <div class="btn-group">
-                            <?php echo anchor ( 'pos/presupuestos/cierroComprobante', '<span class="badge pull-left"> F12 </span>&nbsp;Finalizar <i class="fa fa-check-circle"></i> ', 'role="button" class="btn btn-success" id="F12"' ) ?>
+                            <button class="btn btn-success" id="F12" data-aria="<?php echo base_url (), 'pos/presupuestos/cierroComprobante' ?>"><span class="badge pull-left"> F12 </span>&nbsp;Finalizar <i class="fa fa-check-circle"></i></button>
+                        </div>
+                        <div class="btn-group">
+                            <button class="btn " id="notas" data-toggle="modal" data-target="#Notas"><i class="fa fa-document"></i> Notas</button>
                         </div>
                     </div>
                 </div>
@@ -67,31 +71,16 @@
     <div class="row"><!-- fila de comprobante -->
         <div class="col-lg-2 col-md-2 col-xs-2">
             <div class="panel <?php echo ( $presuEncab->tipcom_id == 1 ) ? 'panel-info' : 'panel-danger'; ?>">
-                <div class="panel-heading"><h4>
-          <span id="tipcom_nom">
-            <?php
-            switch ( $presuEncab->tipcom_id ) {
-                case 1:
-                    $msg = 'Ticket';
-                    break;
-                case 2:
-                    $msg = 'Factura';
-                    break;
-                case 6:
-                    $msg = 'Remito';
-                    break;
-                case 18:
-                    $msg = 'Presupuesto Mostrador';
-                    break;
-            };
-            echo $msg; ?>
-          </span>
-                        <span><?php printf ( "%04.0f", $presuEncab->puesto ) ?></span>
+                <div class="panel-heading">
+                    <h4>
+                      <span id="tipcom_nom">
+                          <?php echo $detallecomprobante?>
+                      </span>
                     </h4>
                 </div>
                 <div class="panel-body">
                     <ul class="list-group">
-                        <li class="list-group-item"><?php printf ( "%08.0f", $presuEncab->numero ) ?></li>
+                        <li class="list-group-item"><?php printf ( "%04.0f-%08.0f", $presuEncab->puesto,$presuEncab->numero ) ?></li>
                     </ul>
                 </div>
                 <div class="panel-footer">
@@ -126,8 +115,8 @@
                         <div>
                             <span class='fpagoNombre'>CONTADO</span>
                             <span> &nbsp;&nbsp;0</span>
-                            <div class='btn btn_mod'><span class='fa fa-refresh'></span></div>
-                            <div class='btn btn_del'><span class='fa fa-trash-o'></span></div>
+                            <div class='btn btn-xs btn_mod'><span class='fa fa-refresh'></span></div>
+                            <div class='btn btn-xs btn_del'><span class='fa fa-trash-o'></span></div>
                         </div>
                     </div>
                     <div class="btn btn-info"><span class="fa fa-plus-circle"></span> Nuevo Medio Pago</div>
@@ -142,7 +131,7 @@
                     <div>
                         <div class="alert alert-info text-right " style="font-size:48px;font-weight: bolder "
                              id="importe">
-                            <?php printf ( "$%01.2f", floatval ( $totales->Total ) ); ?>
+                            <?php printf ( "$%01.2f", $totales->Total ); ?>
                         </div>
                     </div>
                 </div>
@@ -190,7 +179,7 @@
             </div>
         </div>
     </div> <!-- /.row-->
-</div>
+
 
 <!-- modal de formas de pago -->
 <div class="modal fade" id="fpago" tabindex="-1" role="dialog" aria-labelledby="myFpagos" aria-hidden="true">
@@ -238,6 +227,7 @@
     </div>
 </div><!-- /.modal -->
 
+<!--
 <div class="modal fade" id="cartelImpresion" tabindex="-1" role="dialog" aria-labelledby="cartelPrint"
      aria-hidden="true">
     <div class="modal-dialog modal-sm">
@@ -265,8 +255,8 @@
         </div>
     </div>
 </div><!-- /.modal impresion-->
-
 <!-- Modal HTML -->
+
 <div id="espera" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -276,6 +266,51 @@
 </div>
 
 <div id="precio"></div>
+
+<!-- Modal -->
+<div class="modal fade" id="Notas" tabindex="-1" role="dialog" aria-labelledby="Notas" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Cerrar</span>
+                </button>
+                <h4 class="modal-title" id="NotasLabel">
+                    Notas
+                </h4>
+            </div>
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <form  id="form-notas" role="form" action="pos/prespuestos/agregarNotas">
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label" for="tipo" >Tipo Nota</label>
+                            <div class="col-sm-8">
+                                <?php echo form_dropdown('tiponota_id', $tipoNotasSel);?>
+                            </div>
+                        </div>
+                        <div class="clearfix">&nbsp;</div>
+                        <div class="form-group">
+                            <label  class="col-sm-4 control-label" for="notasTexto">Nota</label>
+                            <div class="col-sm-8">
+                                <input type="email" class="form-control" id="notasTexto" placeholder="Ingresar nota"/>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" id="btn-addNota" class="btn btn-success">Agregar Nota</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal"> Cerrar </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <script>
     $(document).ready(function () {
@@ -304,7 +339,7 @@
                         $("#F8").click();
                         break;
                     case 'f12':
-                        $("#F12").click();
+                        $("#F12").click(e);
                         break;
                 }
             }
@@ -364,6 +399,10 @@
         });
         $("#F12").click(function (e) {
             e.preventDefault();
+            CierroComprobante();
+        });
+        $("#F12_old").click(function (e) {
+            e.preventDefault();
             e.stopPropagation();
             $("#cartelImpresion").modal({keyboard: true});
             $("#cartelImpresion").modal('show');
@@ -372,6 +411,7 @@
                 $(this).find(".modal-dialog").css("width", 300);
             });
         });
+
         $("#addCart").submit(function (e) {
             e.preventDefault();
         });
@@ -401,6 +441,7 @@
                         $("#bultos").html(data.Bultos);
                         $("#importe").html(data.Totales);
                         $("#importe2").html(data.Totales);
+                        $("#nombreArticulo").val('');
                     }
                     muestroFpagos();
                     $("#codigobarra").addClass('focus');
@@ -491,7 +532,7 @@
             $("#nombreCuentaTXT").focus();
         });
         busquedaCuenta.onHidden(function (data) {
-            if (typeof cuenta_id != 'undefined') {
+            if (typeof cuenta_id != 'undefined'){
                 if (cuenta_id != "") {
                     url = <?php echo "'" . base_url () . "pos/presupuestos/cambioCuenta/$tmpfacencab_id/'"?>;
                     url += cuenta_id;
@@ -535,8 +576,51 @@
             });
         });
     }
+    function CierroComprobante(e){
+        $("#codigobarra").removeClass('focus');
+        elijoCierre = new BootstrapDialog({
+            title: "Finalizacion",
+            message: <?= $textoVendedores?>,
+            buttons: [{
+                label: 'Reparto',
+                cssClass: 'btn-primary',
+                action: function(dialog){
+                    vendedor = $("input[name=vendedor]:checked").val();
+                    EnviarReparto();
+                }
+            }, {
+                label: 'Presupuesto',
+                cssClass: 'btn-warning',
+                action: function(dialog){
+                    vendedor = $("input[name=vendedor]:checked").val();
+                    ImprimoRemito();
+                }
+            }, {
+                label: 'Facturacion',
+                cssClass: 'btn-success',
+                action: function(dialog){
+                    vendedor = $("input[name=vendedor]:checked").val();
+                    Imprimo(e, "cerrar", vendedor);
+                }
+            }, {
+                label: 'Cerrar',
+                cssClass: 'btn-danger',
+                action: function(dialog){
+                    dialog.close();
+                }
+            }]
+        });
+        elijoCierre.setSize(BootstrapDialog.SIZE_WIDE);
+        elijoCierre.setType(BootstrapDialog.TYPE_WARNING);
+        elijoCierre.realize();
+        elijoCierre.open();
+        elijoCierre.onHidden(function (data) {
+            $("#codigobarra").addClass('focus');
+            $("#codigobarra").focus();
+        });
+    }
     function Imprimo(e, accion, vendedor) {
-        pagina = $("#F12").attr('href');
+        pagina = $("#F12").attr('data-aria');
         tmpfacencab_id = $("#tmpfacencab_id").val();
         $.ajax({
             url: pagina,
@@ -580,8 +664,8 @@
                 linea = " <div class='alert " + label + " ' role='alert' >";
                 linea += "<span class='fpagoNombre'>" + dato.pagoNombre + "</span>";
                 linea += "<span> &nbsp;&nbsp;" + dato.monto + "</span>";
-                linea += "<div class='btn btn_mod' id='mod_" + dato.id + "'><span class='fa fa-refresh'></span></div>";
-                linea += "<div class='btn btn_del' id='del_" + dato.id + "'><span class='fa fa-trash-o'></span></div>";
+                linea += "<div class='btn btn-xs btn_mod' id='mod_" + dato.id + "'><span class='fa fa-refresh'></span></div>";
+                linea += "<div class='btn btn-xs btn_del' id='del_" + dato.id + "'><span class='fa fa-trash-o'></span></div>";
                 linea += "</div>";
                 $("#fpagosList").append(linea);
             });

@@ -1,6 +1,6 @@
 <?php
 
-class Pos extends MY_Controller
+class Pos extends Admin_Controller
 {
     var $puesto;
 
@@ -10,11 +10,11 @@ class Pos extends MY_Controller
         /*
          * cargo libreria del controlador fiscal
          */
-        $this->puesto = PUESTO;
+        $this->puesto = $this->getPuesto();
         $this->load->library('hasar');
 
         $this->load->model('Facencab_model', '', true);
-        $this->load->model('Tipcom_model', '', true);
+        $this->load->model('Tipcom_model');
 
         $datos['tareas'][] = array('pos/factura/presupuesto/', '>> Ticket <<');
         $datos['tareas'][] = array('pos/cierreJournal', 'Cierre Jornada');

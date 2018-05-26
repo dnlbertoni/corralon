@@ -1,18 +1,31 @@
 <?php
-
-/**
- * Description of caja
- *
- * @author dnl
- * @property Cajaencab_model $Cajaencab_model
- * @property Facencab_model $Facencab_model
- * @property Presuencab_model $Presuencab_model
- * @property Cuenta_model $Cuenta_model
- * @property Numeradores_model $Numeradores_model
- * @property Hasar340 $Hasar340
- */
+    /**
+     * Description of caja
+     *
+     * @author dnl
+     * @property Cajaencab_model $Cajaencab_model
+     * @property Facencab_model $Facencab_model
+     * @property Presuencab_model $Presuencab_model
+     * @property Cuenta_model $Cuenta_model
+     * @property Numeradores_model $Numeradores_model
+     * @property Df330  $df330
+     * @property Cnf $cnf
+     * @property Hasar $hasar
+     *
+     * @todo: notas de credito
+     * @todo: consumidor final
+     *
+     *
+     */
 class Caja extends Admin_Controller {
+    /**
+     * @var int
+     */
     var $PrinterRemito;
+
+    /**
+     * Caja constructor.
+     */
     function __construct () {
         parent::__construct();
         $this->load->model ( 'Cajaencab_model' );
@@ -22,10 +35,16 @@ class Caja extends Admin_Controller {
         $this->PrinterRemito = 2; //por laser
     }
 
+    /**
+     * Principal de Caja
+     */
     function index () {
         Template::render();
     }
 
+    /**
+     *
+     */
     function open () {
         $data['puesto'] = $this->getPuesto ();
         $data['caja'] = $this->Cajaencab_model->getCajaPuesto ( $this->getPuesto (), 1 );
@@ -34,8 +53,14 @@ class Caja extends Admin_Controller {
         Template::render ();
     }
 
+    /**
+     *
+     */
     function openDo () { }
 
+    /**
+     *
+     */
     function close () {
         $data['puesto'] = $this->getPuesto ();
         $data['caja'] = $this->Cajaencab_model->getCajaPuesto ( $this->getPuesto (), 1 );
@@ -44,10 +69,13 @@ class Caja extends Admin_Controller {
         Template::render ();
     }
 
+    /**
+     *
+     */
     function cierreJournal () {
         $cierre = new Hasar();
         //$cierre->setRuta ( "/var/www/html/corralon/assets/tmp/fiscal" );
-        $cierre->setRuta ( 'c:/xampp/htdocs/corralon/assets/tmp/fiscal' );
+        $cierre->setRuta ( 'c:/xampp/htdocs/assets/tmp/fiscal' );
 
         $tipo = $this->input->post ( 'tipo' );
         $cierre->setPuesto ( intval ( $this->getPuesto () ) );
@@ -106,21 +134,59 @@ class Caja extends Admin_Controller {
         };
     }
 
-    function anular($idEncab)
-    {
+    /**
+     * @param $idEncab
+     */
+    function anular( $idEncab){
         $this->Presuencab_model->setAnulado($idEncab);
-        echo json_encode(array("mensaje" => "OK"));
+        echo json_encode(array("mensaje"=>"OK"));
     }
 
+    /**
+     *
+     */
     function facturar () {
-        $fecha = new DateTime();
-        $data['presupuestos'] = $this->Presuencab_model->getPendientes($fecha->format("Y-m-d"));
+        $fecha= new DateTime();
+        $presupuestos = $this->Presuencab_model->getPendientes ($fecha->format("Y-m-d"));
+        $data['presupuestos'] =$presupuestos ;
         $data['facturados'] = $this->Presuencab_model->getFacturados($fecha->format("Y-m-d"));
-        $data['fecha'] = $fecha;
+        $data['fecha'] = $fecha->format("d/m/Y");
+        $fechas = $fecha->format("Y-m-d");
+        /*
+         * busqueda diaria
+         */
+        $fecdes = $fecha->format("Y-m-d");
+        $mensual =  $this->Facencab_model->getResumenPeriodo($fecdes,$fechas);
+        $data['diaria']=sprintf("$ %s",number_format($mensual->total,2));
+        /*
+         * busqueda semanal
+         */
+        $dias = $fecha->format("w");
+        $dias = ($dias==0)?7:$dias;
+        $fecha->modify("-".($dias-1) . " days");
+        $fecdes = $fecha->format("Y-m-d");
+        $mensual =  $this->Facencab_model->getResumenPeriodo($fecdes,$fechas);
+        $data['semanal']= sprintf("$ %s",number_format($mensual->total,2));
+        /*
+         * busqueda mensual
+         */
+        $dias = $fecha->format("d") - 1;
+        $fecha->modify("-".$dias . " days");
+        $fecdes = $fecha->format("Y-m-d");
+        $mensual =  $this->Facencab_model->getResumenPeriodo($fecdes,$fechas);
+
+        $data['mensual']= sprintf("$ %s",number_format($mensual->total,2));
+        $mensual =  $this->Facencab_model->getResumenPeriodo($fecdes,$fechas,4);
+        $data['afip']= sprintf("$ %s",number_format($mensual->total,2));
+
         Template::set ( $data );
         Template::render ();
     }
 
+    /**
+     * @param $formato
+     * @param $idPresupuesto
+     */
     function imprimir ( $formato, $idPresupuesto ) {
         $this->load->model ( 'Numeradores_model' );
         $presupuesto = $this->Presuencab_model->getById ( $idPresupuesto );
@@ -158,23 +224,26 @@ class Caja extends Admin_Controller {
                 if ( $this->PrinterRemito == 1 ) {
                     $data['file'] = $this->_imprimeDNF ( $ptorem, $numrem, $this->getPuesto (), $idPresupuesto, $cliente, $items, $detalle, $firma );
                 } else {
-                    $this->printRemitoDoLaser($idPresupuesto, $tipcom_id, true);
+                    $this->printRemitoDoLaser ($idPresupuesto,$tipcom_id, true);
                     $data['file'] = $this->_imprimeDNFLaser ( $ptorem, $numrem, $this->getPuesto (), $idPresupuesto, $cliente, $items, false );
                 };
                 $data['idencab'] = $idPresupuesto;
                 $data['tipcom_id'] = 6;
-                $data['numero'] = $numrem;
+                $data['numero']=$numrem;
                 $data['DNF'] = $vale;
                 $data['accion'] = 'printRemitoDoLaser';
                 $data['Imprimo'] = 'Comprobante';
                 break;
         };
-        $data['tabla'] = $this->Presuencab_model->getTable();
+        $data['tabla']=$this->Presuencab_model->getTable();
         //header('Content-Type: application/json');
         //echo json_encode($data);
         $this->load->view('caja/carga', $data);
     }
 
+    /**
+     *
+     */
     function printFacturaDo () {
         //print_r($_POST);
         $this->load->library ( 'hasar' );
@@ -184,7 +253,7 @@ class Caja extends Admin_Controller {
         $estado = ( $DNF == 1 ) ? 9 : 1;
         $hasar = new Hasar();
         $hasar->setRuta($this->getRutaPuesto());
-        $hasar->setPuesto($this->getPuesto());
+        $hasar->setPuesto ( $this->getPuesto() );
         $hasar->nombres ( $this->input->post ( 'file' ) );
         $respuesta = $hasar->RespuestaFull ();
         //print_r($respuesta);
@@ -193,7 +262,7 @@ class Caja extends Admin_Controller {
         //echo $numero;
         $comprobantes = $this->Presuencab_model->getComprobante ( $idencab );
         $comprobante = $comprobantes[0];
-        $items = $this->Presuencab_model->getArticulos($idencab);
+        $items = $this->Presuencab_model->getArticulos( $idencab );
         //echo $comprobante->cuenta_id;
         $cliente = $this->Cuenta_model->getByIdComprobante ( $comprobante->cuenta_id );
         $letra = ( $cliente->condiva == 1 ) ? "A" : "B";
@@ -208,9 +277,9 @@ class Caja extends Admin_Controller {
                 'letra_movim' => $letra,
                 'id_articulo' => $item->id_articulo,
                 'codigobarra_movim' => $item->Codigobarra,
-                'cantidad_movim' => $item->Cantidad,
-                'preciovta_movim' => $item->Precio,
-                'tasaiva_movim' => $item->Tasa
+                'cantidad_movim'    => $item->Cantidad,
+                'preciovta_movim'   => $item->Precio,
+                'tasaiva_movim'     => $item->Tasa
             );
             if ( $item->Tasa > 20 ) {
                 $ivamax += ( $item->Precio / ( 1 + ( $item->Tasa / 100 ) ) ) * $item->Tasa / 100;
@@ -236,12 +305,15 @@ class Caja extends Admin_Controller {
         $idFacencab = $this->Facencab_model->graboComprobante ( $datosEncab, $datosMovim );
         $this->Presuencab_model->setFacturado($idencab, $idFacencab);
         if ( $DNF == 1 ) {
-            $this->printCtaCte($comprobante->cuenta_id, $this->getPuesto(), $numero, $hasar->importe, $idFacencab);
+            $this->printCtaCte ( $comprobante->cuenta_id, $this->getPuesto(), $numero, $hasar->importe, $idFacencab );
         };
-        $resultado['mensaje'] = "OK";
+        $resultado['mensaje']="OK";
         echo json_encode($resultado);
     }
 
+    /**
+     *
+     */
     function printRemitoDo () {
         $this->load->library ( 'hasar' );
         $hasar = new Hasar();
@@ -251,14 +323,14 @@ class Caja extends Admin_Controller {
         $DNF = $this->input->post ( 'DNF' );
         $estado = ( $DNF == 1 ) ? 9 : 1;
         $ptorem = $this->getPuestoCnf();
-        $comprobante = $this->Presuencab_model->getComprobante($idencab);
+        $comprobante= $this->Presuencab_model->getComprobante($idencab);
         $numero = $comprobante->numero;
         $hasar->setPuesto ( $puesto );
         $hasar->nombres ( $this->input->post ( 'file' ) );
         $respuesta = $this->hasar->RespuestaFull ();
         //$respEstado = $this->hasar->Estado();
         //$cuenta = $this->Tmpmovim_model->getCuenta($idencab, $puesto);
-        $items = $this->Presuencab_model->getArticulos($idencab);
+        $items = $this->Presuencab_model->getArticulos( $idencab );
         $cliente = $this->Cuenta_model->getByIdComprobante ( $comprobante->cuenta_id );
         $letra = "R";
         $ivamax = 0;
@@ -266,6 +338,7 @@ class Caja extends Admin_Controller {
         $importe = 0;
         $neto = 0;
         $negativo = ( $tipcom_id == 9 ) ? -1 : 1;
+        $datosMovim = array();
         foreach ( $items as $item ) {
             $datosMovim[] = array (
                 'tipcomid_movim' => $tipcom_id,
@@ -307,26 +380,33 @@ class Caja extends Admin_Controller {
         if ( $DNF == 1 ) {
             $this->printCtaCte ( $comprobante->cuenta_id, $puesto, $numero, $importe * $negativo, $idFacencab );
         };
-        $estado['mensaje'] = "OK";
+        $estado['mensaje']="OK";
         echo json_encode($estado);
     }
 
-    function printRemitoDoLaser($idencab = false, $tipcom_id = false, $interno = false)
-    {
-        $idencab = ($idencab) ? $idencab : $this->input->post('idencab');
-        $tipcom_id = ($tipcom_id) ? $tipcom_id : $this->input->post('tipcom');
+    /**
+     * @param bool $idencab
+     * @param bool $tipcom_id
+     * @param bool $interno
+     *
+     * @return bool|string
+     */
+    function printRemitoDoLaser ( $idencab=false, $tipcom_id=false, $interno=false) {
+        $idencab   = ($idencab)?   $idencab   : $this->input->post ( 'idencab' );
+        $tipcom_id = ($tipcom_id)? $tipcom_id : $this->input->post ( 'tipcom' );
         $DNF = $this->input->post ( 'DNF' );
         $estado = ( $DNF == 1 ) ? 9 : 1;
         $ptorem = $this->getPuestoCnf();
         $comprobante = $this->Presuencab_model->getById($idencab);
         $numero = $comprobante->numero;
-        $items = $this->Presuencab_model->getComprobante($idencab);
+        $items = $this->Presuencab_model->getComprobante( $idencab );
         $letra = "R";
         $ivamax = 0;
         $ivamin = 0;
         $importe = 0;
         $neto = 0;
         $negativo = ( $tipcom_id == 9 ) ? -1 : 1;
+        $datosMovim = array();
         foreach ( $items as $item ) {
             $datosMovim[] = array (
                 'tipcomid_movim' => $tipcom_id,
@@ -365,17 +445,25 @@ class Caja extends Admin_Controller {
         $idFacencab = $this->Facencab_model->graboComprobante ( $datosEncab, $datosMovim );
         $this->Presuencab_model->setFacturado($idencab, $idFacencab);
         if ( $DNF == 1 ) {
-            $this->printCtaCteLaser($comprobante->cuenta_id, $this->getPuesto(), $numero, $importe * $negativo, $idFacencab, $items);
+            $this->printCtaCteLaser ( $comprobante->cuenta_id, $this->getPuesto(), $numero, $importe * $negativo, $idFacencab, $items );
         } else {
-            $respuesta['mensaje'] = "OK";
+            $respuesta['mensaje']="OK";
         }
-        if ($interno) {
+        if($interno){
             return json_encode($respuesta);
-        } else {
+        }else{
             echo json_encode($respuesta);
         }
+        return true;
     }
 
+    /**
+     * @param $cuenta
+     * @param $puesto
+     * @param $numero
+     * @param $importe
+     * @param $idFacencab
+     */
     function printCtaCte ( $cuenta, $puesto, $numero, $importe, $idFacencab ) {
         $this->output->enable_profiler ( false );
         //preparo el comprobante a imprimir
@@ -395,6 +483,14 @@ class Caja extends Admin_Controller {
         $this->load->view ( 'caja/carga', $data );
     }
 
+    /**
+     * @param $cuenta
+     * @param $puesto
+     * @param $numero
+     * @param $importe
+     * @param $idFacencab
+     * @param $items
+     */
     function printCtaCteLaser ( $cuenta, $puesto, $numero, $importe, $idFacencab, $items ) {
         $this->output->enable_profiler ( false );
         //preparo el comprobante a imprimir
@@ -403,7 +499,7 @@ class Caja extends Admin_Controller {
         $numrem = $this->Numeradores_model->getNextCompCtaCte ( $ptorem, true );
         $numeroFac = $this->Facencab_model->getNumeroFromIdencab ( $idFacencab );
         //genero el archivo
-        $data['file'] = $this->_imprimeDNFLaser($ptorem, $numrem, $this->getPuestoCnf(), $numeroFac, $cliente, $items, true);
+        $data['file'] = $this->_imprimeDNFLaser ( $ptorem, $numrem, $this->getPuestoCnf(), $numeroFac, $cliente, $items, true );
         $data['puesto'] = $puesto;
         $data['idencab'] = $idFacencab;
         $data['cuenta'] = $cuenta;
@@ -414,6 +510,9 @@ class Caja extends Admin_Controller {
         $this->load->view ( 'caja/carga', $data );
     }
 
+    /**
+     *
+     */
     function printCtaCteDo () {
         $this->load->model ( 'Ctactemovim_model', '', true );
         $puesto = $this->getPuesto();
@@ -436,13 +535,22 @@ class Caja extends Admin_Controller {
         //$num = $this->Numeradores_model->updateCompCtaCte ( $ptorem, $numero + 1 );
     }
 
-
-    function _imprimeFactura ( $puesto, $idencab, $items, $total, $cliente ) {
+    /**
+     * @param       $puesto
+     * @param       $idencab
+     * @param       $items
+     * @param       $total
+     * @param       $cliente
+     * @param array $textoAdicional
+     *
+     * @return string
+     */
+    function _imprimeFactura ( $puesto, $idencab, $items, $total, $cliente, $textoAdicional=array() ) {
         $this->load->library ( "hasar" );
         $this->load->library ( "df330" );
 
-        // $this->df330->setRuta ( 'c:/xampp/htdocs/corralon/assets/tmp/fiscal');
-        $this->df330->setRuta($this->getRutaPuesto());
+       // $this->df330->setRuta ( 'c:/xampp/htdocs/corralon/assets/tmp/fiscal');
+        $this->df330->setRuta ( $this->getRutaPuesto());
 
         $this->df330->setPuesto ( $puesto );
         $comprobante = "f";
@@ -453,6 +561,13 @@ class Caja extends Admin_Controller {
         $this->df330->DatosCliente ( $cliNom, $cliente->cuit, $cliente->letra615, $tipdoc, $cliente->direccion );
         $tiplet = ( $cliente->condiva == 1 ) ? "A" : "B";
         $this->df330->AbrirFactura ( $tiplet );
+        $tx=0;
+        foreach ($textoAdicional as $textoAd){
+            if($tx<4){
+                $this->df330->TextoFactura($textoAd);
+            }
+            $tx++;
+        }
         $this->df330->ItemFactura ( $items );
         $this->df330->SubTotalFactura ();
         $this->df330->TotalFactura ( $total );
@@ -460,6 +575,49 @@ class Caja extends Admin_Controller {
         return $nom_archiv;
     }
 
+    /**
+     * @param integer $puesto
+     * @param integer $idencab
+     * @param mixed   $items
+     * @param mixed   $cliente
+     *
+     * @return string Nombre del archivo
+     */
+    function _imprimeNotaCredito ( $puesto, $idencab, $items, $cliente ) {
+        $this->load->library ( "hasar" );
+        $this->load->library ( "df330" );
+
+        // $this->df330->setRuta ( 'c:/xampp/htdocs/corralon/assets/tmp/fiscal');
+        $this->df330->setRuta ( $this->getRutaPuesto());
+
+        $this->df330->setPuesto ( $puesto );
+        $comprobante = "f";
+        $nom_archiv = $comprobante . $idencab;
+        $this->df330->nombres ( $nom_archiv );
+        $tipdoc = ( $cliente->tipdoc == 2 ) ? "C" : 2;
+        $cliNom = ( $cliente->datos_fac == 1 ) ? $cliente->nombre_facturacion : $cliente->nombre;
+        $this->df330->DatosCliente ( $cliNom, $cliente->cuit, $cliente->letra615, $tipdoc, $cliente->direccion );
+        $tiplet = ( $cliente->condiva == 1 ) ? "R" : "S";
+        $this->df330->AbrirDocumemtoHomologado( $tiplet );
+        $this->df330->ItemFactura ( $items );
+//        $this->df330->SubTotalFactura ();
+        $this->df330->CerrarDocumentoHomolagdo();
+//        $this->df330->CerrarFactura ();
+        return $nom_archiv;
+    }
+
+    /**
+     * @param      $ptorem
+     * @param      $numrem
+     * @param      $puesto
+     * @param      $idencab
+     * @param      $cliente
+     * @param      $items
+     * @param int  $detalle
+     * @param bool $firma
+     *
+     * @return string
+     */
     function _imprimeDNF ( $ptorem, $numrem, $puesto, $idencab, $cliente, $items, $detalle = 0, $firma = false ) {
         $this->load->library ( 'hasar' );
         $this->load->library ( 'cnf' );
@@ -471,10 +629,23 @@ class Caja extends Admin_Controller {
         $this->cnf->AbrirDNF ();
         $this->cnf->NumeroDNF ( $ptorem, $numrem );
         $this->cnf->ItemsDNF ( $items, $detalle );
+        if($firma){
+            $this->cnf->FirmaDNF();
+        }
         $this->cnf->CierroDNF ();
         return $nom_archiv;
     }
 
+    /**
+     * @param $ptorem
+     * @param $numrem
+     * @param $puesto
+     * @param $numero
+     * @param $cliente
+     * @param $importe
+     *
+     * @return string
+     */
     function _imprimeDNFCtaCte ( $ptorem, $numrem, $puesto, $numero, $cliente, $importe ) {
         $this->load->library ( 'hasar' );
         $this->load->library ( 'cnf' );
@@ -492,6 +663,12 @@ class Caja extends Admin_Controller {
         return $nom_archiv;
     }
 
+    /**
+     * @param $puesto
+     * @param $idencab
+     * @param $cuenta
+     * @param $file
+     */
     function printTicketDoManual ( $puesto, $idencab, $cuenta, $file ) {
         $this->load->library ( 'hasar' );
         $this->hasar->setPuesto ( $puesto );
@@ -515,6 +692,7 @@ class Caja extends Admin_Controller {
         $items = $this->Tmpmovim_model->itemsComprobante ( $puesto, $idencab );
         $ivamax = 0;
         $ivamin = 0;
+        $datosMovim=array();
         foreach ( $items as $item ) {
             $datosMovim[] = array (
                 'puesto_movim' => $puesto,
@@ -551,108 +729,108 @@ class Caja extends Admin_Controller {
         $this->load->view ( 'pos/factura/carga' );
     }
 
-    function _imprimeDNFLaser($ptorem, $numrem, $puesto, $idencab, $cliente, $items, $firma = false, $imprime = false)
-    {
-        /**
-         * imprime comprobante de remito por PDF
-         *
-         * lee los articulos que le pasan en $items, lo arma y lo imprime
-         * @param integer $ptorem numero del puesto para el remito
-         * @param integer $numrem numero del comprobante para el remito
-         * @param integer $puesto nuemro del puesto para el comprobante si es cuenta corriente
-         * @param integer $idencab numero del comprobante por si es cuenta corriente
-         * @param object $cliente todos  los datos de la cuenta
-         * @param object $items todos  los items que  compro el cliente
-         * @param bolean $firma define si se imprime con firma o no
-         * @return boolean $resultado devuelve verdadero si se envio la impresion
-         */
+    /**
+     * imprime comprobante de remito por PDF
+     *
+     * lee los articulos que le pasan en $items, lo arma y lo imprime
+     * @param integer $ptorem numero del puesto para el remito
+     * @param integer $numrem numero del comprobante para el remito
+     * @param integer $puesto nuemro del puesto para el comprobante si es cuenta corriente
+     * @param integer $idencab numero del comprobante por si es cuenta corriente
+     * @param mixed[] $cliente todos  los datos de la cuenta
+     * @param mixed[] $items todos  los items que  compro el cliente
+     * @param boolean $firma define si se imprime con firma o no
+     * @param boolean $imprime Se imprime o no el documento directamente
+     * @return boolean $resultado devuelve verdadero si se envio la impresion
+     */
+    function _imprimeDNFLaser ( $ptorem, $numrem, $puesto, $idencab, $cliente=array(), $items=array(), $firma = false, $imprime=false ) {
         $this->load->library ( 'fpdf' );
         $renglon = 0;
         $hoja = 0;
         $total = 0;
         $fechoy = new DateTime();
         $fecha = $fechoy->format ( "d-m-Y" );
-        $pdf = new Fpdfauto();
-
-        $pdf->Open();
-        $pdf->SetMargins(0, 0, 0);
-        $pdf->SetAutoPageBreak(true);
-        $pdf->SetDrawColor(128);
-        $pdf->SetTopMargin(10);
+        $pdf =new Fpdfauto();
+        
+        $pdf->Open ();
+        $pdf->SetMargins ( 0, 0, 0 );
+        $pdf->SetAutoPageBreak ( true );
+        $pdf->SetDrawColor ( 128 );
+        $pdf->SetTopMargin ( 10 );
         $maxLin = ( $firma ) ? 17 : 20;
         $resto = count ( $items );
         foreach ( $items as $item ) {
             if ( $renglon == 0 ) {
                 //imprimo encabezado
-                $pdf->AddPage('P', array('100', '148'));
-                $pdf->SetFont('Arial', 'b', '10');
-                $pdf->Cell(0, 5, "Documento No Valido como Factura", 0, 1, 'C');
-                $pdf->Cell(70, 5, sprintf("( %s ) %s", $cliente->codigo, $cliente->nombre), 0, 0, 'L');
-                $pdf->Cell(30, 5, $fecha, 0, 1, 'R');
+                $pdf->AddPage ( 'P', array ( '100', '148' ) );
+                $pdf->SetFont ( 'Arial', 'b', '10' );
+                $pdf->Cell ( 0, 5, "Documento No Valido como Factura", 0, 1, 'C' );
+                $pdf->Cell ( 70, 5, sprintf ( "( %s ) %s", $cliente->codigo, $cliente->nombre ), 0, 0, 'L' );
+                $pdf->Cell ( 30, 5, $fecha, 0, 1, 'R' );
 
                 if ( $firma ) {
-                    $pdf->Cell(50, 5, sprintf("Comp. CtaCte: %04.0f-%08.0f", $puesto, $idencab), 0, 0, 'L');
+                    $pdf->Cell ( 50, 5, sprintf ( "Comp. CtaCte: %04.0f-%08.0f", $puesto, $idencab ), 0, 0, 'L' );
                 }
-                $pdf->Cell(50, 5, sprintf("Rem: %04.0f-%08.0f", $ptorem, $numrem), 0, 1, 'R');
-                $pdf->Line(0, 25, 100, 25);
-                $pdf->SetFont('Arial', 'b', '8');
-                $pdf->SetXY(0, 25);
-                $pdf->Cell(10, 5, "Cant", 0, 0, 'C');
-                $pdf->SetXY(10, 25);
-                $pdf->Cell(80, 5, "Detalle", 0, 0, 'C');
-                $pdf->SetXY(70, 25);
-                $pdf->Cell(15, 5, "Unit", 0, 0, 'C');
-                $pdf->SetXY(85, 25);
-                $pdf->Cell(10, 5, "Importe", 0, 1, 'C');
-                $pdf->Line(0, 30, 100, 30);
+                $pdf->Cell ( 50, 5, sprintf ( "Rem: %04.0f-%08.0f", $ptorem, $numrem ), 0, 1, 'R' );
+                $pdf->Line ( 0, 25, 100, 25 );
+                $pdf->SetFont ( 'Arial', 'b', '8' );
+                $pdf->SetXY ( 0, 25 );
+                $pdf->Cell ( 10, 5, "Cant", 0, 0, 'C' );
+                $pdf->SetXY ( 10, 25 );
+                $pdf->Cell ( 80, 5, "Detalle", 0, 0, 'C' );
+                $pdf->SetXY ( 70, 25 );
+                $pdf->Cell ( 15, 5, "Unit", 0, 0, 'C' );
+                $pdf->SetXY ( 85, 25 );
+                $pdf->Cell ( 10, 5, "Importe", 0, 1, 'C' );
+                $pdf->Line ( 0, 30, 100, 30 );
                 if ( $hoja > 0 ) {
-                    $linea = $renglon * 5 + 30;
-                    $pdf->Cell(0, 5, sprintf("Transporte --> %4.2f", $total), 0, 1, 'R');
+                    //$linea = $renglon * 5 + 30;
+                    $pdf->Cell ( 0, 5, sprintf ( "Transporte --> %4.2f", $total ), 0, 1, 'R' );
                 };
             };
-            $pdf->SetFont('Arial', '', '10');
+            $pdf->SetFont ( 'Arial', '', '10' );
             $linea = ( $hoja == 0 ) ? $renglon * 5 + 30 : $renglon * 5 + 35;
-            $pdf->SetXY(0, $linea);
-            $pdf->Cell(10, 5, $item->Cantidad, 0, 0, 'L');
-            $pdf->SetXY(10, $linea);
-            $pdf->Cell(80, 5, substr($item->Nombre, 0, 27), 0, 0, 'L');
-            $pdf->SetXY(70, $linea);
-            $pdf->Cell(10, 5, $item->Precio, 0, 0, 'R');
-            $pdf->SetXY(85, $linea);
-            $pdf->Cell(10, 5, sprintf("%4.2f", $item->Precio * $item->Cantidad), 0, 1, 'R');
+            $pdf->SetXY ( 0, $linea );
+            $pdf->Cell ( 10, 5, $item->Cantidad, 0, 0, 'L' );
+            $pdf->SetXY ( 10, $linea );
+            $pdf->Cell ( 80, 5, substr ( $item->Nombre, 0, 27 ), 0, 0, 'L' );
+            $pdf->SetXY ( 70, $linea );
+            $pdf->Cell ( 10, 5, $item->Precio, 0, 0, 'R' );
+            $pdf->SetXY ( 85, $linea );
+            $pdf->Cell ( 10, 5, sprintf ( "%4.2f", $item->Precio * $item->Cantidad ), 0, 1, 'R' );
             $total += ( $item->Cantidad * $item->Precio );
             $renglon++;
             $resto--;
             if ( $renglon > $maxLin ) {
                 //termino comprobante parcial
                 if ( $resto > 0 ) {
-                    $pdf->SetFont('Arial', 'b', '10');
-                    $pdf->Line(0, $linea + 5, 100, $linea + 5);
-                    $pdf->Cell(0, 5, sprintf("Transporte --> %4.2f", $total), 0, 1, 'R');
+                    $pdf->SetFont ( 'Arial', 'b', '10' );
+                    $pdf->Line ( 0, $linea + 5, 100, $linea + 5 );
+                    $pdf->Cell ( 0, 5, sprintf ( "Transporte --> %4.2f", $total ), 0, 1, 'R' );
                     if ( $firma ) {
-                        $pdf->Line(20, $linea + 20, 80, $linea + 20);
-                        $pdf->SetXY(0, $linea + 22);
-                        $pdf->Cell(0, 5, "Firma del Cliente", 0, 1, 'C');
+                        $pdf->Line ( 20, $linea + 20, 80, $linea + 20 );
+                        $pdf->SetXY ( 0, $linea + 22 );
+                        $pdf->Cell ( 0, 5, "Firma del Cliente", 0, 1, 'C' );
                     };
                 }
                 $renglon = 0;
                 $hoja++;
             };
         };
-        $pdf->SetFont('Arial', 'b', '10');
-        $pdf->Line(0, $linea + 5, 100, $linea + 5);
-        $pdf->Cell(0, 5, sprintf("Total --> %4.2f", $total), 0, 1, 'R');
+        $pdf->SetFont ( 'Arial', 'b', '10' );
+        $pdf->Line ( 0, $linea + 5, 100, $linea + 5 );
+        $pdf->Cell ( 0, 5, sprintf ( "Total --> %4.2f", $total ), 0, 1, 'R' );
         if ( $firma ) {
-            $pdf->Line(20, $linea + 20, 80, $linea + 20);
-            $pdf->SetXY(0, $linea + 22);
-            $pdf->Cell(0, 5, "Firma del Cliente", 0, 1, 'C');
+            $pdf->Line ( 20, $linea + 20, 80, $linea + 20 );
+            $pdf->SetXY ( 0, $linea + 22 );
+            $pdf->Cell ( 0, 5, "Firma del Cliente", 0, 1, 'C' );
         };
-        $pathPDF = "/var/www/html/corralon/assets/tmp/fiscal/%s/pdf/%04.0f-%08.0f.pdf";
+        //$pathPDF = "/var/www/html/corralon/assets/tmp/fiscal/%s/pdf/%04.0f-%08.0f.pdf";
         $pathPDF = "%s/%s/pdf/%04.0f-%08.0f.pdf";
         $nombre = sprintf ( $pathPDF, $this->getRutaPuesto (), intval ( $this->getPuesto () ), $ptorem, $numrem );
         //$pdf->Output ( $nombre, 'F' );
         $pdf->AutoPrint(true);
-        $pdf->Output();
+        $pdf->Output ( );
         /*
         if ( $imprime ) {
             $cmd = sprintf ( "lp -o media=Custom.100x148mm %s -d %s", $nombre, $this->getImpresora () );
@@ -660,5 +838,28 @@ class Caja extends Admin_Controller {
         }
         */
         return $nombre;
+    }
+
+    /**
+     * cambia el id de cuenta cuando el valor nomnal de la factura no tiene cliente con dni
+     * @param        $idEncab
+     * @param int    $ndoc
+     * @param string $nombre
+     * @param string $direccion
+     */
+    public function nominal(){
+        $idEncab   = $this->input->post('idencab');
+        $ndoc      = $this->input->post('documento');
+        $nombre    = $this->input->post('nombre');
+        $direccion = (trim($this->input->post('domicilio'))!="")?$this->input->post('domicilio'):".";
+        if(trim($nombre)!="" && $idEncab > 0){
+            $cliente   = $this->Cuenta_model->agregoConsumidorNominal($ndoc, $nombre, $direccion);
+        }else{
+            $cliente = false;
+        }
+        if($cliente){
+            $presupuesto = $this->Presuencab_model->setNominal($idEncab, $cliente);
+        }
+        Template::redirect('caja/facturar');
     }
 }
