@@ -43,7 +43,7 @@ $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
 $db['default']['username'] = 'sistemas';
-$db['default']['password'] = 'kaltidus';
+$db['default']['password'] = '';
 $db['default']['database'] = 'corralon';
 $db['default']['dbdriver'] = 'mysqli';
 $db['default']['dbprefix'] = '';
@@ -59,7 +59,7 @@ $db['default']['stricton'] = FALSE;
 
 $db['desarrollo']['hostname'] = 'localhost';
 $db['desarrollo']['username'] = 'sistemas';
-$db['desarrollo']['password'] = 'kaltidus';
+$db['desarrollo']['password'] = '';
 $db['desarrollo']['database'] = 'corralon_dev';
 $db['desarrollo']['dbdriver'] = 'mysqli';
 $db['desarrollo']['dbprefix'] = '';
